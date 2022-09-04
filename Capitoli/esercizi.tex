@@ -1,0 +1,926 @@
+%!TEX root = ../main.tex
+\chapter{Esercizi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 04/03/2016 - SECONDA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%PRIMO FOGLIO%
+%%%%%%%%%%%%%%
+\section{Primo foglio}
+
+\setcounter{exeN}{0}
+
+\begin{exeN}\label{ex:1.1}
+	Si calcoli il valore di
+	\begin{itemize}
+		\item \(MCD(5520,3135)\),
+		\item \(MCD(8736,3135)\).
+	\end{itemize}
+\end{exeN}
+
+\begin{sol}
+	Applichiamo l'algoritmo di Euclide:
+	\begin{itemize}
+		\item Nel primo caso avremo
+		      \begin{align*}
+			      5520 & = 1\cdot3135+2385 \\
+			      3135 & = 1\cdot2385+750  \\
+			      2385 & = 3\cdot750+75    \\
+			      135  & = 1\cdot75+60     \\
+			      75   & = 1\cdot60+15     \\
+			      60   & = 4\cdot15,
+		      \end{align*}
+		      quindi \((5520,3135)=15\).
+		\item Nel secondo
+		      \begin{align*}
+			      8736 & = 2\cdot3135+2466 \\
+			      3135 & = 1\cdot2466+669  \\
+			      2466 & = 3\cdot669+459   \\
+			      669  & = 1\cdot459+210   \\
+			      459  & = 2\cdot210+39    \\
+			      210  & = 5\cdot39+15     \\
+			      30   & = 2\cdot15+9      \\
+			      15   & = 1\cdot9+6       \\
+			      9    & = 1\cdot6+3       \\
+			      6    & =2\cdot4,
+		      \end{align*}
+		      per cui \((8736,3135)=3\).
+	\end{itemize}
+\end{sol}
+
+\begin{exeN}\label{ex:1.2}
+	Si calcoli il valore di
+	\begin{itemize}
+		\item \(v_2(70!)\),
+		\item \(v_5(125!)\),
+		\item \(v_7(130!)\).
+	\end{itemize}
+\end{exeN}
+
+\begin{sol}
+	Ricordiamo che, per il teorema \ref{th:1.10}, avremo
+	\[
+		v_p(n!)=\sum_{k=1}^{+\infty}\left[\frac{n}{p^k}\right].
+	\]
+	Applichiamolo quindi al nostro esercizio:
+	\begin{itemize}
+		\item Per il primo punto
+		      \[
+			      \begin{split}
+				      v_2(70!) &= \sum_{k=1}^{+\infty}\left[\frac{70}{2^k}\right]=\left[\frac{70}{2}\right]+\left[\frac{70}{4}\right]+\left[\frac{70}{8}\right]+\left[\frac{70}{16}\right]+\left[\frac{70}{32}\right]+\left[\frac{70}{64}\right]\\
+				      & =35+17+8+4+2+1=67.
+			      \end{split}
+		      \]
+		\item Per il secondo
+		      \[
+			      \begin{split}
+				      v_5(125!) &= \sum_{k=1}^{+\infty}\left[\frac{125}{5^k}\right]=\left[\frac{125}{5}\right]+\left[\frac{125}{25}\right]+\left[\frac{125}{125}\right]\\
+				      & =25+5+1=31.
+			      \end{split}
+		      \]
+		\item Infine per il terzo
+		      \[
+			      \begin{split}
+				      v_7(130!) &= \sum_{k=1}^{+\infty}\left[\frac{130}{7^k}\right]=\left[\frac{130}{7}\right]+\left[\frac{130}{49}\right]\\
+				      & =18+2=20.
+			      \end{split}
+		      \]
+	\end{itemize}
+\end{sol}
+
+\begin{exeN}\label{ex:1.3}
+	Siano \(a,b,c\in\N\), si dimostri che
+	\begin{itemize}
+		\item Se \(a\mid n,b\mid n\) e \((a,b)=1\), allora
+		      \[
+			      a\,b\mid n.
+		      \]
+		\item Se \(a\mid b\,c\) e \((a,b)=1\), allora
+		      \[
+			      a\mid c.
+		      \]
+	\end{itemize}
+\end{exeN}
+
+\begin{sol}
+	Siano \(a,b,c\in \N\).
+	\begin{itemize}
+		\item Per ipotesi \((a,b)=1\), quindi, applicando l'identità di Bezout, avremo
+		      \[
+			      1=x\,a+y\,b\iff n=n\,x\,a+n\,y\,b,
+		      \]
+		      ora, \(a\mid n\) e \(b\mid n\), per cui \(a\,\a=n\) e \(b\,\b=n\), sostituendo nell'equazione precedente avremo
+		      \[
+			      n=b\,\b\,x\,a+a\,\a\,y\,b=a\,b(\b x+\a y),
+		      \]
+		      ovvero
+		      \[
+			      a\,b\mid n.
+		      \]
+		\item In modo del tutto analogo, poichè \((a,b)=1\), avremo
+		      \[
+			      1=x\,a+y\,b\iff c=c\,x\,a+c\,y\,b,
+		      \]
+		      ma \(a\mid b\,c\), quindi \(a\,\a=b\,c\), da cui
+		      \[
+			      c=c\,x\,a+a\,\a\,y=a(c\,x+\a\,y),
+		      \]
+		      ovvero
+		      \[
+			      a\mid c.
+		      \]
+	\end{itemize}
+\end{sol}
+
+\begin{exeN}\label{ex:1.4}
+	Si dimostri che esistono infiniti primi \(p\) della forma \(p=4k-1\).
+\end{exeN}
+
+\begin{sol}
+	Supponiamo per assurdo che \(p_1\cdot\ldots\cdot p_s\) siano tutti e soli i primi della forma \(p=4k-1\).
+	Consideriamo quindi \(N=4 p_1\cdot\ldots\cdot p_s-1\).
+	Osserviamo che \(N\) è della forma \(4t-1\) e che \((N,p_j)=1\), rimane quindi da mostrare che \(N\) ammette un divisore primo della forma \(4k-1\).
+
+	Se condiseriamo un qualsiasi \(n\in\N\), avremo, per la divisione col resto, che
+	\[
+		n=q\,4+r,\text{ con }r\in\{0,1,2,3\},
+	\]
+	inoltre se \(n\) è dispari, come nel caso dei numeri primi distinti da \(2\), avremo \(r=1\) o \(r=3\).
+	Ciò significa che i primi dispari sono tutti della forma \(4k-1\) o \(4k+1\).
+	Ora, se \(N\) avesse tutti i fattori primi della forma \(4k+1\), si avrebbe
+	\[
+		N=l_1^{\a_1}\cdot\ldots\cdot l_t^{\a_t},
+	\]
+	inoltre
+	\[
+		(4k_1+1)(4k_2+1)=4(k_1 k_2+k_1+k_2)+1=4h+1,
+	\]
+	per cui \(N\) sarebbe della forma \(4z+1\).
+	Ma ciò è assurdo per la scelta di \(N\) in quanto
+	\[
+		4z+1=4 p_1\cdot\ldots\cdot p_s-1\iff 4(z-p_1\cdot\ldots\cdot p_s)=-2,
+	\]
+	ovvero se e soltanto se \(2\mid 1\), che è assurdo.
+\end{sol}
+
+\begin{exeN}\label{ex:1.6}
+	Sia, per \(k>1\),
+	\[
+		\z(k)=\sum_{n=1}^{+\infty}\frac{1}{n^k},
+	\]
+	la funzione \(\z\) di Riemann, si dimostri che
+	\[
+		\sum_{n\le X}\frac{1}{n^k}=\z(k)+O \left( \frac{1}{X^{k-1}} \right)\qquad\text{e che}\qquad\sum_{n\le X}\frac{\m(n)}{n^k}=\frac{1}{\z(k)}+O \left( \frac{1}{X^{k-1}} \right).
+	\]
+\end{exeN}
+
+\begin{sol}
+	Chiaramente
+	\[
+		\sum_{n\le X}\frac{1}{n^k} = \z(k)+E(X),
+	\]
+	con
+	\[
+		\begin{split}
+			\abs{E(X)}=\sum_{n>X}\frac{1}{n^k} & =\sum_{n\ge M}\frac{1}{n^k}\graffito{\(M=[X]+1\)}\\
+			& =\frac{1}{M^k}+\frac{1}{(M+1)^k}+\dots
+		\end{split}
+	\]
+	Applicando una disequazione integrale otteniamo
+	\[
+		\int_M^{+\infty}\frac{\dd t}{t^k}\le\sum_{n>X}\frac{1}{n^k}\le \frac{1}{M^k}+\int_M^{+\infty}\frac{\dd t}{t^k},
+	\]
+	ovvero
+	\[
+		\sum_{n>X}\frac{1}{n^k} < \frac{1}{\big([X]+1\big)^k}+\frac{1}{k\big([X]+1\big)^{k-1}}<\frac{2}{k}\frac{1}{x^{k-1}}\ll \frac{1}{x^{k-1}}.
+	\]
+	Per la seconda uguaglianza avremo
+	\[
+		\sum_{n\le X}\frac{\m(k)}{n^k} = \frac{1}{\z(k)}+E(X),
+	\]
+	dove
+	\[
+		\begin{split}
+			E(X) & =\abs*{\sum_{h>X}\frac{\m(h)}{h^k}}\\
+			& \le \sum_{h>X}\frac{\m(h)}{h^k}\\
+			& \le \sum_{h>X}\frac{1}{h^k}\ll \frac{1}{X^{k-1}}.
+		\end{split}
+	\]
+\end{sol}
+
+\begin{exeN}\label{ex:1.9}
+	Sia \(N\) un numero dispari perfetto, dimostrare che è della forma
+	\[
+		N=p_1^{1+4k} \big( p_2^{\a_2} \cdot \ldots \cdot p_s^{\a_s} \big)^2,\text{ dove }p=1+4h.
+	\]
+\end{exeN}
+
+\begin{sol}
+	Scriviamo la generica fattorizzazione di \(N\)
+	\[
+		N=p_1^{\a_1}\cdot \ldots \cdot p_s^{\a_s},
+	\]
+	con \(p_i>2\) in quanto \(N\) è dispari.
+	Ora \(N\) è perfetto, quindi
+	\[
+		\s(N)=2N=2(1+2a)=2+4a,
+	\]
+	ma
+	\[
+		\s(N)= \big( 1+p_1+\ldots p_1^{\a_1} \big) \big( 1+p_2+\ldots +p_2^{\a_2} \big) \cdot \ldots \cdot \big( 1+p_s+\ldots + p_s^{\a_s} \big) ,
+	\]
+	che è quindi pari ma non divisibile per \(4\).
+	Ciò significa che esisterà un unico \(i\) tale che \(\big( 1+p_i+\ldots+p_i^{\a_i} \big) \) è pari ma non divisibile per \(4\), mentre, di conseguenza, tutti gli altri fattori di \(\s(N)\) saranno dispari.
+
+	Assumiamo per semplicità che \(i=1\).
+	Ora il generico \(\big( 1+p_j+\ldots +p_j^{\a_j} \big) \) dispari, sarà somma di \(\a_j+1\) elementi tutti necessariamente dispari in quanto, per ipotesi, \(p_j>2\).
+	Avremo quindi, preso \(j\ge2\), che \(\a_j+1\) è dispari, ovvero
+	\[
+		\a_j\text{ pari },\,\fa j\ge2.
+	\]
+	Per la medesima ragione \(\a_1\) è necessariamente dispari.
+	Riepilogando
+	\[
+		N=p_1^{1+2\a_1} \big( p_2^{\a_2} \cdot\ldots\cdot p_s^{\a_s} \big)^2.
+	\]
+	Resta da mostrare che non vi sono altre fattorizzazioni possibili, ma, per quanto detto finora,
+	\[
+		2+4a=\s(N)=\big( 1+p_1+\ldots+p_1^{2\a_1+1} \big) d,
+	\]
+	dove \(d\) è dispari, mentre il primo fattore è primo ma non divisibile per \(4\).
+	Quindi \(p_1=4c+\e\) con \(\e=\pm 1\), da cui
+	\[
+		\begin{split}
+			2+4a=\s(N) & =\big(1+\e+4c+(\e+4c)^2+\ldots+(\e+4c)^{2\a_1+1}\big)d\\
+			& =\big(1+\e+\e^2+\ldots+\e^{2\a_1+1}+4D\big)d,
+		\end{split}
+	\]
+	dove, ancora una volta, avremo \(1+\e+\e^2+\ldots+\e^{2\a_1+1}\) pari ma non divisibile per \(4\), quindi
+	\[
+		\big(1+\e+\e^2+\ldots+\e^{2\a+1}\big)=\sum_{k=0}^{2\a_1+1}\e^k=
+		\begin{cases}
+			2\a_1+2 & \e=1  \\
+			\pm 1   & \e=-1
+		\end{cases}
+	\]
+	Infine, l'unico modo per ottenere un numero pari ma non divisibile per \(4\), è che \(\e=1\) e \(\a_1\) sia pari, ovvero
+	\[
+		N=p_1^{1+4k}\big(p_2^{\a_2}\cdot\ldots\cdot p_s^{\a_s}\big)^2,\text{ con }p_1=4c+1.
+	\]
+\end{sol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 22/03/2016 - QUINTA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%
+%SECONDO FOGLIO%
+%%%%%%%%%%%%%%%%
+\section{Secondo foglio}
+
+\setcounter{exeN}{0}
+
+\begin{exeN}[Formula delle somme parziali]\label{ex:2.1}
+	Sia \((a_n)_{n\in\N}\) una successione di valori in \(\C\) e sia \(\j(x)\) una funzione di classe \(C^1\).
+	Si dimostri che
+	\[
+		\sum_{1 \le n \le x}a_n \j(n) = A(x)\j(x)-\int_1^x A(u)\j'(u)\,\dd u,\qquad\text{con}\qquad A(x)=\sum_{1\le n\le x}a_n.
+	\]
+\end{exeN}
+
+\begin{sol}
+	Suddividiamo l'integrale
+	\[
+		A(x)\j(x)-\int_1^x A(u)\j'(u)\,\dd u = A(x)\j(x) - \sum_{n=1}^{[x]-1}\int_n^{n+1}A(u)\j'(u)\,\dd u-\int_{[x]}^x A(u)\j'(u)\,\dd u.
+	\]
+	Osserviamo che nell'intervallo \((n,n+1)\) avremo che \(A(u)\equiv A(n)\), da cui
+	\[
+		\begin{split}
+			& = A(x)\j(x) - \sum_{n=1}^{[x]-1}A(n)\left.\j(u)\right|_n^{n+1} - A(x)\left.\j(u)\right|_{[x]}^x\\
+			& = \cancel{A(x)\j(x)}-\sum_{n=1}^{[x]-1}A(n)\big(\j(n+1)-\j(n)\big)-\cancel{A(x)\j(x)}+A\big([x]\big)\j\big([x]\big)\\
+			& = -\sum_{n=1}^{[x]-1} \big(A(n+1)-a_{n+1}\big)\j(n+1) + \sum_{n=1}^{[x]-1}A(n)\j(n)+A\big([x]\big)\j\big([x]\big)\\
+			& = -\sum_{n=1}^{[x]-1}A(n+1)\j(n+1)+\sum_{n=1}^{[x]-1}a_{n+1}\j(n+1)+\sum_{n=1}^{[x]-1}A(n)\j(n)+A\big([x]\big)\j\big([x]\big)\\
+			& = \sum_{n=1}^{[x]-1}a_{n+1}\j(n+1)+A(1)\j(1)=\sum_{n=1}^{[x]}a_n\j(n).
+		\end{split}
+	\]
+\end{sol}
+
+\begin{exeN}\label{ex:2.2}
+	Si trovino tutte le soluzioni di
+	\[
+		5X\equiv 10 \pmod{35},
+	\]
+	nell'intervallo \([-500,500]\).
+\end{exeN}
+
+\begin{sol}
+	La congruenza ammette soluzioni se e soltanto se \((5,35)\mid 10\), ma \((5,35)=5\), per cui le soluzioni esistono e sono precisamente \(5\).
+	Quindi
+	\[
+		5X \equiv 10 \pmod{35} \iff X \equiv 2 \pmod{7},
+	\]
+	ovvero \(X = 2+7k\) con \(0\le k\le 4\).
+	Per cui le soluzioni modulo \(35\) sono
+	\[
+		2,9,16,23,30.
+	\]
+	In particolare le soluzioni intere nell'intervallo \([-500,500]\) seguono da
+	\[
+		-500 \le 2+7k \le 500 \iff \left[ -\frac{502}{7} \right] +1 \le k \le \left[ \frac{498}{7} \right],
+	\]
+	ovvero \(-71 \le k \le 71\) che corrispondono precisamente a 143 soluzioni.
+\end{sol}
+
+\begin{exeN}\label{ex:2.5}
+	Calcolare tutte le radici primitive modulo 50
+\end{exeN}
+
+\begin{sol}
+	La strategia consiste nel trovare una radice primitiva modulo \(5^\a\), per il teorema \ref{th:3.18} essa sarà automaticamente una radice primitiva modulo \(2\,5^\a\), infatti \(50=2\,5^2\).
+
+	Possiamo osservare facilmente che \(3\) è una radice primitiva modulo \(5\), infatti
+	\[
+		3^{\j(5)} = 3^{4} \equiv 1 \pmod{5}.
+	\]
+	Per sollevare \(3\) ad una radice modulo \(5^\a\) cerchiamo \(t\in\Z\) tale che
+	\[
+		(3+5t)^4 = 1+5u,\text{ con }5\nmid u.
+	\]
+	Se \(t=0\) avremo
+	\[
+		3^4 = 81 = 1+80 = 1+5\,16,\text{ con }5\nmid 16,
+	\]
+	per cui \(3\) è una radice primitiva modulo \(5^\a\), in particolare, essendo dispari, è una radice primitiva modulo \(2\,5^\a\) e quindi anche modulo \(50\).
+
+	Tramite una radice primitiva conosciamo anche tutte le altre, esse saranno della forma \(3^k\) con \(\big(k,\j(50)\big)=1\).
+	Pertanto esisteranno precisamente \(\j\big(\j(50)\big)=\j(20)=8\) radici primitive modulo \(50\):
+	\[
+		3^1,3^3,3^7,3^9,3^{11},3^{13},3^{17},3^{19},
+	\]
+	ovvero
+	\[
+		3, 13, 17, 23, 27, 33, 37, 47.
+	\]
+\end{sol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 12/05/2016 - UNDICESIMA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%TERZO FOGLIO%
+%%%%%%%%%%%%%%
+\section{Terzo foglio}
+
+\setcounter{exeN}{0}
+\setcounter{exeL}{0}
+
+\stepcounter{exeN}
+\begin{exeL}\label{ex:esonero3a}
+	Sia \(p \neq 5\) primo tale che \(p=x^2+5y^2\), con \(x,y\in\Z\).
+	Allora
+	\[
+		p \equiv 1 \pmod{20} \qquad\text{oppure}\qquad p\equiv 9 \pmod{20}.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Supponiamo che esistano \(x,y\in\Z\) tali che \(p=x^2+5^y\), consideriamo tale uguaglianza modulo \(4\):
+	\[
+		p = x^2+5y^2 \equiv x^2+y^2 \pmod{4}.
+	\]
+	Ora se \(n\in \Z_4\) allora \(n^2\in\{[0]_4,[1]_4\}\), per cui
+	\[
+		x^2+y^2 \in \{[0]_4,[1]_4,[2]_4\} \implies p \equiv 1 \pmod{4},
+	\]
+	in quanto \(p\) primo implica \(p\not\equiv 0,2 \pmod{4}\).
+
+	Analogamente consideriamo l'uguaglianza modulo 5:
+	\[
+		p = x^2+5y^2 \equiv x^2 \pmod{5}.
+	\]
+	Se \(n\in \Z_5\) allora \(n^2 \in \{[0]_5,[1]_5,[4]_5\}\), per cui
+	\[
+		p \equiv 1 \pmod{5} \qquad\text{oppure}\qquad p \equiv 4 \pmod{5},
+	\]
+	in quanto, di nuovo, \(p\) primo implica \(p\not\equiv 0\pmod{5}\).
+
+	Riepilogando se \(p=x^2+5y^2\) allora
+	\[
+		\begin{cases}
+			p \equiv 1 \pmod{4} \\
+			p \equiv 1 \pmod{5}
+		\end{cases}
+		\qquad\text{oppure}\qquad
+		\begin{cases}
+			p \equiv 1 \pmod{4} \\
+			p \equiv 4 \pmod{5}
+		\end{cases}
+	\]
+	da cui si ottiene facilmente la tesi.
+\end{sol}
+
+\begin{exeL}\label{ex:esonero3b}
+	Si dimostri che per ogni \(p\equiv 1,9 \pmod{20}\) esiste \(k\in\{1,2,3,4,5\}\) tale che
+	\[
+		k\,p = x^2+5y^2.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Sia \(\a\in\Z\) una soluzione di \(x^2+5\equiv 0 \pmod{p}\).
+	Osserviamo che tale soluzione esiste se e solo se \(-5\) è un residuo quadratico modulo \(p\)
+	D'altronde \(p\equiv 1,9 \pmod{20}\) si ha \(p\equiv 1 \pmod{4}\), quindi
+	\[
+		\jac{-5}{p} = \jac{5}{p} = \jac{p}{5} = \jac{5}{p} = \jac{p\pmod{5}}{5} = 1.
+	\]
+	Per il lemma delle gabbie e dei piccioni sappiamo che esistono \(x,y\in\Z\) tali che
+	\[
+		0 < \abs{x},\abs{y} < \sqrt{p} \qquad\text{e}\qquad y\,\a \equiv x \pmod{p}.
+	\]
+	Quindi
+	\[
+		x^2 + 5y^2 \equiv_p y^2\a^2 + 5y^2 = y^2(\a^2+5) \equiv 0 \pmod{p} \implies x^2+5y^2 = k\,p.
+	\]
+	Inoltre \(0<x^2+5y^2 < 6p\), quindi \(k\in\{1,2,3,4,5\}\).
+\end{sol}
+
+\begin{exeL}\label{ex:esonero3c}
+	Dimostrare che se \(x,y\in\Z\) allora \(x^2+5y^2 \not\equiv 2,3,7,18 \pmod{20}\).
+
+	Dedurre inoltre che se \(p\) è primo con \(p\equiv 1,9 \pmod{20}\), allora
+	\[
+		p = x^2+5y^2 \qquad\text{oppure}\qquad 4p = x^2+5y^2.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Abbiamo già mostrato negli esercizi precedenti che necessariamente
+	\[
+		x^2+5y^2 \equiv 0,1,2 \pmod{4} \qquad\text{e}\qquad x^2+5y^2 \equiv 0,1,4 \pmod{5}.
+	\]
+	Bisogna quindi risolvere tutti i possibili sistemi che queste condizioni inducono.
+	Svolgendo i calcoli si ha che
+	\[
+		x^2+5y^2 \equiv 0,16,4,5,1,9,10,6,14 \pmod{20},
+	\]
+	che come ci aspettavamo non coincidono con \(2,3,7,18\).
+
+	Ora se \(p\equiv 1 \pmod{20}\) e fosse \(x^2+5y^2 = 2p,3p\) allora
+	\[
+		x^2+5y^2 \equiv 2,3\pmod{20},
+	\]
+	che è assurdo per la parte precedente.
+
+	Analogamente se \(p\equiv 9 \pmod{20}\) e \(x^2+5y^2 = 2p,3p\) allora
+	\[
+		x^2+5y^2 \equiv 18,7 \pmod{20},
+	\]
+	che è nuovamente assurdo.
+
+	Osserviamo infine che se \(x^2+5y^2 =5p\) allora \(5 \mid 5p,5y^2 \implies 5\mid x^2\).
+	Quindi \(x=5x'\), da cui
+	\[
+		25x'^2 + 5y^2 = 5p \implies 5x'^2+y^2=p,
+	\]
+	che un caso già considerato.
+\end{sol}
+
+\begin{exeL}\label{ex:esonero3d}
+	Dimostrare che se \(4\mid x^2+5y^2\) allora \(2\mid(x,y)\).
+
+	Dedurre che se \(p\) è primo si ha
+	\[
+		p\equiv 1,9 \pmod{20} \iff p = x^2+5y^2,x,y\in\Z.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Se per assurdo \(2\nmid (x,y)\) allora
+	\[
+		x\equiv 1 \pmod{2} \qquad\text{oppure}\qquad y\equiv 1 \pmod{2} \qquad\text{oppure}\qquad x,y\equiv 1 \pmod{2}.
+	\]
+	Nel primo caso si avrebbe \(x^2 \equiv 1 \pmod{4}\) e \(y\equiv 0 \pmod{4}\), quindi
+	\[
+		x^2+5y^2 \equiv 1 \pmod{4},
+	\]
+	che è assurdo in quanto \(4\mid x^2+5y^2\).
+
+	Nel secondo caso, analogamente, \(y^2 \equiv 1 \pmod{4}\) e \(x^2 \equiv 0 \pmod{4}\), quindi
+	\[
+		x^2+5y^2 \equiv 5 \equiv 1 \pmod{4},
+	\]
+	che è nuovamente assurdo.
+
+	Infine nell'ultimo caso, si avrebbe \(x^2,y^2 \equiv 1 \pmod{4}\), da cui
+	\[
+		x^2+5y^2 \equiv 6 \equiv 2 \pmod{4},
+	\]
+	che è anch'esso assurdo.
+
+	Dall'esercizio precedente sappiamo che
+	\[
+		p\equiv 1,9 \pmod{20} \iff p,4p = x^2+5y^2,x,y\in\Z.
+	\]
+	Ora se \(2\mid(x,y)\) allora \(x=2x'\) e \(y=2y'\), da cui
+	\[
+		4p = x^2+5y^2 \implies 4p = 4x'^2+4\cdot 5y'^2 \implies p=x'^2+5y'^2.
+	\]
+\end{sol}
+
+\begin{exeN}\label{ex:esonero5}
+	Siano \(a,b\in\N\), si calcoli il numero di modi in cui è possibile esprimere
+	\[
+		6^a 65^b
+	\]
+	come somma di due quadrati.
+\end{exeN}
+
+\begin{sol}
+	Dobbiamo calcolare \(S(6^a 65^b)\).
+	Sappiamo che \(S(n)/4\) è una funzione moltiplicativa e
+	\[
+		\frac{S(p^\a)}{4} = \begin{cases}
+			1    & \text{se \(p=2\) oppure \(p\equiv 3\pmod{4}\) con \(\a\) pari} \\
+			0    & \text{se \(p\equiv 3\pmod{4}\) con \(\a\) dispari}             \\
+			\a+1 & \text{se \(p\equiv 1 \pmod{4}\)}
+		\end{cases}
+	\]
+	Da cui
+	\[
+		\frac{S(6^a 65^b)}{4} = \frac{S(2^a)}{4} \frac{S(3^a)}{4} \frac{S(5^b)}{4} \frac{S(13^b)}{4}.
+	\]
+	Ora se \(2\mid a\) allora \(S(6^a 65^b) = 0\) in quanto
+	\[
+		3\equiv 3 \pmod{4} \implies \frac{S(3^a)}{4} = 0.
+	\]
+	Se \(2\nmid a\) avremo
+	\[
+		\frac{S(2^a)}{4}=1, \frac{S(3^a)}{4}=1, \frac{S(5^b)}{4}=b+1, \frac{S(13^b)}{4}=b+1.
+	\]
+	Quindi
+	\[
+		S(6^a 65^b) = 	\begin{cases}
+			0        & \text{se \(2\mid a\)}  \\
+			4(b+1)^2 & \text{se \(2\nmid a\)}
+		\end{cases}
+	\]
+\end{sol}
+
+\begin{exeN}\label{ex:esonero4}
+	Sia \(\a\in\R\) con \(0\le \a \le 1\).
+	Allora esiste \(S\subset \N\) tale che ha densità naturale
+	\[
+		\d_S = \a, \qquad\text{con } \d_S = \lim_{T \to +\infty} \frac{\#\big(S\cap [1,T]\big)}{\#\big(\N\cap[1,T]\big)}.
+	\]
+\end{exeN}
+
+\begin{oss}
+	Si suggerisce di considerare la successione \(\big\{[\b\,n]\big\}_{n\in\N}\) per un certo \(\b\in\R\).
+\end{oss}
+
+\begin{sol}
+	Definiamo, per il suggerimento,
+	\[
+		S = \Set{[\b\,n] | n\in \N} \cap \N, \qquad\text{con \(\b\in\R\) fissato}.
+	\]
+	Avremo
+	\[
+		\#\big(S\cap[1,T]\big) = \Set{n\in\N | 0 < [\b\,n] \le T} = \Set{n\in\N | \{\b\,n\} < \b n \le T +\{\b\,n\}},
+	\]
+	da cui %TODO
+\end{sol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 19/05/2016 - DODICESIMA SETTIMANA (2)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exeN}\label{ex:B4}
+	Tramite la formula delle somme parziali si trovi una formula asintotica per
+	\[
+		\sum_{n\le T} \ln^3 n.
+	\]
+\end{exeN}
+
+\begin{proof}
+	Ricordiamo che se \(\{a_n\}_{n\in\N}\) è una successione a valori in \(\C\) e \(\j(x)\) è una funzione di classe \(C^1\), allora vale
+	\[
+		\sum_{n\le T} a_n \j(n) = A(T)\j(T) - \int_1^T A(u)\j'(u)\,\dd u, \qquad\text{con }A(T) = \sum_{n\le T}a_n.
+	\]
+	Nel nostro caso abbiamo \(a_n\equiv 1\) e \(\j(x) = \ln^3 x\). Da cui
+	\[
+		\sum_{n\le T}\ln^3 n = [T]\ln^3(T) - 3\int_1^T \frac{[T]\ln^2(u)}{u}\,\dd u.
+	\]
+	Ricordando che \([T]=T-\{T\}=T+O(1)\), avremo
+	\[
+		\sum_{n\le T}\ln^3 n = T\ln^3(T) + O\big(\ln^3(T)\big) - 3 \int_1^T \ln^2(u)\,\dd u -O \left( \int_1^T 3 \frac{\ln^2 u}{u}\,\dd u \right).
+	\]
+	D'altronde
+	\[
+		\int_1^T 3 \frac{\ln^2 u}{u}\,\dd u = \ln^3 T,
+	\]
+	da cui
+	\[
+		\sum_{n\le T}\ln^3 n = T\ln^3(T) - 3 \int_1^T \ln^2(u)\,\dd u + O\big(\ln^3(T)\big).
+	\]
+	A questo punto possiamo scegliere se stimare l'integrale oppure se ottenere un'approssimazione migliore tramite lo sviluppo per parti.
+	Nel primo caso avremo
+	\[
+		\int_1^T \ln^2 u\,\dd u \le \ln^2 T \int_1^T \dd u = (T-1)\ln^2 T = O\big(T \ln^2 T\big).
+	\]
+	Nel secondo, tramite uno sviluppo per parti, otterremmo
+	\[
+		-3\int_1^T \ln^2 u\,\dd u = -3T \ln^2 T + 6 T \ln T - 6T +6.
+	\]
+	Quindi
+	\[
+		\sum_{n\le T}\ln^3 n = T\ln^3 T -3T \ln^2 T + 6 T \ln T - 6T +6 + O\big(\ln^3(T)\big).
+	\]
+\end{proof}
+
+\stepcounter{exeN}
+\setcounter{exeL}{0}
+\begin{exeL}\label{ex:B3a}
+	Un intero positivo \(d\) si definisce divisore unitario di \(n\in\N\) se \(d\mid n\) e \((d,n/d)=1\).
+	Definiamo
+	\[
+		d^*(n) = \#\Set{d\in N | d \text{ divisore unitario di }n}.
+	\]
+	Si dimostri che \(d^*\) è una funzione moltiplicativa.
+\end{exeL}
+
+\begin{sol}
+	Siano \(n,m\in\N\) tali che \((n,m)=1\).
+	Vorremmo dimostrare che esiste una corrispondenza biunivoca
+	\[
+		D^*(n) \times D^*(m) \leftrightarrow D^(n\,m).
+	\]
+	Mandiamo \((d_1,d_2) \mapsto d_1 d_2\).
+	Dobbiamo verificare che \(d_1 d_2\) è un divisore di \(n\,m\) e che \((d_1 d_2, n/d_1 \, m/d_2)=1\).
+
+	Chiaramente se \(d_1\mid n\) e \(d_2\mid m\) allora \(d_1 d_2 \mid n\,m\).
+
+	Ora supponiamo che \(l\mid d_1\,d_2\)%TODO
+\end{sol}
+
+\begin{exeL}\label{ex:B3b}
+	Si trovi una formula per \(d^*(p^\a)\) con \(p\) primo e \(\a\ge 1\).
+
+	Dedurre inoltre che se \(n\) è privo di fattori quadratici si ha
+	\[
+		d^*(n) = d(n).
+	\]
+	Produrre infine un esempio per cui \(d^*(n)\neq d(n)\).
+\end{exeL}
+
+\begin{proof}
+	Chiaramente i divisori unitari di \(p^\a\) sono \(1\) e \(p^\a\) stesso.
+	Quindi \(d^*(p^\a)=2\).
+
+	Ora se \(n=p_1^{\a_1} \cdot\ldots\cdot p_s^{\a_s}\), sapendo che \(d^*(p^\a)=2\) e che \(d^*\) è moltiplicativa, si ha
+	\[
+		d^*(n) = 2^s \qquad\text{e}\qquad d(n) = \prod_{j=1}^s (\a_j+1),
+	\]
+	dove la seconda formula è stata dimostrata nella proposizione a pagina \pageref{pr:2.2}.
+
+	Quindi
+	\[
+		\prod_{j=1}^s 2 = \prod_{j=1}^s (\a_j+1) \iff 2 = \a_j + 1 \iff \a_j = 1,\,\fa j.
+	\]
+	Ovvero \(n=p_1 \cdot\ldots\cdot p_s\) è privo di fattori quadratici.
+
+	Alla luce di questo fatto è semplice trovare un caso in cui \(d^*(n)=d(n)\), ad esempio
+	\[
+		d^*(4) = 2 \neq d(4) = 3.
+	\]
+\end{proof}
+
+\begin{exeL}\label{ex:B3c}
+	Si consideri la funzione
+	\[
+		\s_k^*(n) = \sum_{\substack{d\mid n\\(d,n/d)=1}} d^k.
+	\]
+	Si provi che \(\s_k^*\) è moltiplicativa per ogni \(k\in\Z\).
+\end{exeL}
+
+\begin{proof}
+	Segue da \(d^*\) moltiplicativa.
+	Infatti se ho \(n,m\in\Z\) tali che \((n,m)=1\), allora
+	\[
+		\begin{split}
+			\s_k^*(n\,m) & = \sum_{\substack{d\mid n\,m\\d\text{ unitario}}} d^k = \sum_{\substack{d_1\mid n\\ d_2\mid m\\d_1,d_2\text{ unitari}}} (d_1 d_2)^k = \sum_{\substack{d_1\mid n\\d_1\text{ unitario}}} d_1^k \sum_{\substack{d_2\mid m\\d_2\text{ unitario}}} d_2^k\\
+			& = \s_k^*(n)\s_k^*(m).
+		\end{split}
+	\]
+\end{proof}
+
+\begin{exeL}\label{ex:B3d}
+	Si trovi una formula per \(\s_k^*(p^\a)\) con \(p\) primo e \(\a\ge 1\).
+	Si calcoli infine \(\s_{-3}^* * \m(324)\).
+\end{exeL}
+
+\begin{sol}
+	Dal punto \(b\) possiamo dedurre facilmente che
+	\[
+		\s_k^*(p^\a) = 1+p^{k\,\a}.
+	\]
+
+	Ora, per calcolare \(\s_{-3}^* * \m(324)\), ricordiamo che la convoluzione di funzioni moltiplicative è moltiplicativa.
+	Quindi
+	\[
+		\s_{-3}^* * \m(324) = \s_{-3}^* * \m(2^2) \s_{-3}^* * \m(3^4),
+	\]
+	dove
+	\[
+		\s_{-3}^* * \m(2^2) = \sum_{d\mid 2^2} \s_{-3}^* \left( \frac{2^2}{d} \right) \m(d) = \s_{-3}^*(2^2)-\s_{-3}^*(2)= \frac{1}{2^6}-\frac{1}{2^3},
+	\]
+	e
+	\[
+		\s_{-3}^* * \m(3^4) = \sum_{d\mid 3^4} \s_{-3}^* \left( \frac{3^4}{d} \right) \m(d) = \s_{-3}^*(3^4)-\s_{-3}^*(3^3) = \frac{1}{3^{12}} - \frac{1}{3^9}.
+	\]
+\end{sol}
+
+\begin{exeN}\label{ex:C5}
+	Descrivere gli interi che non possono essere scritti come somma di tre quadrati e provare che esistono infiniti di tali interi.
+\end{exeN}
+
+\begin{sol}
+	Si veda il teorema di Legendre a pagina \pageref{th:teorLegendreQuadrati}.
+
+	Avremo quindi che ogni intero della forma \(7+8k\) non è somma di tre quadrati.
+	Ovviamente esistono infiniti interi siffatti.
+\end{sol}
+
+\begin{exeN}\label{ex:X5}
+	Siano \(d,n,m\in\Z\).
+	Si dimostri che se esistono \(x,y,z,t\in\Z\) tali che
+	\[
+		n=x^2+d\,y^2 \qquad\text{e}\qquad m = z^2+d\,t^2,
+	\]
+	allora esistono \(u,v\in\Z\) tali che \(n\,m = u^2+d\,v^2\).
+
+	Usare questo fatto per esprimere \(5548\) nella forma \(Q^2+3 P^2\).
+\end{exeN}
+
+\begin{sol}
+	In generale possiamo considerare
+	\begin{gather*}
+		x^2+d\,y^2 = (x+\sqrt{-d}y)(x-\sqrt{-d}y) = \a\,\bar{\a},\\
+		z^2+d\,t^2 = (z+\sqrt{-d}t)(z-\sqrt{-d}t) = \b\,\bar{\b},
+	\end{gather*}
+	dove
+	\[
+		\a\,\b = (x\,z-d\,y\,t) + \sqrt{-d}(x\,t+y\,z).
+	\]
+	Da cui
+	\[
+		n\,m = \a\,\b\,\bar{\a\,\b} = \abs{\a\,\b}^2 = (x\,z-d\,y\,t)^2 + d(x\,t+y\,z)^2=u^2+d\,v^2.
+	\]
+	Adesso troviamo \(Q,P\in\Z\) tali che \(5548=Q^2+3P^2\).
+	Osserviamo che \(5548=4\cdot 19\cdot 73\), dove
+	\begin{gather*}
+		4 = 1+3\cdot 1 = \abs{1+\sqrt{-3}}^2,\\
+		19 = 16+3\cdot 1 = \abs{4+\sqrt{-3}}^2,\\
+		73 = 25+3\cdot 16 = \abs{5+4\sqrt{-3}}^2.
+	\end{gather*}
+	Da cui
+	\[
+		5548 = \abs{(1+\sqrt{-3})(4+\sqrt{-3})(5+4\sqrt{-3})}^2 = \abs{-55+29\sqrt{-3}}^2 = 55^2+3\cdot 29^2.
+	\]
+\end{sol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 20/05/2016 - DODICESIMA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\stepcounter{exeN}
+\setcounter{exeL}{0}
+\begin{exeL}\label{ex:C3a}
+	Sia \(k\in\N\).
+	Preso \(n\in\N\) definiamo la funzione totiente di Jordan \(J_k(n)\) di \(n\) come una generalizzazione della funzione di Eulero,
+	\[
+		J_k(n) = \#\Set{(a_1,\ldots,a_k)\in\N^k | a_1,\ldots,a_k \le n, (n,a_1,\ldots,a_k)=1}.
+	\]
+	Si provi che la funzione di Jordan è moltiplicativa e che
+	\[
+		J_k(n) = n^k \prod_{p\mid n} \left( 1- \frac{1}{p^k} \right).
+	\]
+\end{exeL}
+
+\begin{sol}
+	La strategia consiste nel dimostrare che:
+	\begin{enumerate}
+		\item \(J_k\) è moltiplicativa;
+		\item vale \(J_k(p^\a) = p^{k\,\a} (1-1/p^k)\).
+	\end{enumerate}
+	Da ciò dedurremmo, preso \(n=p_1^{\a_1} \cdot\ldots\cdot p_s^{\a_s}\), che
+	\[
+		\begin{split}
+			J_k(n) & = \prod_{j=1}^s J_k(p_j^{\a_j}) = \prod_{j=1}^s p_j^{k\,\a_j} \left( 1- \frac{1}{p_j^k} \right) = \prod_{j=1}^s p_j^{k\,\a_j} \prod_{j=1}^s \left( 1- \frac{1}{p_j^k} \right)\\
+			& = n^k \prod_{p\mid n} \left( 1- \frac{1}{p^k} \right).
+		\end{split}
+	\]
+	Definiamo \(H_k(n) = \Set{(a_1,\ldots,a_k)\in (\Z_n)^k | (n,a_1,\ldots,a_k)=1}\), vorremmo la seguente corrispondenza biunivoca
+	\[
+		H_k(n\,m) \leftrightarrow H_k(n) \times H_k(m).
+	\]
+	\graffito{\(\leftarrow)\)}Supponiamo che \((a_1,\ldots,a_k)\in H_k(n), (b_1,\ldots,b_k)\in H_k(m)\). Per ogni \(j\) sia \(\g_j\) l'unica soluzione di
+	\[
+		\begin{cases}
+			x \equiv a_j \pmod{n} \\
+			x \equiv b_j \pmod{m}
+		\end{cases}
+	\]
+	segue che \((\g_1,\ldots,\g_k)\in H_k(n\,m)\).
+
+	\graffito{\(\rightarrow)\)}Analogamente, se \((\g_1,\ldots,\g_k)\in H_k(n\,m)\), per ogni \(j\) è sufficiente prendere \(a_j,b_j\) tali che
+	\[
+		a_j \equiv \g_j \pmod{n} \qquad\text{e}\qquad b_j \equiv \g_j \pmod{m}.
+	\]
+	Dimostriamo infine che \(J_k(p^\a) = p^{k\,\a} (1-1/p^k)\).
+	Ora per ogni \((a_1,\ldots,a_k)\in\N^k\) e per ogni \(p\) primo, avremo
+	\[
+		(p^\a,a_1,\ldots,a_k) \neq 1 \iff p \mid a_i,\,\fa i,
+	\]
+	da cui
+	\begin{multline*}
+		\#\Set{(a_1,\ldots,a_k)\in\N^k | a_1,\ldots,a_k \le p^a,p \mid a_1,\ldots,a_k}\\
+		= \#\Set{(a_1,\ldots,a_k)\in \Z_{p^\a} | p \mid a_1,\ldots,a_k}^k = (p^{\a-1})^k.
+	\end{multline*}
+	Ora è chiaro che \(H_k(p^\a)\) corrisponde al complementare dell'insieme di cui abbiamo appena calcolato la cardinalità.
+	Quindi, dal momento che \(\abs{(\Z_{p^\a})^k}=p^{\a\,k}\), avremo
+	\[
+		\begin{split}
+			J_k(p^\a) & = p^{\a\,k} - \#\Set{(a_1,\ldots,a_k)\in \Z_{p^\a} | p \mid a_1,\ldots,a_k}^k\\
+			& = p^{\a\,k}-p^{(\a-1)k} = p^{\a\,k} \left( 1- \frac{1}{p^k} \right).
+		\end{split}
+	\]
+\end{sol}
+
+\begin{exeL}\label{ex:C3b}
+	Dimostrare che
+	\[
+		\sum_{d\mid n} J_k(d) = n^k.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Osserviamo che tale somma è la convoluzione di \(J_k\) e la funzione unitaria.
+	Sappiamo che la convoluzione di due funzioni moltiplicative è moltiplicativa.
+	In particolare la funzione unitaria è banalmente moltiplicativa e \(J_k\) lo è per il punto precedente.
+
+	Quindi affinché la tesi sia valida è sufficiente verificarla per \(n=p^\a\):
+	\[
+		\begin{split}
+			\sum_{d\mid p^\a} J_k(d) & = \sum_{i=0}^\a J_k(p^i) =1+ \sum_{i=i}^\a p^{k\,i}\left( 1- \frac{1}{p^k} \right)\graffito{la formula per \(J_k(p^i)\) viene dal punto precedente}\\
+			& = 1+ \left( 1- \frac{1}{p^k} \right) \sum_{i=1}^\a p^{k\,i} = 1+ \left( 1- \frac{1}{p^k} \right) p^k\frac{p^{k\,\a}-1}{p^k-1}\\
+			& = p^{k\,\a}.
+		\end{split}
+	\]
+\end{sol}
+
+\begin{exeL}\label{ex:C3c}
+	Si verifichi l'identità
+	\[
+		J_k(n) = \m(n) * n^k.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Ricordiamo la prima formula di inversione di M\"oebius
+	\[
+		g(n) = \sum_{d\mid n} f(d) \implies f(n) = \sum_{d\mid n}\m(d) g \left( \frac{n}{d} \right),
+	\]
+	ovvero \(g = f*1 \implies f=\m*g\).
+
+	Dal punto precedente sappiamo che \(J_k*1 = n^k\), quindi, applicando l'inversione di M\"oebius,
+	\[
+		J_k = \m * n^k.
+	\]
+\end{sol}
+
+\begin{exeL}\label{ex:C3d}
+	Si verifichi l'identità
+	\[
+		\sum_{n\ge 1} \frac{J_k(n)}{n^s} = \frac{\z(s-k)}{\z(s)}.
+	\]
+\end{exeL}
+
+\begin{sol}
+	Abbiamo già osservato a pagina \pageref{lem:convz_f} che se
+	\[
+		\z_f (s) = \sum_{n \ge 1} \frac{f(n)}{n^s},
+	\]
+	allora \(\z_f(s)\z_g(s) = \z_{f*g}(s)\).
+
+	Nel punto precedente abbiamo dimostrato che \(J_k=\m*n^k\), da cui
+	\[
+		\begin{split}
+			\sum_{n\ge 1} \frac{J_k(n)}{n^s} & = \z_{J_k}(s) = \z_{\m*n^k}(s) = \z_\m(s) \z_{n^k}(s)\\
+			& = \sum_{n\ge 1} \frac{\m(n)}{n^s} \sum_{n\ge 1} \frac{n^k}{n^s} = \frac{\z(s-k)}{\z(s)},
+		\end{split}
+	\]
+	dove il calcolo di \(\z_\m(s)\) è possibile verificarlo a pagina \pageref{es:z_f}.
+\end{sol}

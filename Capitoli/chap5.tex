@@ -1,0 +1,890 @@
+%!TEX root = ../main.tex
+\chapter{Somme di quadrati}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 22/04/2016 - OTTAVA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%
+%INTRODUZIONE%
+%%%%%%%%%%%%%%
+\section{Introduzione}
+
+\begin{defn}{Somma di quadrati}{sommaQuadrati}
+	Diremo che \(n\in\N\) è somma di quadrati se esistono \(x_1,\ldots,x_k\in\N\) tali che
+	\[
+		n = x_1^2 + \ldots + x_k^2.
+	\]
+\end{defn}
+
+\begin{notz}
+	Indicheremo con \(\square\) un quadrato perfetto.
+	Ad esempio per dire che \(n\) è somma di \(k\) quadrati scriveremo \(n=k\square\).
+\end{notz}
+
+\begin{teor}{di Lagrange}{teorLagrangeQuadratiEnunciato}
+	Ogni \(n\in\N\) è al più somma di quattro quadrati.
+\end{teor}
+
+\begin{proof}
+	A pagina \pageref{th:teorLagrangeQuadrati}.
+\end{proof}
+
+\begin{ese}
+	Mostriamo la scomposizione in somma di quadrati di alcuni interi:
+	\begin{gather*}
+		2=1^2+1^2;\\
+		3=1^2+1^2+1^2;\\
+		4=2^2;\\
+		5=2^2+1^2;\\
+		6=2^2+1^2+1^2;\\
+		7=2^2+1^2+1^2+1^2.
+	\end{gather*}
+\end{ese}
+
+\begin{teor}{di Legendre}{teorLegendreQuadratiEnunciato}
+	Sia \(n\in\N\).
+	Allora \(n\) è la somma di tre quadrati se e soltanto se
+	\[
+		n \neq 4^l (7+8k),l,k\in\N.
+	\]
+\end{teor}
+
+\begin{proof}
+	A pagina \pageref{th:teorLegendreQuadrati}.
+\end{proof}
+
+\begin{oss}
+	Quando si dice che \(n\) è somma di tre quadrati si includono anche i naturali che sono somma di uno o due quadrati.
+	A questi infatti è possibile sommare \(0^2\) per raggiungere i tre interi.
+\end{oss}
+
+\begin{teor}{di Fermat}{5.1}\index{Teorema!di Fermat}
+	Sia \(p\ge 3\) primo.
+	Allora
+	\[
+		p = 2\square \iff p\equiv 1 \pmod{4}.
+	\]
+\end{teor}
+
+\begin{proof}
+	\graffito{\(\Rightarrow)\)}Supponiamo che \(p\) sia somma di due quadrati.
+	Dal momento che \(p\) primo, certamente \(p\not\equiv 0,2\pmod{4}\).
+	Inoltre, in generale, se \(n\equiv 3 \pmod{4}\), allora \(n\) non è somma di due quadrati.
+	Infatti i quadrati modulo \(4\) sono \(0\) e \(1\), in quanto
+	\[
+		\Z_4 = \Set{0,1,2,3} \implies (\Z_4)^2 = \Set{0,1}.
+	\]
+	Quindi se fosse \(n=x^2+y^2\) si avrebbe
+	\[
+		n \mod 4 = x^2 \mod 4 + y^2 \mod 4 \implies 3 = a^2 + b^2,
+	\]
+	che è assurdo in quanto \(a,b\in \Set{0,1}\).
+	Per cui \(p \equiv 1 \pmod{4}\).
+
+	\graffito{\(\Leftarrow)\)}Supponiamo \(p\equiv 1 \pmod{4}\), in particolare \(\jac{-1}{p}=1\).
+	Quindi esiste \(x_0\in\Z\) tale che \(x_0^2+1^2 \equiv 0 \pmod{p}\).
+	Inoltre \(x_0\) possiamo sceglierlo nel sistema completo di residui
+	\[
+		\Set{-\frac{p-1}{2},\ldots,\frac{p-1}{2}}.
+	\]
+	Per cui esiste \(x_0\in\Z\) tale che \(\abs{x_0} < \frac{p}{2}\) e \(x_0^2+1^2 \equiv 0 \pmod{p}\).
+	Ovvero esiste \(m\in\Z\) tale che \(m\,p = x_0^2+1^2\).
+	Dove \(m<p\) in quanto
+	\[
+		m\,p = x_0^2 +1^2 < \frac{p^2}{4}+1^2 < p^2 \implies m<p.
+	\]
+	La strategia a questo punto, sapendo che esiste \(1\le m <p\) tale che \(m\,p = 2\square\), è mostrare che se \(m>1\) esiste \(m_0\) tale che \(1\le m_0<m\) e \(m_0 p = 2\square\).
+	Iterando il procedimento troveremo necessariamente \(m_n=1\) tale che \(m_n p = 2\square\), ovvero \(p=2\square\).
+
+	Sia \(m\,p = x^2+y^2\) e siano \(x_1,y_1 \in \N\) tali che
+	\[
+		x_1 \equiv x \pmod{m} \qquad\text{e}\qquad y_1 \equiv y \pmod{m}.
+	\]
+	In particolare posso prenderli tali che \(\abs{x_1}\le \frac{m}{2}\) e \(\abs{y_1}\le \frac{m}{2}\).
+	Quindi
+	\[
+		x_1^2 + y_1^2 \equiv x^2+y^2 \equiv 0 \pmod{m}.
+	\]
+	Pertanto esisterà \(m_0\in\N\) tale che \(m_0 m = x_1^2+y_1^2\).
+	D'altronde
+	\[
+		x_1^2+y_1^2 \le \left( \frac{m}{2} \right)^2 + \left( \frac{m}{2} \right)^2 = \frac{m^2}{2} \iff m_0 m \le \frac{m^2}{2},
+	\]
+	ovvero
+	\[
+		m_0 m \le \frac{m^2}{2} < m^2 \iff m_0 \le \frac{m}{2} < m.
+	\]
+	Inoltre \(m_0 \neq 0\), poichè altrimenti \(x_1^2+y_1^2 = 0\), quindi
+	\[
+		x_1 = y_1 = 0 \implies m\mid x, y \implies m^2 \mid x^2 + y^2,
+	\]
+	ma ciò è assurdo poichè altrimenti \(m \mid p\) che contraddice \(1 < m < p\) con \(p\) primo.
+
+	Quindi abbiamo trovato \(m_0\) tale che \(1 \le m_0 < m\) e \(m_0 m = x_1^2 + y_1^2\).
+
+	Osserviamo che se \(n_1 = 2\square = a_1^2 + b_1^2\) e \(n_2 = 2\square = a_2^2 + b_2^2\), si ha
+	\[
+		n_1 n_2 = (a_1^2+b_1^2)(a_2^2+b_2^2) = (a_1 b_2 - a_2 b_1)^2 + (a_1 a_2 + b_1 b_2)^2 = 2\square.
+	\]
+	Quindi, dal momento che \(m_0 m\) e \(m\, p\) sono entrambi \(2\square\), troviamo
+	\[
+		m_0 m \cdot m\,p = 2\square = (x_1 y-y_1 x)^2 + (x_1 x+y_1 y)^2,
+	\]
+	ovvero
+	\[
+		m_0 p = \left( \frac{x_1 y-y_1 x}{m} \right)^2 + \left( \frac{x_1 x+y_1 y}{m} \right)^2 = 2\square.
+	\]
+	Da cui, iterando, giungo alla tesi.
+\end{proof}
+
+\begin{oss}
+	L'implicazione \(p\equiv 1 \pmod{4} \implies p = \square + \square\) può essere dimostrata in maniera alternativa.
+	Si usa il fatto che se \(p \equiv 1 \pmod{4}\) allora esiste \(x\in \Z\) tale che \(x^2 + 1 \equiv 0 \pmod{p}\)
+\end{oss}
+
+\begin{ese}
+	Consideriamo \(13,17\) entrambi primi congrui ad \(1\) modulo \(4\).
+	Avremo
+	\[
+		13 = 3^2+2^2 \qquad\text{e}\qquad 17 = 4^2+1^2.
+	\]
+\end{ese}
+
+\begin{teor}{Naturali somma di due quadrati}{5.2}
+	Sia \(n\in\N\) e supponiamo \(n=2^r p_1^{r_1} \cdot\ldots\cdot p_t^{r_t} q_1^{u_1} \cdot\ldots\cdot q_s^{u_s}\), dove
+	\[
+		p_j \equiv 1 \pmod{4} \qquad\text{e}\qquad q_i \equiv 3 \pmod{4}.
+	\]
+	Allora \(n=2\square\) se e soltanto se \(u_1,\ldots,u_s\) sono tutti pari.
+\end{teor}
+
+\begin{proof}
+	\graffito{\(\Leftarrow)\)}Per il teorema precedente \(p_j \equiv 1 \pmod{4} \implies p_j = 2\square\).
+	Abbiamo già osservato nella dimostrazione precedente che il prodotto si somme di due quadrati è una somma di due quadrati, quindi \(p_1^{r_1} \cdot\ldots\cdot p_t^{r_t}=2\square\).
+
+	D'altronde \(u_i\) pari ci dice che \(q_i^{u_i} = \left(q_i^{\frac{u_i}{2}}\right)^2+0^2\), quindi nuovamente \(q_1^{u_1} \cdot\ldots\cdot q_s^{u_s}\) è somma di due quadrati in quanto prodotto di somme di due quadrati.
+	Pertanto \(n=2\square\).
+
+	\graffito{\(\Rightarrow)\)}Supponiamo per assurdo che esista \(u_i\) tale che \(2\nmid u_i\).
+	Dal momento che \(n=x^2+y^2\) avremo \(x^2+y^2 \equiv 0 \pmod{q_i}\).
+	Se fosse \(q_i \nmid y\) allora esisterebbe il suo inverso moltiplicativo \(y^*: y\,y^* \equiv 1 \pmod{q_i}\).
+	Quindi
+	\[
+		x^2+y^2 \equiv_{q_i} 0 \iff (x\,y^*)^2 + (y\,y^*)^2 \equiv_{q_i} 0 \iff (x\,y^*)^2 \equiv -1 \pmod{q_i},
+	\]
+	ovvero \(\jac{-1}{q_i} = 1\), ma ciò non può accadere in quanto \(q_1 \equiv 3 \pmod{4}\).
+	Quindi \(q_i \mid y \implies q_i \mid x\). Per cui
+	\[
+		n = (q_i x')^2 + (q_i y')^2 \implies \frac{n}{q_i^2} = x'^2 + y'^2.
+	\]
+	Ricordiamo che \(u_i\ge 3\), per cui ripetendo il ragionamento su \(\frac{n}{q_i^2}\) otteniamo \(u_i-3 \ge 3\).
+	Ripetendo il procedimento un numero sufficiente di volte si giunge inevitabilmente ad una contraddizione.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 10/05/2016 - UNDICESIMA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%
+%SOMMA DI DUE QUADRATI%
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Somma di due quadrati}
+
+\begin{defn}{Funzione enumerativa della somma di due quadrati}{funzioneEnumerativaSommaDueQuadrati}
+	Definiamo una funzione aritmetica \(S\) che associ ad ogni naturali il numero di modi in cui può essere scomposto come somma di due quadrati,
+	\[
+		S(n) = \#\Set{(a,b)\in\Z^2 | a^2+b^2=n}.
+	\]
+\end{defn}
+
+\begin{ese}
+	\(S(2)=4\), infatti \(2=1^2+1^2,(-1)^2+1^2,1^2+(-1)^2,(-1)^2+(-1)^2\).
+
+	Analogamente \(S(3)=0\) e \(S(5)=8\).
+\end{ese}
+
+\begin{defn}{Numero di interi scomponibili come somma di due quadrati}{interiSommaDueQuad}
+	Definiamo una funzione aritmetica \(K\) che ci fornisca il numero di interi, minori di un dato \(T\), che possono essere scritti come somma di due quadrati,
+	\[
+		K(T) = \#\Set{n\in \N | n\le T, n=\square+\square}.
+	\]
+\end{defn}
+
+\begin{ese}
+	\(K(5)=4\), infatti \(1,2,4\) e \(5\) possono essere scritti come somma di due quadrati.
+
+	Analogamente \(K(10)=7,K(20)=12\).
+\end{ese}
+
+\begin{defn}{Densità naturale}{densitàNaturale}\index{Densità naturale}
+	Sia \(S\subseteq \N\).
+	Definiamo la \emph{densità naturale} \(\d_S\) di \(S\) come
+	\[
+		\d_S = \lim_{T \to +\infty} \frac{\#\big(S \cap [1,T]\big)}{\#\big(\N \cap [1,T]\big)}.
+	\]
+\end{defn}
+
+\begin{oss}
+	Esistono insiemi che non ammettono densità naturale.
+	Un esempio è costituito dall'insieme
+	\[
+		A = \bigcup_{n=0}^{+\infty} \{2^{2n},\ldots,2^{2n+1}-1\}.
+	\]
+	Infatti se definiamo \(T(n) = \#\big(A \cap [1,n]\big)\), avremo che
+	\[
+		T(k) = \frac{2^{2n+2}-1}{3},\,\fa k \in [2^{2n+1}-1,2^{2n+2}-1],
+	\]
+	ma questo ci mostra immediatamente che il limite della densità naturale non può esistere in quanto
+	\begin{gather*}
+		\limsup_{n \to +\infty} \frac{T(n)}{n} = \lim_{n\to +\infty} \frac{1+2^2+2^4+\ldots+2^{2n}}{2^{2n+1}-1} = \lim_{n\to +\infty} \frac{2^{2m+2}-1}{3(2^{2m+1}-1)} = \frac{2}{3}\\
+		\liminf_{n \to +\infty} \frac{T(n)}{n} = \lim_{n\to +\infty} \frac{1+2^2+2^4+\ldots+2^{2n}}{2^{2n+2}-1} = \lim_{n\to +\infty} \frac{2^{2m+2}-1}{3(2^{2m+2}-1)} = \frac{1}{3}.
+	\end{gather*}
+\end{oss}
+
+\begin{teor}{di Landau}{teoremaDiLandau}\index{Teorema!di Landau}
+	Vale la seguente stima asintotica
+	\[
+		K(T) \sim c \frac{T}{\sqrt{\ln T}}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Non fornita.
+\end{proof}
+
+\begin{cor}
+	L'insieme degli interi che possono essere scritti come somma di due quadrati hanno densità nulla.
+\end{cor}
+
+\begin{proof}
+	Dal teorema abbiamo
+	\[
+		\d_{2\square} = \lim_{T \to +\infty} \frac{K(T)}{T+o(1)} = \lim_{T \to +\infty} \frac{c \frac{T}{\sqrt{\ln T}}}{T} = 0.
+	\]
+\end{proof}
+
+\begin{teor}{Lemma delle gabbie e dei piccioni}{lemmaGabbiePiccioni}
+	Sia \(x\in \Z\) tale che \(x^2+1 \equiv 0 \pmod{p}\), con \(p\) primo.
+	Allora esistono \(a,b\in \Z\) tali che
+	\[
+		0 < \abs{a},\abs{b} < \sqrt{p} \qquad\text{e}\qquad a\,x \equiv b \pmod{p}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Definiamo il seguente insieme
+	\[
+		S = \Set{u\,x - v | u,v\in \Z, 0\le u,v \le \sqrt{p}}.
+	\]
+	Avremo \([\sqrt{p}]+1\) scelte sia per \(u\) che per \(v\).
+	Quindi \(S\) ha \(\big([\sqrt{p}]+1\big)^2>p\) coppie \((u,v)\) distinte.
+
+	D'altronde se consideriamo il resto modulo \(p\) di \(u\,x-v\) avremo \(p\) possibili resti.
+
+	Ora, dal momento che il numero delle coppie \((u,v)\) è maggiore del numero di resti, avremo necessariamente che
+	\[
+		\ex (u_1,v_1),(u_2,v_2) : u_1 x - v_1 \equiv u_2 x  - v_2 \pmod{p}.
+	\]
+	Se definiamo \(a=u_1-u_2\) e \(b=v_1-v_2\) abbiamo che \(a\,x \equiv b \pmod{p}\).
+	Resta da verificare che \(0 < \abs{a},\abs{b} < \sqrt{p}\).
+	Ma
+	\[
+		\abs{a} = \abs{u_1-u_2} < \sqrt{p} \qquad\text{e}\qquad \abs{b} = \abs{v_1-v_2} < \sqrt{p},
+	\]
+	quindi la seconda disuguaglianza è verificata.
+	Se per assurdo \(b=0\) si avrebbe \(a\,x \equiv 0 \pmod{p}\); d'altronde \(x^2 \equiv -1 \pmod{p}\), per cui \(p \nmid x\) e di conseguenza \(p \mid a \implies a=0\) in quanto \(a < \sqrt{p}\).
+
+	Per cui \(a=0, b=0 \implies u_1=u_2\) e \(v_1=v_2\) che è ovviamente assurdo per la nostra scelta iniziale.
+	Analogamente si mostra che \(a=0 \implies b=0\) che porta alla stessa contraddizione.
+\end{proof}
+
+\begin{cor}
+	Sia \(x\in \Z\) tale che \(x^2+1 \equiv 0 \pmod{p}\), con \(p\) primo.
+	Allora esistono \(a,b\in \Z\) tali che \(a^2+b^2 =p\).
+\end{cor}
+
+\begin{proof}
+	Per il teorema esistono \(a,b\in \Z\) tali che
+	\[
+		0 < \abs{a},\abs{b} < \sqrt{p} \qquad\text{e}\qquad a\,x \equiv b \pmod{p}.
+	\]
+	Quindi
+	\[
+		a^2+b^2 \equiv_p a^2 +(a\,x)^2 = a^2(1+x^2) \equiv 0 \pmod{p}.
+	\]
+	Dunque \(p\mid a^2+b^2\), ovvero \(a^2+b^2= k\,p\).
+	D'altronde \(0<a^2+b^2 <2p\), per cui \(a^2+b^2=p\).
+\end{proof}
+
+\begin{oss}
+	Tramite questo risultato possiamo dimostrare in maniera alternativa, e molto utile per gli esercizi, che se \(p\equiv 1 \pmod{4}\) allora \(p = \square+\square\).
+	Useremo proprio il fatto che se \(p\equiv 1 \pmod{4}\) allora esiste \(x\in \Z\) tale che \(x^2+1 \equiv 0 \pmod{p}\).
+
+	Infatti se prendiamo \(x= \left(\frac{p-1}{2}\right)!\), avremo
+	\[
+		\begin{split}
+			x^2 & = \prod_{r=1}^{\frac{p-1}{2}} r^2 = \underbrace{(-1)^{\frac{p-1}{2}}}_{=1} \prod_{r=1}^{\frac{p-1}{2}} r^2 = \prod_{r=1}^{\frac{p-1}{2}} r(-r) \equiv \prod_{r=1}^{\frac{p-1}{2}} r \prod_{r=1}^{\frac{p-1}{2}} (p-r) \pmod{p}\\
+			& = \left( 1 \cdot 2 \cdot \ldots \cdot \left( \frac{p-1}{2} \right) \right) \left( (p-1)(p-2) \cdot\ldots\cdot \left( \frac{p-1}{2}+1 \right) \right)\\
+			& = (p-1)! \equiv -1 \pmod{p},
+		\end{split}
+	\]
+	dove l'ultima equivalenza è dovuta al teorema di Wilson, dimostrato a pagina \pageref{th:3.13}.
+\end{oss}
+
+\begin{teor}{Generalizzazione del lemma delle gabbie e dei piccioni}{generalizzazioneLemmaGabbiePiccioni}
+	Sia \(n\in \N, n>1\).
+	Allora per ogni \(x\in \Z\) tale che \(x^2+1 \equiv 0 \pmod{n}\), esiste un'unica coppia \((a,b)\in \N^2\) tale che
+	\[
+		(a,b) = 1; \qquad n=a^2+b^2 \qquad\text{e}\qquad a\,x \equiv b \pmod{n}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Definiamo nuovamente
+	\[
+		S = \Set{u\,x - v | u,v\in \Z, 0\le u,v \le \sqrt{p}}.
+	\]
+	Sfruttando argomenti del tutto analoghi a quelli usati nel lemma precedente si può dimostrare che esistono \(a,b\in \Z\) tali che \(a\,x \equiv b \pmod{n}\) e \(n=a^2+b^2\).
+
+	Mostriamo che \(a,b\in \N\), assumendo, senza perdita di generalità, che \(a>0\).
+	Se \(b>0\) non c'è nulla da dimostrare, supponiamo quindi che \(b<0\) e deifiniamo \(a'=-b\) e \(b'=a\).
+	Avremo quindi \(a',b'\in \N, a'^2+b'^2 = n\) e
+	\[
+		a'x = -b\,x \equiv_n -x\,a\,x = (-x^2)a \equiv_n a = b'.
+	\]
+	A meno di effettuare tali variazioni, resta da dimostrare che \((a',b')=1\) e che non vi sono ulteriori coppie.
+	Se scriviamo \(b=a\,x+k\,n\) otteniamo
+	\[
+		\begin{split}
+			n & = a^2+b^2  = a^2+(a\,x + k\,n)^2 = a^2+ a^2 x^2 + k\,n\,a\,x + k\,n\,a\,x + k^2 n^2\\
+			& = a^2(x^2+1) + k\,n\,a\,x + k\,n(a\,x+ k\,n) = a^2 l\,n + k\,n\,a\,x + k\,n\,b\\
+			& = (a(a\,l\,n+x\,k)+k\,b)n.
+		\end{split}
+	\]
+	Da cui
+	\[
+		\begin{split}
+			a^2+b^2 = n & \iff (a(a\,l\,n+x\,k)+k\,b)n = n \iff a(a\,l\,n+x\,k)+k\,b = 1\\
+			& \iff a\,\a + b\,\b = 1,
+		\end{split}
+	\]
+	ovvero \((a,b)=1\).
+
+	Supponiamo infine che \((A,B)\) sia una seconda coppia che soddisfa il teorema, per cui
+	\begin{align*}
+		 & (A,B) = 1              &  & (a,b)=1                \\
+		 & A^2+B^2 = n            &  & a^2+b^2=n              \\
+		 & A\,x \equiv B \pmod{n} &  & a\,x \equiv b \pmod{n}
+	\end{align*}
+	In particolare \(n^2 = (a\,A+b\,B)^2 + (a\,B-b\,A)^2\), dove
+	\[
+		a\,A + b\,B \equiv a\,A + a\,A\,x^2 = a\,A (1+x^2) \equiv 0 \pmod{n} \implies a\,A + b\,B = k\,n.
+	\]
+	L'unica possibilità è che \(a\,A+b\,B = n\) e \(a\,B -b\,a = 0\), da cui
+	\[
+		a\,B = A\,b \implies 	\begin{aligned}
+			a \mid A\,b \implies a \mid A \\
+			A \mid a\,B \implies A \mid a
+		\end{aligned}
+		\implies a=A.
+	\]
+	e analogamente \(b=B\).
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 11/05/2016 - UNDICESIMA SETTIMANA (2)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lem}
+	Sia \(a\,x^2 + b\,x + c = 0 \pmod{p}\), \(p\ge 3\) primo, una congruenza di secondo grado e sia \(D = b^2-4a\,c\) il discriminante.
+	Allora la congruenza ammette soluzioni se e soltanto se \(D\) è un residuo quadratico modulo \(p\).
+\end{lem}
+
+\begin{proof}
+	Applichiamo gli stessi passaggi che si effettuano nel caso di equazioni reali
+	\[
+		\begin{split}
+			a\,x^2 + b\,x + c \equiv_p 0 & \iff 4a^2 x^2 + 4a\,b\,x+4a\,c \equiv_p 0 \\
+			& \iff 4a^2 x^2 + 4a\,b\,x + b^2 \equiv_p b^2 -4a\,c\\
+			& \iff (2a\,x + b)^2 \equiv_p b^2 -4a\,c.
+		\end{split}
+	\]
+	A questo punto si tratta di risolvere il sistema
+	\[
+		\begin{cases}
+			y^2 \equiv D \pmod{p} \\
+			2a\,x + b \equiv \bar{y} \pmod{p}
+		\end{cases}
+	\]
+	dove \(\bar{y}\) è una soluzione della prima congruenza.
+	Osserviamo che la seconda congruenza è sempre risolubile a meno che \(p\mid a\), il quale è però un caso banale.
+	Pertanto abbiamo una soluzione quando \(y^2 \equiv D \pmod{p}\), ovvero quando \(D\) è un residuo quadratico modulo \(p\).
+\end{proof}
+
+\begin{ese}
+	Dimostriamo che
+	\[
+		p \equiv 1 \pmod{3} \iff \,\ex x,y \in \Z : p = x^2+x\,y + y^2.
+	\]
+	\graffito{\(\Leftarrow)\)}Consideriamo l'uguaglianza \(p=x^2+x\,y+y^2\) modulo \(3\)
+	\[
+		p = x^2+x\,y + y^2 \equiv_3 x^2-2x\,y+y^2 = (x-y)^2.
+	\]
+	Ora se \(n\in \Z_3\) si ha che \(n^2 \in \{0,1\}\), per cui
+	\[
+		p \equiv_3 (x-y)^2 \in \{0,1\}.
+	\]
+	D'altronde \(p\) primo ci dice che \(p\not\equiv 0 \pmod{3}\), da cui \(p \equiv 1 \pmod{3}\).
+
+	\graffito{\(\Rightarrow)\)}Consideriamo la congruenza associata \(T^2+T+1\equiv_p 0\) e supponiamo che \(\a\) sia una sua soluzione.
+	Tale soluzione esiste per il lemma precedente, in quanto il discriminante è \(-3\) e abbiamo
+	\[
+		\jac{-3}{p} = (-1)^{\frac{p-1}{2}} (-1)^{\frac{3-1}{2}\frac{p-1}{2}} \jac{p}{3} = \jac{p}{3} = \jac{p\pmod{3}}{3} = \jac{1}{3} =1.
+	\]
+	Ora utilizzando argomenti analoghi al lemma delle gabbie e dei piccioni, avremo che esistono \(a,b\in \Z\) tali che
+	\[
+		0 < \abs{a},\abs{b} < \sqrt{p} \qquad\text{e}\qquad a\,\a \equiv b \pmod{p}.
+	\]
+	Da cui
+	\[
+		a^2 + a\,b + b^2 \equiv a(1+\a+\a^2) \equiv 0 \pmod{p},
+	\]
+	in quanto \(\a\) è soluzione della congruenza \(T^2+T+1\equiv_p 0\).
+	Inoltre
+	\[
+		0 \underbrace{<}_{\Delta < 0} a^2+a\,b+b^2 < 3p \implies a^2+a\,b+b^2 = \begin{cases}
+			p \\
+			2p
+		\end{cases}
+	\]
+	Ora se per assurdo \(a^2+a\,b + b^2 = 2p\), dal momento che \(p\equiv 1 \pmod{3}\), si avrebbe
+	\[
+		(a-b)^2 \equiv 2 \pmod{3},
+	\]
+	che è assurdo per quanto mostrato nella prima parte dell'esercizio.
+	Per cui \(a^2+a\,b+ b^2=p\).
+\end{ese}
+
+\begin{teor}{Ulteriori proprietà}{ultPropSommaDueQuad}
+	Consideriamo le seguenti funzioni enumerative
+	\begin{itemize}
+		\item \(T(n) = \#\Set{x\in \Z_n | x^2 \equiv -1 \pmod{n}}\);
+		\item \(R^+(n) = \#\Set{(a,b) \in \N^2 | (a,b)=1, a^2+b^2=n}\);
+		\item \(R(n) = \#\Set{(a,b) \in \Z^2 | (a,b)=1, a^2+b^2=n}\).
+	\end{itemize}
+	Allora
+	\[
+		T(n) = R^+(n),n>1 \qquad\text{e}\qquad R(n) = 4R^+(n),\,\fa n.
+	\]
+\end{teor}
+
+\begin{proof}
+	Posto \(n>1\), mostriamo che vi è una corrispondenza biunivoca fra
+	\[
+		\Set{x\in \Z_n | x^2 \equiv -1 \pmod{n}} \qquad\text{e}\qquad \Set{(a,b) \in \N^2 | (a,b)=1, a^2+b^2=n}.
+	\]
+	Se \(x\) soddisfa \(x^2+1\equiv 0 \pmod{n}\) abbiamo già mostrato che esiste un'unica coppia \((a,b)\in \N^2\) che soddisfa le proprietà cercate.
+
+	Viceversa supponiamo che \((a,b)\in \N^2\) soddisfino
+	\[
+		a^2+b^2 = n \qquad\text{e}\qquad (a,b)=1.
+	\]
+	Ora se \((a,n)=d>1\) allora \(d\mid a^2,n\), in particolare \(d\mid b^2 = n-a^2\), per cui \(d\mid (a^2,b^2)\), ma ciò è assurdo in quanto \((a,b)=1 \implies (a^2,b^2)=1\).
+	Quindi \((a,n)=1 \implies a\,x \equiv b \pmod{n}\) è risolubile e ammette un'unica soluzione.
+	Mandiamo quindi \((a,b)\) in tale soluzione \(x\), avremo
+	\[
+		n=a^2+b^2 \implies 0 \equiv a^2+b^2 =a^2(x^2+1) \pmod{n},
+	\]
+	d'altronde \((a,n)=1\), quindi \(x^2 \equiv -1 \pmod{n}\).
+
+	Dimostriamo infine che \(R(n)=4R^+(n)\).
+	Sia \((a,b)\in\N^2\) tale che \((a,b)=1\) e \(a^2+b^2=n\).
+	Se \(a,b\neq 0\) posso considerare le coppie
+	\[
+		(a,b), \qquad (-a,b), \qquad (a,-b), \qquad(-a,-b).
+	\]
+	Se invece \(a\,b = 0\) allora \(a=0\) oppure \(b=0\).
+	Supponiamo che \(a=0\), ma abbiamo già osservato che \((a,n)=1\), quindi \(n=1\), che il caso escluso per ipotesi.
+\end{proof}
+
+\begin{oss}
+	T(n) è moltiplicativa, infatti già sappiamo che se \(f\in \Z[x]\),
+	\[
+		N_f(n) = \#\Set{x\in \Z_n | f(x) \equiv 0 \pmod{n}},
+	\]
+	è moltiplicativa.
+\end{oss}
+
+\begin{prop}{Calcolo della funzione \(T(n)\)}{calcolT(n)}
+	Preso \(n\in \N\), sia \(T(n)\) il numero delle soluzione di \(x^2+1 \equiv 0 \pmod{n}\).
+	Allora
+	\[
+		T(n) =  \begin{cases}
+			0           & \text{se \(4\mid n\) oppure se \(q\mid n\) con \(q\equiv_4 3\) primo} \\
+			2^{\w_o(n)} & \text{altrimenti}
+		\end{cases}
+	\]
+	dove \(\w_o(n)\) è il numero di primi dispari che dividono \(n\).
+\end{prop}
+
+\begin{proof}
+	Chiaramente il risultato è valido per \(T(1)=1\), per cui assumiamo \(n>1\).
+
+	Abbiamo già osservato che \(T\) è una funzione moltiplicativa.
+	Quindi se consideriamo la scomposizione di \(n\) come
+	\[
+		n = 2^r p_1^{r_1} \cdot\ldots\cdot p_t^{r_t} q_1^{u_1} \cdot\ldots\cdot q_s^{u_s},
+	\]
+	dove \(p_j,q_i\) sono primi tali che \(p_j \equiv 1 \pmod{4}\) e \(u_i \equiv 3 \pmod{4}\), allora
+	\[
+		T(n) = T(2^r)T(p_1^{r_1}) \cdot\ldots\cdot T(P_t^{r_t}) T(u_1^{q_1}) \cdot\ldots\cdot T(u_s^{q_s}).
+	\]
+	Si verifica facilmente che \(T(2)=1\).
+	D'altronde \(x^2+1 \equiv 0 \pmod{4}\) non ha soluzioni e pertanto \(T(2^r)=0\) per \(r\ge 2\).
+	Segue che \(T(n)=0\) se \(4\mid n\).
+
+	Supponiamo adesso che \(q\) sia un primo tale che \(q\equiv 3\pmod{4}\), ne segue che \(-1\) non è un residuo quadratico modulo \(q\), quindi \(T(q^s)=0\) per \(s\ge 1\).
+	In particolare \(T(n)=0\) se \(q\mid n\).
+
+	Resta da dimostrare che se \(p\equiv 1 \pmod{4}\) primo, allora \(T(p^r)=2\) per ogni \(r\ge 1\).
+	Sappiamo che se \(p\equiv 1 \pmod{4}\) allora \(x^2+1\equiv 0 \pmod{p}\) ammette soluzione, pertanto \(T(p)=2\).
+	Ora se \(\a\) è tale che \(\a^2+1 \equiv 0 \pmod{p}\) allora \(2\a\not\equiv 0 \pmod{p}\), quindi, per il teorema del sollevamento\graffito{il teorema del sollevamento viene trattato nell'esercizio \(7\) del secondo foglio di esercizi} ogni soluzione si solleva a \(p^2\) in modo unico.
+	Iterando questo procedimento si mostra proprio quanto richiesto.
+\end{proof}
+
+\begin{teor}{Calcolo della funzione \(S(n)\)}{calcoloS(n)}
+	Consideriamo la funzione enumerativa della somma di due quadrati definita come
+	\[
+		S(n) = \#\Set{(a,b) \in \Z^2 | a^2+b^2 = n}.
+	\]
+	Allora
+	\[
+		S(n) = 4\sum_{d^2 \mid n} T \left( \frac{n}{d^2} \right).
+	\]
+\end{teor}
+
+\begin{proof}
+	Per definizione
+	\[
+		S(n) = \sum_{\substack{(a,b)\in\Z^2\\a^2+b^2=n}} 1 = \sum_{d\in \N} \sum_{\substack{(a,b)\in\Z^2\\d=(\abs{a},\abs{b})\\a^2+b^2=n}} 1.
+	\]
+	Ora se \(d=(\abs{a},\abs{b})\) allora \(d^2 \mid a^2+b^2 = n\).
+	Quindi se scriviamo \(a=d\,a_1\) e \(b=d\,b_1\) otteniamo
+	\[
+		a_1^2 + b_1^2 = \frac{n}{d^2}.
+	\]
+	Da cui
+	\[
+		\begin{split}
+			S(n) & = \sum_{d^2\mid n}\sum_{\substack{(a,b)\in\Z^2\\d=(\abs{a},\abs{b})\\a^2+b^2=n}} 1 = \sum_{d^2\mid n}\sum_{\substack{(a_1,b_1)\in \Z^2\\(\abs{a_1},\abs{b_1})=1\\a_1^2+b_1^2=n/d^2}} 1 = \sum_{d^2\mid n} R \left( \frac{n}{d^2} \right)\\
+			& = 4\sum_{d^2\mid n} T \left( \frac{n}{d^2} \right).
+		\end{split}
+	\]
+\end{proof}
+
+\begin{teor}{Scrittura alternativa di \(S(n)\)}{scritturaAltS(n)}
+	Consideriamo la funzione enumerativa della somma di due quadrati definita come
+	\[
+		S(n) = \#\Set{(a,b) \in \Z^2 | a^2+b^2 = n}.
+	\]
+	Allora
+	\[
+		S(n) = 4\sum_{m\mid n} \c_4(m), \qquad\text{dove }\c_4(m) = \begin{cases}
+			0                    & 2\mid m  \\
+			(-1)^{\frac{m-1}{2}} & 2\nmid m
+		\end{cases}
+	\]
+\end{teor}
+
+\begin{proof}
+	Sappiamo che \(\c_4\) è una funzione totalmente moltiplicativa, da cui
+	\[
+		\w(n) = \sum_{m\mid n} \c_4(m),
+	\]
+	è moltiplicativa.
+	In particolare
+	\[
+		\begin{split}
+			\w(p^\a) & = \sum_{m\mid p^\a} \c_4(m) = \sum_{\b = 0}^\a \c_4(p^\b) = \c_4(1)+\c_4(p)+\ldots+\c_4(p^\a)\\
+			& = \begin{cases}
+				1    & p=2                                    \\
+				\a+1 & p\equiv 1 \pmod{4}                     \\
+				1    & p\equiv 3 \pmod{4}, \a \text{ pari}    \\
+				0    & p\equiv 3 \pmod{4}, \a \text{ dispari}
+			\end{cases}
+		\end{split}
+	\]
+	Ora, anche
+	\[
+		\frac{S(n)}{4} = \sum_{d^2 \mid n} T \left( \frac{n}{d^2} \right),
+	\]
+	è moltiplicativa, quindi ci basta calcolare \(S(p^\a)/4\):
+	\[
+		\frac{S(p^\a)}{4} = \sum_{d^2 \mid p^\a} T \left( \frac{p^\a}{d^2} \right) = 	\begin{cases}
+			T(p^\a)+T(p^{\a-2})+\ldots+T(1) & \text{se \(\a\) pari}    \\
+			T(p^\a)+T(p^{\a-2})+\ldots+T(p) & \text{se \(\a\) dispari}
+		\end{cases}
+	\]
+	Sappiamo che
+	\[
+		T(p^\a) = 	\begin{cases}
+			1 & \text{se }p^\a = 2                                     \\
+			0 & \text{se }4\mid p^\a \text{ oppure }p\equiv 3 \pmod{4} \\
+			2 & \text{se }p\equiv 1 \pmod{4}
+		\end{cases}
+	\]
+	Da cui
+	\[
+		\begin{split}
+			\frac{S(p^\a)}{4} & = 	\begin{cases}
+				1                & \text{se \(\a\) pari, \(p=2\)}                   \\
+				1+2 \frac{\a}{2} & \text{se \(\a\) pari, \(p\equiv 1 \pmod{4}\)}    \\
+				1                & \text{se \(\a\) pari, \(p\equiv 3 \pmod{4}\)}    \\
+				1                & \text{se \(\a\) dispari, \(p=2\)}                \\
+				2 \frac{\a+1}{2} & \text{se \(\a\) dispari, \(p\equiv 1 \pmod{4}\)} \\
+				0                & \text{se \(\a\) dispari, \(p\equiv 3 \pmod{4}\)}
+			\end{cases}\\
+			& = 	\begin{cases}
+				1    & \text{se \(p=2\) oppure \(p\equiv 3 \pmod{4}\) con \(\a\) pari} \\
+				0    & \text{se \(p\equiv 3 \pmod{4}\) con \(\a\) dispari}             \\
+				\a+1 & \text{se \(p\equiv 1 \pmod{4}\)}
+			\end{cases}
+		\end{split}
+	\]
+	Dal momento che i risultati coincidono la tesi è verificata.
+\end{proof}
+
+\begin{oss}
+	Dalla dimostrazione si può ricavare l'andamento medio si \(S(n)\):
+	\[
+		\frac{1}{T}\sum_{n\le T} S(n) = \frac{4}{T}\sum_{n\le T}\sum_{m\mid n} \c_4(m) = \frac{4}{T}\sum_{m\le T}\c_4(m) \left[ \frac{T}{m} \right].
+	\]
+\end{oss}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 12/05/2016 - UNDICESIMA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{teor}{Stima asintotica della somma di \(S(n)\)}{stimaAsintoticaS(n)}
+	Consideriamo la funzione enumerativa della somma di due quadrati definita come
+	\[
+		S(n) = \#\Set{(a,b) \in \Z^2 | a^2+b^2 = n}.
+	\]
+	Allora
+	\[
+		\sum_{n\le T} S(n) = \p\,T + O(\sqrt{T}), T \to +\infty.
+	\]
+\end{teor}
+
+\begin{proof}
+	Sfruttiamo nuovamente il metodo dell'iperbole di Dirichlet (vedi teorema \ref{th:2.7}):
+	\[
+		\begin{split}
+			\sum_{n\le T}S(n) & = 4\sum_{n\le T}\sum_{m\mid n}\c_4(m) = 4\sum_{\substack{a,b\in\N\\a\,b\le T}} \c_4(a)\\
+			& = \sum_{a\le \sqrt{T}} \c_4(a) \sum_{b\le T/a} 1 + \sum_{b\le \sqrt{T}}\sum_{\sqrt{T}\le a \le T/b} \c_4(a)\graffito{la seconda somma del secondo addendo corrisponde a \(1-1+1-\ldots \le 1\)}\\
+			& = 4\sum_{a\le \sqrt{T}} \c_4(a) \left[ \frac{T}{a} \right] + O(\sqrt{T}) = 4T \sum_{a\le \sqrt{T}} \frac{\c_4(a)}{a}+ O(\sqrt{T}).
+		\end{split}
+	\]
+	Posto \(\a = \sum \frac{\c_4(n)}{n}\) otteniamo
+	\[
+		4\a\,T + O \left( T \sum_{a>\sqrt{T}} \frac{\c_4(a)}{a} \right)+O(\sqrt{T}) = 4\a\,T + O(\sqrt{T}).
+	\]
+	Ora
+	\[
+		\c_4(2k)=0 \implies \sum_{n=1}^{+\infty} \frac{\c_4(n)}{n} = \sum_{k=0}^{+\infty} \frac{(-1)^k}{2k+1}.
+	\]
+	Inoltre da
+	\[
+		\sum_{a=0}^t y^a = \frac{1-y^{t+1}}{1-y},
+	\]
+	posto \(y=-x^2\), otteniamo
+	\[
+		\sum_{n=0}^{k-1} (-1)^n x^{2n} = \frac{1-x^{2k}}{1+x^2} \implies \sum_{n=0}^{k-1} (-1)^n x^{2n} + \frac{x^{2k}}{1+x^2} = \frac{1}{1+x^2}.
+	\]
+	Da cui
+	\[
+		\frac{\p}{4} = \int_0^1 \frac{\dd x}{1+x^2} = \sum_{n=0}^{k-1} (-1)^n \int_0^1 x^{2n}\,\dd x + \int_0^1 \frac{x^{2k}}{1+x^2}\,\dd x,
+	\]
+	ovvero
+	\[
+		\frac{\p}{4} = \sum_{n=0}^{k-1} \frac{(-1)^n}{2n+1} + \int_0^1 \frac{x^{2k}}{x^2+1}\,\dd x \le \sum_{n=0}^{k-1} \frac{(-1)^n}{2n+1}+ \int_0^1 x^{2k}\,\dd x = \sum_{n=0}^{k-1} \frac{(-1)^n}{2n+1} + \frac{1}{2k+1}.
+	\]
+	Riepilogando
+	\[
+		\sum_{n=0}^{k-1} \frac{(-1)^n}{2n+1} = \frac{\p}{4} + O \left( \frac{1}{k} \right),
+	\]
+	da cui
+	\[
+		4T \sum_{a\le \sqrt{T}} \frac{\c_4(a)}{a} + O(\sqrt{T}) = \p + O(\sqrt{T}).\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 17/05/2016 - DODICESIMA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SOMMA DI QUATTRO QUADRATI%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Somma di quattro quadrati}
+
+\begin{lem}[Idendità di Eulero]
+	Siano \(n_1,n_2\in\N\) tali che \(n_1=4\square\) e \(n_2=4\square\).
+	Allora
+	\[
+		n_1 n_2 = 4\square
+	\]
+\end{lem}
+
+\begin{proof}
+	Supponiamo che
+	\[
+		n_1 = x_1^2 + x_2^2 + x_3^2 + x_4^2 \qquad\text{e}\qquad n_2 = y_1^2 + y_2^2 + y_3^2 + y_4^2.
+	\]
+	Allora è sufficiente verificare la seguente uguaglianza per ottenere la tesi
+	\begin{multline*}
+		(x_1^2 + x_2^2 + x_3^2 + x_4^2)(y_1^2 + y_2^2 + y_3^2 + y_4^2) = (x_1 y_1+x_2 y_2+x_3 y_3+x_4 y_4)^2\\
+		+ (x_1 y_2-x_2 y_1+x_3 y_4-x_4y_3)^2 + (x_1 y_3 - x_3 y_1 - x_2 y_4 + x_4 y_2)^2\\
+		+ (x_1 y_4 - x_4 y_1 - x_3 y_2 + x_2 y_3)^2.
+	\end{multline*}
+\end{proof}
+
+\begin{teor}{di Lagrange}{teorLagrangeQuadrati}\index{Teorema!di Lagrange}
+	Ogni \(n\in\N\) è al più somma di quattro quadrati.
+\end{teor}
+
+\begin{proof}
+	Per l'identità di Eulero ci basta dimostrare che per ogni \(p\) primo si abbia \(p=4\square\).
+
+	Per \(p=2\) la tesi è verificata in quanto \(2=1^2+1^2+0^2+0^2\).
+
+	Supponiamo che \(p\equiv 1 \pmod{4}\), allora per il teorema di Fermat \(p=x^2+y^2\).
+	Quindi anche in questo caso la tesi è verificata per \(p=x^2+y^2+0^2+0^2\).
+
+	Resta da verificare il caso \(q\) primo con \(q\equiv 3 \pmod{4}\).
+	Certamente
+	\[
+		q\equiv 3 \pmod{4} \implies \jac{-1}{q} = -1.
+	\]
+	Definiamo
+	\[
+		a = \min\Set{x\in\N | \jac{x+1}{q}=-1}.
+	\]
+	In particolare avremo
+	\[
+		\jac{a}{q} = 1 \qquad\text{e}\qquad \jac{a+1}{q}=-1.
+	\]
+	Da cui
+	\[
+		\jac{-a-1}{q} = \jac{-1}{q}\jac{a+1}{q} = 1.
+	\]
+	Quindi abbiamo che \(a\equiv x^2 \pmod{q}\) e \(-a-1\equiv y^2 \pmod{q}\).
+	Naturalmente posso scegliere \(\abs{x},\abs{y} < \frac{q}{2}\) ed ottenere
+	\[
+		x^2+y^2+1 =m\,q,
+	\]
+	dove \(m\ge 1\) e \(m<q\).
+	Quest'ultima perchè
+	\[
+		x^2+y^2+1 \le \frac{q^2}{4} + \frac{q^2}{4} + 1 = \frac{q^2}{2}+1,
+	\]
+	da cui
+	\[
+		m\,q \le \frac{q^2}{2}+1 \iff m < \frac{q}{2}+\frac{1}{q} < q.
+	\]
+	Quindi abbiamo verificato che se \(q\equiv 3 \pmod{4}\) allora esiste \(1\le m<q\) tale che \(m\,q=x_1^2+x_2^2+x_3^2+x_4^2\).
+
+	Vogliamo mostrare che il minimo con tale proprietà è proprio \(m=1\).
+
+	Osserviamo che se fosse \(m\) pari si avrebbe che il numero di \(j\) tali che \(x_j\) è pari è \(0,2\) oppure \(4\).
+	In ogni caso possiamo concludere, a meno di riordinare gli indici, che
+	\[
+		x_1 \equiv x_2 \pmod{2} \qquad\text{e}\qquad x_3 \equiv x_4 \pmod{2}.
+	\]
+	Da cui
+	\[
+		\frac{m}{2}q = \left( \frac{x_1+x_2}{2} \right)^2 + \left( \frac{x_1-x_2}{2} \right)^2 + \left( \frac{x_3+x_4}{2} \right)^2 + \left( \frac{x_3-x_4}{2} \right)^2.
+	\]
+	Da ciò deduco che al posto di \(m\) posso prendere \(m/2\), questa è una contraddizione se assumiamo che \(m\) è il minimo.
+
+	Possiamo quindi supporre \(m\) dispari.
+	Per ogni \(j=1,2,3,4\) consideriamo \(y_j\) tali che
+	\[
+		y_j \equiv x_j \pmod{m} \qquad\text{e}\qquad \abs{y_j} < \frac{m}{2},
+	\]
+	dove \(\abs{y_j}\neq m/2\) in quanto \(m\) è dispari.
+
+	Avremo quindi
+	\[
+		y_1^2+y_2^2+y_3^2+y_4^2 \equiv 0 \pmod{m} \implies y_1^2+y_2^2+y_3^2+y_4^2 = m_0 m,
+	\]
+	dove \(m_0\neq 0\) poiché altrimenti si avrebbe
+	\[
+		y_j = 0,\,\fa j \implies x_j \equiv 0 \pmod{m} \implies q\,m = k\,m^2 \iff q = k\,m \implies m\mid q,
+	\]
+	che è assurdo in quanto \(1<m<q\) con \(q\) primo.
+	D'altronde \(m_0<m\), infatti
+	\[
+		m_0 m = y_1^2+y_2^2+y_3^2+y_4^2 < 4 \frac{m^2}{4} = m^2 \implies m_0<m.
+	\]
+	Riassumendo sappiamo che
+	\[
+		m\,q = x_1^2+x_2^2+x_3^2+x_4^2, \qquad\text{con \(1\le m<q\) dispari},
+	\]
+	e che
+	\[
+		m\,m_0 = y_1^2+y_2^2+y_3^2+y_4^2, \qquad\text{con \(1\le m_0<m\) e \(x_j\equiv y_j \pmod{m}\)}.
+	\]
+	Quindi, per l'identità di Eulero
+	\[
+		m^2q\,m_0 = 4\square = \underbrace{\square}_{\equiv 0 \pmod{m}} + \underbrace{\square}_{\equiv 0 \pmod{m}} + \underbrace{\square}_{\equiv 0 \pmod{m}} + \underbrace{\square}_{\equiv 0 \pmod{m}},
+	\]
+	da cui
+	\[
+		q\,m_0 = \frac{\square}{m^2}+\frac{\square}{m^2}+\frac{\square}{m^2}+\frac{\square}{m^2},
+	\]
+	ovvero \(m_0 q =z_1^2+z_2^2+z_3^2+z_4^2\), con \(m_0<m\), che è una contraddizione se assumiamo che \(m\) è minimo.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%
+%SOMMA DI TRE QUADRATI%
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Somma di tre quadrati}
+
+\begin{teor}{di Legendre}{teorLegendreQuadrati}\index{Teorema!di Legendre}
+	Sia \(n\in\N\).
+	Allora \(n\) è la somma di tre quadrati se e soltanto se
+	\[
+		n \neq 4^l (7+8k),l,k\in\N.
+	\]
+\end{teor}
+
+\begin{proof}
+	\graffito{\(\Rightarrow)\)}Se \(x\in\Z_8\) allora \(x^2\in\{0,1,4\}\).
+	Osserviamo che non c'è modo di ottenere \(7\) come somma di \(3\) elementi tra \(\{0,1,4\}\).
+	Per cui
+	\[
+		7+8k \neq 3\square.
+	\]
+	Quindi la tesi è vera per \(l=0\).
+	Procediamo ora per induzione su \(l\).
+	Supponiamo quindi che non esistano interi della forma
+	\[
+		4^l(7+8k) = \square + \square + \square.
+	\]
+	Dimostriamolo per \(l+1\).
+	Supponiamo per assurdo che esistano \(x_1,x_2,x_3\in\Z\) tali che
+	\[
+		4^{l+1}(7+8k) = x_1^2+x_2^2+x_3^2.
+	\]
+	Osserviamo che modulo \(4\) si ha \(x^2 \equiv 0\) se \(x\) è pari e \(x^2\equiv 1\) se, viceversa, \(x\) è dispari.
+	Quindi
+	\[
+		x_1^2+x_2^2+x_3^2 = 4^{l+1}(7+8k) \equiv 0 \pmod{4},
+	\]
+	ci dice che \(x_1,x_2,x_3\) sono tutti pari, da cui
+	\[
+		4^l(7+8k) = \left( \frac{x_1}{2} \right)^2 + \left( \frac{x_2}{2} \right)^2 + \left( \frac{x_3}{2} \right)^2,
+	\]
+	che è assurdo per ipotesi induttiva.
+\end{proof}

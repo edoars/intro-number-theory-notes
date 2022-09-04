@@ -1,0 +1,25 @@
+\documentclass[10pt,a4paper,twoside,headinclude,footinclude,color]{./latex-notes-cls/edoars-notes}
+\graphicspath{ {Immagini/} }
+
+\hypersetup{pdfauthor={Edoardo Signorini},
+            pdftitle={Introduzione alla teoria dei numeri},
+            pdfcreator={Latex with hyperref}}
+
+\begin{document}
+%MATERIALE INIZIALE
+\input{MaterialeInizialeFinale/titolo}
+\tableofcontents
+
+%MATERIALE PRINCIPALE
+\input{Capitoli/chap1}
+\input{Capitoli/chap2}
+\input{Capitoli/chap3}
+\input{Capitoli/chap4}
+\input{Capitoli/chap5}
+\input{Capitoli/chap6}
+
+%MATERIALE FINALE
+\input{Capitoli/esercizi}
+\addcontentsline{toc}{chapter}{Indice analitico}
+\printindex
+\end{document}

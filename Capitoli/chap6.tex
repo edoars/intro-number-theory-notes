@@ -1,0 +1,324 @@
+%!TEX root = ../main.tex
+\chapter{Teoria elementare dei numeri primi}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 20/05/2016 - DODICESIMA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RIVISITAZIONE DEL TEOREMA DI EUCLIDE%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rivisitazione del teorema di Euclide}
+
+Nella prima parte del corso abbiamo dimostrato il teorema di Euclide sull'infinitezza dei numeri primi.
+In questo paragrafo amplieremo questo risultato.
+
+\begin{teor}{Serie dei reciproci dei primi}{6.1}
+	La serie
+	\[
+		\sum_p \frac{1}{p}.
+	\]
+	è divergente.
+\end{teor}
+
+\begin{proof}
+	Per ogni \(X\ge 2\) reale, consideriamo
+	\[
+		P_X = \prod_{p \le X} \left( 1- \frac{1}{p} \right)^{-1},
+	\]
+	da cui, passando al logaritmo,
+	\[
+		\ln P_X = -\sum_{p \le X} \ln \left( 1 - \frac{1}{p} \right).
+	\]
+	Ricordiamo che l'espansione di Taylor di \(-\ln(1-t)\) è
+	\[
+		-\ln(1-t) = \sum_{n=1}^{\infty} \frac{t^n}{n}, \qquad\text{per }\abs{t}<1.
+	\]
+	Nel nostro caso \(1/p\) ha modulo chiaramente minore di \(1\), quindi
+	\[
+		\begin{split}
+			\ln P_X & = -\sum_{p \le X} \ln \left( 1 - \frac{1}{p} \right) = \sum_{p\le X} \sum_{h=1}^{\infty} \frac{1}{h\,p^h}\\
+			& = \sum_{p\le X} \frac{1}{p} + \sum_{p\le X} \sum_{h=2}^{\infty} \frac{1}{h\,p^h}.
+		\end{split}
+	\]
+	Definiamo
+	\[
+		S_1 = \sum_{p\le X} \frac{1}{p} \qquad\text{e}\qquad S_2 = \sum_{p\le X} \sum_{h=2}^{\infty} \frac{1}{h\,p^h}.
+	\]
+	Noi vorremmo dimostrare che \(S_1 \to \infty\) per \(X \to \infty\).
+	Per farlo mostreremo che \(S_2\) è limitata e che \(P_X\) diverge.
+	Infatti
+	\[
+		0 \le \sum_{h=2}^{\infty} \frac{1}{h\,p^h} \le \sum_{h=2}^{\infty} \frac{1}{p^h} = \sum_{h=0}^{\infty}\frac{1}{p^h}-1- \frac{1}{p} = \frac{1}{p(p-1)},
+	\]
+	da cui
+	\[
+		0 \le S_2 \le \sum_p \frac{1}{p(p-1)} \le \sum_{n=2}^{\infty} \frac{1}{n(n-1)} = 1,
+	\]
+	dove l'ultima serie è \(1\) in quanto
+	\[
+		\sum_{n=2}^{\infty} \frac{1}{n(n-1)} = \sum_{n=2}^{\infty} \left( \frac{1}{n-1} - \frac{1}{n} \right) = 1- \frac{1}{2} + \frac{1}{2} - \frac{1}{3} + \frac{1}{3} - \ldots = 1.
+	\]
+	Per cui \(0\le S_2 \le 1\).
+	D'altronde, per \(X\to \infty\), avremo
+	\[
+		\begin{split}
+			P_X & = \prod_{p\le X} \left( 1 - \frac{1}{p} \right)^{-1} = \prod_{p\le X} \sum_{h=0}^{\infty} \frac{1}{p^h} = \sum_{\substack{h\in\N\\\max\{p\text{ primo } : p \mid h\}\le X}}\\
+			& \ge \sum_{h\le X} \frac{1}{h} \to +\infty.
+		\end{split}
+	\]
+	Da cui la tesi.
+\end{proof}
+
+\begin{oss}
+	Questo risultato ci prova che i primi non sono un sottoinsieme "rarefatto" dei naturali.
+	A differenza, ad esempio, delle potenze di due.
+\end{oss}
+
+\begin{oss}
+	Il matematico Viggo Brun, dimostrò che la serie dei reciproci dei numeri primi gemelli
+	\[
+		\sum_{\substack{p \text{ primo}\\p+2 \text{ primo}}} \frac{1}{p}.
+	\]
+	converge.
+\end{oss}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%FUNZIONE DI VON MANGOLDT%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Funzione di von Mangoldt}
+
+Nel capitolo \(1\) abbiamo parlato della funzione \(\p(X)\), che denota il numero di primi nell'intervallo \([2,X]\).
+Sappiamo che Hadamard e de la Vallée Poussin hanno dimostrato nel 1896 il teorema dei numeri primi
+\[
+	\p(X) \sim \frac{X}{\ln X}.
+\]
+Negli anni '50 il teorema fu ridimostrato con metodi elementari da Selberg ed Erd\H{o}s.
+
+Prima di questa dimostrazione si pensava che questo teorema fosse "trascendente", ossia che non fosse dimostrabile senza l'utilizzo di analisi complessa.
+Intorno al 1850, il matematico Chebi\v{c}ev dimostrò che esistono \(C_1,C_2\in \R\) tali che
+\[
+	C_1 \frac{X}{\ln X} \le \p(X) \le C_2 \frac{X}{\ln X}, \qquad\text{con } 0<C_1<1<C_2<2.
+\]
+In questo paragrafo introdurremo una funzione che ci sarà utile per dimostrare questo risultato.
+
+\begin{defn}{Funzione di von Mangoldt}{funzioneVonMangoldt}\index{Funzione!di von Mangoldt}
+	Si definisce \emph{funzione di von Mangoldt} la seguente funzione aritmetica
+	\[
+		\Lambda\colon \N \to \C, \Lambda(n) = 	\begin{cases}
+			\ln p & \text{se \(n=p^\a\) con \(p\) primo} \\
+			0     & \text{altrimenti}
+		\end{cases}
+	\]
+\end{defn}
+
+\begin{teor}{Trasformata di Dirichlet di \(\Lambda\)}{6.2}
+	La trasformata di Dirichlet di \(\Lambda\) è
+	\[
+		\sum_{d\mid n} \Lambda(d) = \ln n.
+	\]
+\end{teor}
+
+\begin{proof}
+	Sia \(n=p_1^{\a_1} \cdot\ldots\cdot p_s^{\a_s}\).
+	Osserviamo che ogni divisore di \(n\) che non sia del tipo \(p^\a\) contribuisce in maniera nulla alla somma in questione.
+	Quindi
+	\[
+		\begin{split}
+			\sum_{d\mid n}\Lambda(d) & = \sum_{j=1}^s \sum_{\b=1}^{\a_j} \Lambda(p_j^\b) = \sum_{j=1}^s \sum_{\b=1}^{\a_j} \ln p_j\\
+			& = \sum_{j=1}^s \ln p_j \sum_{\b=1}^{\a_j} 1 = \sum_{j=1}^s \a_j \ln p_j = \ln \left( \prod_{j=1}^s p_j^{\a_j} \right)\\
+			& = \ln n.\qedhere
+		\end{split}
+	\]
+\end{proof}
+
+\begin{oss}
+	Ricordiamo che se
+	\[
+		\z_f(s) = \sum_{n=1}^{\infty} \frac{f(n)}{n^s},
+	\]
+	allora \(\z_f(s)\z_g(s) = \z_{f*g}(s)\).
+
+	Quindi, sapendo che \(\Lambda*1(n) = \ln n\), avremo
+	\[
+		\z_{\Lambda*1}(s) = \z_{\ln n}(s) \iff \z_\Lambda(s) \z(s) = \z_{\ln n}(s),
+	\]
+	da cui
+	\[
+		\left( \sum_{n=1}^{\infty} \frac{\Lambda(n)}{n^s} \right) \z(s) = \sum_{n=1}^{\infty} \frac{\ln n}{n^s} = -\z'(s).
+	\]
+\end{oss}
+
+\begin{teor}{Stima asintotica di una somma di \(\Lambda\)}{6.3}
+	Vale la seguente stima
+	\[
+		\sum_{n\le X} \Lambda(n) \left[ \frac{X}{n} \right]  = X\ln X - X + O(\ln X), \qquad\text{per }X \to +\infty.
+	\]
+\end{teor}
+
+\begin{proof}
+	Applichiamo la formula delle somme parziali, trattata a pagina \pageref{ex:2.1}, alle somme di \(\ln n\):
+	\[
+		\begin{split}
+			\sum_{n\le X} \ln n & = [X] \ln X - \int_1^X \frac{[u]}{u}\,\dd u = X\ln X + O(\ln X) - \int_1^X \dd u + O \left( \int_1^X \frac{1}{u}\,\dd u \right)\graffito{ricordiamo che \([X]=X-\{X\}=X+O(1)\)}\\
+			& = X\ln X - X + O(\ln X).
+		\end{split}
+	\]
+	Per il teorema precedente \(\ln n=\Lambda * 1\), da cui
+	\[
+		\begin{split}
+			\sum_{n\le X} \ln n & = \sum_{n\le X} \sum_{d \mid n} \Lambda(d) = \sum_{d\le X} \Lambda(d) \sum_{\substack{n\le X\\d\mid n}} 1\\
+			& = \sum_{d\le X} \Lambda(d) \left[ \frac{X}{d} \right].\qedhere
+		\end{split}
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 24/05/2016 - TREDICESIMA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%TEOREMA DI CHEBICHEV%
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Teorema di Chebi\v{c}ev}
+
+\begin{teor}{Valore medio di \(\Lambda\)}{6.4}
+	Esistono \(C_3,C_4\in\R\) tali che
+	\[
+		\sum_{n\le X} \Lambda(n) \ge \frac{1}{2} X\ln 2, \qquad\text{per }x\ge C_3
+	\]
+	e
+	\[
+		\sum_{\frac{X}{2}\le n < X} \Lambda(n) \le C_4 X, \qquad\text{per ogni }x\ge 0.
+	\]
+\end{teor}
+
+\begin{proof}
+	Ricordando la stima del teorema precedente avremo
+	\[
+		\begin{split}
+			\sum_{m\le X} \Lambda(m) \left( \left[ \frac{X}{m} \right] -2 \left[ \frac{X}{2m} \right]  \right) & = \sum_{m\le X} \Lambda(m) \left[ \frac{X}{m} \right] - 2 \sum_{m\le X} \Lambda(m) \left[ \frac{X}{2m} \right]\\
+			& = X \ln X-X +O(\ln X) - 2\sum_{m\le \frac{X}{2}} \Lambda(m) \left[ \frac{X}{2m} \right]\\
+			& = X \ln X-X + O(\ln X) - 2 \left( \frac{X}{2}\ln \frac{X}{2}-\frac{X}{2}+O \left( \ln \frac{X}{2} \right) \right)\\
+			& = X \ln 2 + O(\ln X).
+		\end{split}
+	\]
+	Osserviamo che per ogni \(\a\in \N\) si ha
+	\[
+		0\le [\a]-2 \left[ \frac{\a}{2} \right] \le 1,
+	\]
+	infatti, dalla nota disuguaglianza \(\a-1<[\a]\le \a\), otteniamo
+	\begin{gather*}
+		[\a]-2 \left[ \frac{\a}{2} \right] \le \a - 2 \left[ \frac{\a}{2} \right] < \a -2 \left( \frac{\a}{2}-1 \right) = 2;\\
+		[\a]-2 \left[ \frac{\a}{2} \right] \ge [\a] - 2\frac{\a}{2} > \a-1 - 2 \frac{\a}{2} = -1,
+	\end{gather*}
+	da cui segue che il risultato in quanto le parti intere sono quantità discrete.
+
+	Per cui
+	\[
+		\sum_{m\le X} \Lambda(m) \ge \sum_{m\le X} \Lambda(m) \left( \left[ \frac{X}{2} \right] -2 \left[ \frac{X}{2m} \right]  \right) = X \ln 2 +O(\ln X).
+	\]
+	Quindi per \(X\ge C_3\) si ha
+	\[
+		\sum_{m\le X} \Lambda(m) \ge \frac{1}{2}X \ln 2.
+	\]
+	Resta da mostrare la seconda disuguaglianza.
+	Chiaramente, per quanto mostrato prima,
+	\[
+		\sum_{\frac{X}{2}<m \le X} \Lambda(m) \ge \sum_{\frac{X}{2}<m\le X} \Lambda(m) \left( \left[ \frac{X}{m} \right] -2 \frac{X}{2m} \right).
+	\]
+	D'altronde per \(m\in \left(\frac{X}{2},X\right]\) avremo
+	\[
+		\left[ \frac{X}{m} \right] =1 \qquad\text{e}\qquad \left[ \frac{X}{2m} \right] =0,
+	\]
+	quindi in particolare
+	\[
+		\begin{split}
+			\sum_{\frac{X}{2}<m \le X} \Lambda(m) & = \sum_{\frac{X}{2}<m\le X} \Lambda(m) \left( \left[ \frac{X}{m} \right] -2 \frac{X}{2m} \right) \le \sum_{m\le X} \Lambda(m) \left( \left[ \frac{X}{m}\right]-2 \left[ \frac{X}{2m} \right]  \right)\\
+			& = X\ln 2 + O(\ln X),
+		\end{split}
+	\]
+	ovvero
+	\[
+		\sum_{\frac{X}{2}<m\le X} \Lambda(m) \le X \ln 2 + C \ln X \le C_4 X,\,\fa X>0,
+	\]
+	a patto di prendere \(C_4\) molto grande.
+\end{proof}
+
+\begin{teor}{di Chebi\v{c}ev}{teorChebicev}\index{Teorema!di Chebi\v{c}ev}
+	Sia \(p\) la funzione enumerativa dei numeri primi, allora:
+	\[
+		\ex C_1,C_2\in\R^+:C_1\frac{X}{\ln X}\le\p(X)\le C_2\frac{X}{\ln X},
+	\]
+	con \(0<C_1<1< C_2\) e \(X\ge 2\).
+\end{teor}
+
+\begin{proof}
+	Per il teorema precedente
+	\[
+		\begin{split}
+			\frac{1}{2}X \ln 2 & \le \sum_{m\le X} \Lambda(m) = \sum_{\substack{p,k\in\N\\p^k \le X}} \ln p =  \sum_{p\le X} \ln p \cdot \#\Set{k\in \N | p^k \le X}\graffito{la prima uguaglianza segue nel prendere tutti i valori per cui \(\Lambda\) è non nulla}\\
+			& = \sum_{p\le X} \ln p \left[ \frac{\ln X}{\ln p} \right] \le \sum_{p \le X} \ln p \frac{\ln X}{\ln p} = \sum_{p\le X} \ln X\\
+			& = \ln X \cdot \p(X).
+		\end{split}
+	\]
+	Da cui
+	\[
+		\p(X) \ge \frac{1}{2} \ln 2 \cdot \frac{X}{\ln X},\,\fa x\ge C_3.
+	\]
+	Per la seconda disuguaglianza, sfruttiamo ancora il teorema precedente,
+	\[
+		\sum_{\frac{X}{2^{j+1}}<m\le \frac{X}{2^j}} \Lambda(m) \le C_4 \frac{X}{2^j},\,\fa x\ge 0,\,\fa j\ge 0.
+	\]
+	Sia \(k\in\N\) tale che \(2^k \le \sqrt{X} < 2^{k+1}\).
+	Ne deduciamo che
+	\[
+		\sum_{\sqrt{X}<m\le X} \le \sum_{j=0}^k \sum_{\frac{X}{2^{j+1}}<m\le \frac{X}{2^j}} \Lambda(m).
+	\]
+	Infatti
+	\begin{itemize}
+		\item per \(j=0\) si ha \(m\in \left(\frac{X}{2},X\right]\);
+		\item per \(j=1\) si ha \(m\in \left(\frac{X}{4},\frac{X}{2}\right]\);
+		\item \(\ldots\)
+		\item per \(j=k\) si ha \(m\in \left(\frac{X}{2^{k+1}},\frac{X}{2^k}\right]\).
+	\end{itemize}
+	D'altronde
+	\[
+		\frac{X}{2^{k+1}} = \sqrt{X} \frac{\sqrt{X}}{2^{k+1}} < 1 \cdot \sqrt{X} \implies (\sqrt{X},X] \subseteq \left(\frac{X}{2^{k+1}},X\right],
+	\]
+	quindi la seconda somma contiene più addendi della prima, ed è pertanto più grande.
+
+	Per cui applicando la disuguaglianza del teorema precedente
+	\[
+		\sum_{\sqrt{X}<m\le X} \Lambda(m) \le C_4 X \sum_{j=0}^k \frac{1}{2^j} < 2 C_4 X,
+	\]
+	ovvero
+	\[
+		\sum_{\sqrt{X}<m\le X} \Lambda(m) \le 2 C_4 X,\,\fa X\ge 0.
+	\]
+	Infine
+	\[
+		\begin{split}
+			\p(X) & = \sum_{p\le X} 1 = \sum_{p\le \sqrt{X}} 1 + \sum_{\sqrt{X}<p\le X} 1 < \sqrt{X} + \sum_{\sqrt{X}<p\le X} \frac{\ln p}{\ln \sqrt{X}}\\
+			& = \sqrt{X} + \frac{2}{\ln X} \sum_{\sqrt{X}<p\le X}\ln p \le \sqrt{X} + \frac{2}{\ln X} \sum_{\sqrt{X}<p\le X}\Lambda(m),
+		\end{split}
+	\]
+	da cui
+	\[
+		\p(X) \le \sqrt{X}+4C_4 \frac{X}{\ln X} < C_5 \frac{X}{\ln X},
+	\]
+	se \(C_5\) è sufficientemente grande.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%
+%TEOREMA DI MERTENS%
+%%%%%%%%%%%%%%%%%%%%
+\section{Teorema di Mertens}
+
+\begin{teor}{di Mertens}{teorMertens}\index{Teorema!di Mertens}
+	Per \(X\to +\infty\) vale
+	\begin{enumerate}
+		\item \(\displaystyle \sum_{m\le X} \frac{\Lambda(m)}{m} = \ln X + O(1)\).
+		\item \(\displaystyle \sum_{p\le X} \frac{\ln p}{p} = \ln X + O(1)\).
+		\item \(\displaystyle \sum_{p\le X} = \ln (\ln X) + A + O \left( \frac{1}{\ln X} \right)\).
+	\end{enumerate}
+	Dove \(A\) è la \emph{costante di Mertens}.
+\end{teor}

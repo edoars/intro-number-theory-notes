@@ -1,0 +1,814 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 22/03/2016 - QUINTA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Residui quadratici}
+%%%%%%%%%%%%%%
+%INTRODUZIONE%
+%%%%%%%%%%%%%%
+\section{Introduzione}
+
+\begin{defn}{Residuo quadratico}{residuoQuadratico}\index{Residuo quadratico}
+	Sia \(p \ge 3\) primo.
+	\(a\in\Z\) si definisce \emph{residuo quadratico modulo \(p\)} se \(p\nmid a\) e
+	\[
+		x^2 \equiv a \pmod{p},
+	\]
+	è risolubile.
+\end{defn}
+
+\begin{oss}
+	Il caso \(p\mid a\) viene escluso in quanto \(x^2 \equiv a \equiv 0 \pmod{p}\) ammette come unica soluzione \(x_0 = 0\) che risulta di scarso interesse.
+\end{oss}
+
+\begin{oss}
+	Se \(p = 2\), la congruenza \(x^2 \equiv a \pmod{2}\) può sempre essere risolta e vale
+	\[
+		x_0 = 	\begin{cases}
+			0 & \text{se }2\mid a  \\
+			1 & \text{se }2\nmid a
+		\end{cases}
+	\]
+\end{oss}
+
+\begin{oss}
+	In generale se \(p\ge 3\) avremo
+	\[
+		N_{x^2-a} = 	\begin{cases}
+			0                     \\
+			1 & \text{se }p\mid a \\
+			2
+		\end{cases}
+	\]
+	dove il valore \(2\) viene assunto quando esiste \(b\neq 0\) tale che \(b^2 \equiv a \pmod{p}\), in tal caso infatti \(p-b\) è un'altra soluzione.
+\end{oss}
+
+\begin{teor}{Cardinalità dei residui quadratici modulo \(p\)}{4.1}
+	Sia \(p\ge 3\), allora l'insieme dei residui quadratici modulo \(p\)
+	\[
+		\mathcal{RQ}(p) = \Set{a \in \Z/p\,\Z | a \text{ residuo quadratico modulo }p},
+	\]
+	ha precisamente \(\frac{p-1}{2}\) elementi, ciascuno dei quali è congruo ad uno dei seguenti
+	\[
+		1^2,2^2,\ldots,\left( \frac{p-1}{2} \right)^2,
+	\]
+	i quali sono mutualmente incongrui.
+\end{teor}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 24/03/2016 - QUINTA SETTIMANA (2)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+	Supponiamo che \(i^2 \equiv j^2 \pmod{p}\) con \(1 \le i<j \le \frac{p-1}{2}\), allora
+	\[
+		p \mid i^2-j^2 \iff p \mid (j-i)(j+i) \iff p\mid j-i \quad\text{oppure}\quad p\mid j+i,
+	\]
+	ma entrambi i casi non possono accadere in quanto \(j-i<\frac{p-1}{2}\) e \(j+i<p-1\).
+	Quindi tutti gli interi della lista sono mutualmente incongrui.
+
+	Supponiamo che \(a\) sia un residuo quadratico modulo \(p\), allora esiste \(b\in\Z/p\,\Z\) tale che
+	\[
+		a \equiv b^2 \pmod{p},\qquad\text{con}\qquad 0<b\le \frac{p-1}{2}\quad\text{oppure}\quad \frac{p-1}{2}<b \le p-1.
+	\]
+	Se \(0<b<\frac{p-1}{2}\) abbiamo soddisfatto la tesi.
+	Supponiamo quindi che \(\frac{p-1}{2} < b \le p-1\), posto \(b'=p-b\) avremo
+	\[
+		p-(p-1) \le b < p- \left( \frac{p-1}{2} \right) \iff 1 \le b' < \frac{p+1}{2},
+	\]
+	ovvero \(0 < b' \le \frac{p-1}{2}\).
+	Mostriamo infine che \(b'\) è un residuo quadratico modulo \(p\):
+	\[
+		b'^2 =(p-b)^2 \equiv (-b)^2 \equiv a \pmod{p}.\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%IL SIMBOLO DI LEGENDRE%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Il simbolo di Legendre}
+
+\begin{defn}{Simbolo di Legendre}{simboloLegendre}\index{Simbolo di Legendre}
+	Sia \(a\in\Z\) e sia \(p\ge 3\) primo, definiamo \emph{simbolo di Legendre} la seguente notazione
+	\[
+		\lege{a}{p} = 	\begin{cases}
+			1  & \text{se }a\in\mathcal{RQ}(p)    \\
+			0  & \text{se }p\mid a                \\
+			-1 & \text{se }p\notin\mathcal{RQ}(p)
+		\end{cases}
+	\]
+\end{defn}
+
+\begin{pr*}
+	Sia \(a\in\Z\) e sia \(p\) un primo dispari, allora
+	\[
+		1+\lege{a}{p} = 	\begin{cases}
+			2 & \text{se }a\in\mathcal{RQ}(p)    \\
+			1 & \text{se }p\mid a                \\
+			0 & \text{se }a\notin\mathcal{RQ}(p)
+		\end{cases}
+		= N_{x^2-a}(p).
+	\]
+\end{pr*}
+
+\begin{teor}{Criterio di Eulero}{4.2}\index{Criterio di Eulero}
+	Sia \(a\in\Z\) e sia \(p\) un primo dispari, allora
+	\[
+		a^{\frac{p-1}{2}} \equiv \lege{a}{p} \pmod{p}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Se \(a\) è un residuo quadratico allora \(a\equiv b^2 \pmod{p}\), da cui
+	\[
+		a^{\frac{p-1}{2}} \equiv b^{\frac{p-1}{2}2} \equiv b^{p-1} \equiv b^{\j(p)} \equiv 1 \equiv \lege{a}{p} \pmod{p}.
+	\]
+	Se \(p\mid a\) allora ovviamente
+	\[
+		a^{\frac{p-1}{2}} \equiv 0 \equiv \lege{a}{p} \pmod{p}.
+	\]
+	Supponiamo infine che \(a\) non sia un residuo quadratico.
+
+	In generale sappiamo che \(x^{p-1}-1\equiv 0 \pmod{p}\) ha \(p-1\) radici modulo \(p\), ma
+	\[
+		(x^{p-1}-1) = (x^{\frac{p-1}{2}}-1)(x^{\frac{p-1}{2}}+1),
+	\]
+	dove \(x^{\frac{p-1}{2}}-1\) ha \(\frac{p-1}{2}\) radice che saranno necessariamente residui quadratici.
+	Da ciò segue che ogni \(a\) che non è un residuo quadratico sarà radice di \(x^{\frac{p-1}{2}}+1 \pmod{p}\), ovvero
+	\[
+		a^{\frac{p-1}{2}} \equiv -1 \equiv \lege{c}{p} \pmod{p}.\qedhere
+	\]
+\end{proof}
+
+\begin{cor}\label{th:4.3}
+	Sia \(p\) un primo dispari, allora
+	\[
+		\lege{-1}{p} = (-1)^{\frac{p-1}{2}} = 	\begin{cases}
+			1  & \text{se }p \equiv 1 \pmod{4} \\
+			-1 & \text{se }p \equiv 3 \pmod{4}
+		\end{cases}
+	\]
+\end{cor}
+
+\begin{proof}
+	Dal teorema sappiamo che
+	\[
+		\lege{-1}{p} \equiv (-1)^{\frac{p-1}{2}} \pmod{p} \implies p \mid (-1)^{\frac{p-1}{2}}-\lege{-1}{p},
+	\]
+	ma \((-1)^{\frac{p-1}{2}}-\lege{-1}{p}\) è una differenza tra segni e può pertanto assumere solo i valori \(-2,0,2\).
+	Per ipotesi \(p\) è un primo dispari quindi \(p\nmid 2,-2\), da cui
+	\[
+		\lege{-1}{p} = (-1)^{\frac{p-1}{2}}.\qedhere
+	\]
+	Inoltre vale
+	\[
+		\lege{-1}{p} = (-1)^{\frac{p-1}{2}} = 	\begin{cases}
+			1  & \text{se }p \equiv 1 \pmod{4} \\
+			-1 & \text{se }p \equiv 3 \pmod{4}
+		\end{cases}
+	\]
+	poichè in modulo \(4\) si ha \(p=4k+\e\) con \(0\le \e <4\).
+	Ma \(\e\) non può essere né 0 né 2, altrimenti si avrebbe \(2,4\mid p\).
+	Da ciò segue che ogni primo è del tipo \(1+4k\) oppure \(3+4k\), da cui
+	\begin{gather*}
+		p=1+4k \implies (-1)^{\frac{4k}{2}} = (-1)^{2k} = 1\\
+		p=3+4k \implies (-1)^{\frac{2+4k}{2}} = (-1)(-1)^{2k} = -1.
+	\end{gather*}
+\end{proof}
+
+\begin{cor}\label{th:4.4}
+	Sia \(p\) un primo dispari e siano \(a,b\in\Z\), allora
+	\[
+		\lege{a\,b}{p} = \lege{a}{p}\lege{b}{p}
+	\]
+\end{cor}
+
+\begin{proof}
+	Dal teorema sappiamo
+	\[
+		\lege{a\,b}{p} \equiv (a\,b)^{\frac{p-1}{2}} = a^{\frac{p-1}{2}}b^{\frac{p-1}{2}} \equiv \lege{a}{p}\lege{b}{p} \pmod{p},
+	\]
+	quindi applicando lo stesso ragionamento mostrato nel corollario precedente avremo
+	\[
+		\lege{a\,b}{p} \equiv \lege{a}{p}\lege{b}{p} \pmod{p} \implies \lege{a\,b}{p} = \lege{a}{p}\lege{b}{p}.\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 19/04/2016 - OTTAVA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{teor}{Lemma di Gauss}{4.5}\index{Lemma!di Gauss}
+	Siano \(a\in \Z\) e \(p\ge 3\) primo con \(p\nmid a\).
+	Definito \(S = \left[ 1,\frac{p-1}{2} \right]\), poniamo
+	\[
+		S_1 = \Set{x\in S | \frac{p}{2}<a\,x \pmod{p} < p}.
+	\]
+	Allora
+	\[
+		\lege{a}{p} = (-1)^{\#S_1}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Dal criterio di Eulero
+	\[
+		\prod_{x\in S}a\,x = a^{\frac{p-1}{2}} \left( \frac{p-1}{2} \right)! \equiv \lege{a}{p} \left( \frac{p-1}{2} \right)! \pmod{p}
+	\]
+	Definiamo \(r_x = a\,x \pmod{p}\), da cui
+	\[
+		\prod_{x\in S} a\,x \equiv \prod_{x\in S_1} r_x \prod_{x\in S_2} a\,x \pmod{p},
+	\]
+	dove \(S_2 = S-S_1 = \Set{x\in S | 0\le a\,x\pmod{p} < \frac{p}{2}}\).
+	Inoltre \(\frac{p}{2}< r_x < p \implies 0 < p-r_x < \frac{p}{2}\), quindi
+	\[
+		\prod_{x\in S_1} r_x \prod_{x\in S_2} a\,x \equiv (-1)^{\#S_1} \prod_{x\in S_1} (p-r_x) \prod_{x\in S_2} a\,x \pmod{p},
+	\]
+	con \(x\in S_1 \implies 1\le p-a\,x \pmod{p} < \frac{p}{2}\) e \(x\in S_2 \implies 1 \le a\,x < \frac{p}{2}\).
+	Inoltre se consideriamo
+	\[
+		S_1 = \Set{\a_1, \ldots, \a_m} \qquad\text{e}\qquad S_2 = \Set{\b_1, \ldots, \b_l},
+	\]
+	allora \(\{\a_i\},\{\b_j\}\) sono tutti distinti e vale \(p-\a_i \neq \b_j,\,\fa i,j\).
+	Infatti se valesse \(\a_i+\b_j = p\) si avrebbe
+	\[
+		a\,x+a\,y \equiv 0 \pmod{p} \iff p\mid a(x+y) \overset{p\nmid a}{\implies} p \mid x+y,
+	\]
+	ma ciò è assurdo in quanto \(x+y\in [1,p-1]\).
+	Quindi \(\#S_1+\#S_2 = \#S = \frac{p-1}{2}\), da cui
+	\[
+		\lege{a}{p} \left( \frac{p-1}{2} \right)! \equiv_p (-1)^{\#S_1} \prod_{x\in S_1} (p-r_x) \prod_{x\in S_2} a\,x = (-1)^{\#S_1} \left( \frac{p-1}{2} \right)!
+	\]
+	ovvero
+	\[
+		\begin{split}
+			\lege{a}{p} \left( \frac{p-1}{2} \right)! \equiv (-1)^{\#S_1} \left( \frac{p-1}{2} \right)! \pmod{p} & \iff \lege{a}{p} \equiv (-1)^{\#S-1} \pmod{p}\\
+			& \iff \lege{a}{p} = (-1)^{\#S_1},
+		\end{split}
+	\]
+	in quanto entrambi segni.
+\end{proof}
+
+\begin{oss}
+	Se \(a>0\) avremo
+	\[
+		\begin{split}
+			\frac{p}{2}<a\,x \pmod{p} < p & \iff \frac{p}{2} < a\,x - p \left[ \frac{a\,x}{p} \right] <p\\
+			& \iff \frac{1}{2} < \frac{a\,x}{p} - \left[ \frac{a\,x}{p} \right] < 1\\
+			& \iff \frac{1}{2} < \left\{\frac{a\,x}{p}\right\} < 1.
+		\end{split}
+	\]
+\end{oss}
+
+\begin{cor}
+	Sia \(p\) un primo dispari, allora
+	\[
+		\lege{2}{p} = (-1)^{\frac{p^2-1}{8}} = 	\begin{cases}
+			1  & \text{se }p\equiv \pm 1 \pmod{8} \\
+			-1 & \text{se }p\equiv \pm 3 \pmod{8}
+		\end{cases}
+	\]
+\end{cor}
+
+\begin{proof}
+	Consideriamo la notazione del lemma di Gauss. Sia quindi \(a=2\), affermo che
+	\[
+		S_1 = \Set{x\in S | \frac{p}{2}<2x\pmod{p}<p} = \Set{x\in S | \frac{p}{4}<x<\frac{p}{2}}.
+	\]
+	Infatti se \(2x\in \left( \frac{p}{2},p \right)\) allora \(2x\pmod{p} = 2x\).
+	Viceversa
+	\[
+		1 \le x \le \frac{p-1}{2} \implies 2\le 2x \le p-1 \implies 2x\pmod{p} = 2x.
+	\]
+	Per cui
+	\[
+		\#S_1 = \left[ \frac{p}{2} \right] - \left[ \frac{p}{4} \right] = 	\begin{cases}
+			4k-2k     & \text{se }p\equiv 1 \pmod{8} \\
+			3+4k-1-2k & \text{se }p\equiv 7 \pmod{8} \\
+			1+4k-2k   & \text{se }p\equiv 3 \pmod{8} \\
+			2+4k-1-2k & \text{se }p\equiv 5 \pmod{8}
+		\end{cases}
+	\]
+	ovvero, per il lemma di Gauss
+	\[
+		\lege{2}{p} = (-1)^{\left[ \frac{p}{2} \right] - \left[ \frac{p}{4} \right]} = 	\begin{cases}
+			1  & \text{se }p\equiv \pm 1\pmod{8} \\
+			-1 & \text{se }p\equiv \pm 3\pmod{8}
+		\end{cases}\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 21/04/2016 - OTTAVA SETTIMANA (2)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lem}
+	Sia \(a\in \N\) e sia \(p\ge 3\) primo con \(p\nmid a\).
+	Allora
+	\[
+		\lege{a}{p} = (-1)^n \qquad\text{con }n = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{2a\,x}{p} \right].
+	\]
+\end{lem}
+
+\begin{proof}
+	Ricordiamo che per il lemma di Gauss
+	\[
+		\lege{a}{p} = (-1)^m \qquad\text{con }m = \#\Set{x\in\N | 1\le x < \frac{p}{2}, a\,x \pmod{p} > \frac{p}{2}}.
+	\]
+	Ora \(a\,x\pmod{p} = a\,x - p \left[ \frac{a\,x}{p} \right]\).
+	Inoltre per la condizione
+	\[
+		\Set{x\in\N | 1\le x<\frac{p}{2}, a\,x\pmod{p}>\frac{p}{2}},
+	\]
+	avremo
+	\[
+		1 < \frac{a\,x\pmod{p}}{p/2} = \frac{a\,x-p \left[ \frac{a\,x}{p} \right] }{p/2} <2 \iff 1 < \frac{2a\,x}{p} -2 \left[ \frac{a\,x}{p} \right] <2.
+	\]
+	Quindi, per ogni \(1\le y \le \frac{p-1}{2}\), si ha
+	\[
+		\left[ \frac{2a\,y}{p}-2 \left[ \frac{a\,y}{p} \right]  \right] = 	\begin{cases}
+			1 & \text{se \(y\) è tale che }a\,y \pmod{p}>\frac{p}{2} \\
+			0 & \text{se \(y\) è tale che }a\,y \pmod{p}<\frac{p}{2}
+		\end{cases}
+	\]
+	ovvero
+	\[
+		\sum_{y=1}^{\frac{p-1}{2}} \left[ \frac{2a\,y}{p}-2 \left[ \frac{a\,y}{p} \right]  \right] = m.
+	\]
+	D'altronde \([\a+n] = [\a]+n\). Quindi
+	\[
+		\sum_{y=1}^{\frac{p-1}{2}} \left[ \frac{2a\,y}{p}-2 \left[ \frac{a\,y}{p} \right]  \right] = \sum_{y=1}^{\frac{p-1}{2}} \left[ \frac{2a\,y}{p}\right] - 2\sum_{y=1}^{\frac{p-1}{2}} \left[ \frac{a\,y}{p}\right] = n-2k,
+	\]
+	ovvero \((-1)^m = (-1)^{n-2k} = (-1)^n\).
+	Da cui segue la tesi per il lemma di Gauss.
+\end{proof}
+
+\begin{lem}
+	Sia \(a\in\Z\) dispari e sia \(p\ge 3\) primo tale che \(p\nmid a\).
+	Allora
+	\[
+		\lege{a}{p} = (-1)^{\l(a,p)} \qquad\text{con } \l(a,p) = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{a\,x}{p} \right].
+	\]
+\end{lem}
+
+\begin{proof}
+	Per le proprietà precedentemente dimostrate
+	\[
+		\begin{split}
+			\lege{\frac{1}{2}(a+p)}{p} & = \overbrace{\lege{4}{p}}^{=1} \lege{\frac{1}{2}(a+p)}{p} = \lege{2a+2p}{p}\\
+			& = \lege{2a+2p\pmod{p}}{p} = \lege{2a}{p}\\
+			& = \lege{2}{p}\lege{a}{p}
+		\end{split}
+	\]
+	Sfruttando il lemma precedente
+	\[
+		\lege{\frac{1}{2}(a+p)}{p} = (-1)^n \qquad\text{con }n = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{a\,x+p\,x}{p} \right].
+	\]
+	Inoltre
+	\[
+		\begin{split}
+			n & = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{a\,x+p\,x}{p} \right] = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{a\,x}{p} \right] +x\graffito{sfruttando la somma id Gauss}\\
+			& = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{a\,x}{p} \right] + \frac{1}{2}\frac{p-1}{2}\left( \frac{p-1}{2}+1 \right)\\
+			& = \sum_{x=1}^{\frac{p-1}{2}} \left[ \frac{a\,x}{p} \right] + \frac{p^2-1}{8} = \l(a,p) + \frac{p^2-1}{8}.
+		\end{split}
+	\]
+	Da cui
+	\[
+		\lege{2}{p}\lege{a}{p} = (-1)^{\l(a,p)} (-1)^{\frac{p^2-1}{8}} \iff \lege{a}{p} = (-1)^{\l(a,p)}.\qedhere
+	\]
+\end{proof}
+
+\begin{teor}{Legge della reciprocità quadratica}{4.7}\index{Legge della reciprocità quadratica}
+	Siano \(p,q\) primi dispari distinti, allora
+	\[
+		\lege{p}{q}\lege{q}{p} = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Per il lemma precedente
+	\[
+		\lege{p}{q}\lege{q}{p} = (-1)^{\l(p,q)}(-1)^{\l(q,p)} = (-1)^{\l(p,q)+\l(q,p)}.
+	\]
+	Quindi la dimostrazione si riduce a provare
+	\[
+		(-1)^{\l(p,q)+\l(q,p)} = (-1)^{\frac{p-1}{2}\frac{q-1}{2}}.
+	\]
+	Per definizione
+	\[
+		\l(p,q) = \sum_{1\le x < \frac{p}{2}} \left[ \frac{q\,x}{p} \right] = \sum_{1\le x < \frac{p}{2}} \sum_{1\le y < \frac{q\,x}{p}} 1 = \sum_{1\le y <\frac{q}{2}} \sum_{\frac{y\,p}{q}<x\le \frac{p-1}{2}} 1.
+	\]
+	Analogamente
+	\[
+		\l(q,p) = \sum_{1\le y < \frac{q}{2}} \left[ \frac{p\,x}{1} \right] = \sum_{1\le y < \frac{q}{2}} \sum_{1\le x < \frac{y\,p}{q}} 1.
+	\]
+	Per cui
+	\[
+		\begin{split}
+			\l(p,q) + \l(q,p) & = \sum_{1\le y < \frac{q}{2}} \left( \sum_{\frac{y\,p}{q}<x \le \frac{p-1}{2}} 1 + \sum_{1\le x < \frac{y\,p}{q}}1 \right) = \sum_{1\le y < \frac{q}{2}} \sum_{1\le x < \frac{p-1}{2}} 1\\
+			& = \sum_{1\le y < \frac{q}{2}} = \frac{p-1}{2}\frac{q-1}{2}.\qedhere
+		\end{split}
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%
+%IL SIMBOLO DI JACOBI%
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Il simbolo di Jacobi}
+
+\begin{defn}{Simbolo di Jacobi}{simboloJacobi}\index{Simbolo di Jacobi}
+	Sia \(a\in\Z\) e sia \(m\in\Z\) dispari.
+	Definiamo \emph{simbolo di Jacobi} come
+	\[
+		\jac{a}{m}_J = \lege{a}{p_1}^{\a_1} \cdot\ldots\cdot \lege{a}{p_s}^{\a_s},
+	\]
+	dove \(m = p_1^{\a_1} \cdot\ldots\cdot p_s^{\a_s}\).
+\end{defn}
+
+\begin{oss}
+	In generale se \(m=p\) primo vale
+	\[
+		\jac{a}{p}_J = \lege{a}{p}.
+	\]
+\end{oss}
+
+\begin{notz}
+	Per l'osservazione precedente non distingueremo più il simbolo di Legendre dai simboli di Jacobi.
+	Utilizzeremo invece il simbolo più generale
+	\[
+		\jac{a}{m}
+	\]
+\end{notz}
+
+\begin{pr}
+	Sia \(m\in\Z\) dispari. Allora
+	\[
+		\jac{1}{m} = 1
+	\]
+\end{pr}
+
+\begin{proof}
+	Ricordiamo che se \(p\) primo dispari vale
+	\[
+		\jac{1}{p} = 1.
+	\]
+	Quindi per definizione
+	\[
+		\jac{1}{m} = \prod_p \jac{1}{p}^{v_p(m)} = \prod_p 1^{v_p(m)} =1.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	Sia \(a\in \Z\) e sia \(m\in \Z\) dispari. Allora
+	\[
+		\jac{a}{m} = \jac{a \pmod{m}}{m}.
+	\]
+\end{pr}
+
+\begin{proof}
+	Sappiamo \(a= a\pmod{m}+k\,m\), per cui
+	\[
+		\jac{a}{m} = \prod_p \jac{a}{p}^{v_p(m)} = \prod_p \jac{a\pmod{m}+k\,m}{p}^{v_p(m)}.
+	\]
+	In generale se \(v_p(m)\ge 1\) avremo \(p\mid m\), ovvero \(k\,m \equiv 0\pmod{p}\).
+	Da cui
+	\[
+		\jac{a}{m} = \prod_p \jac{a \pmod{m}}{m}^{v_p(m)} = \jac{a\pmod{m}}{m}.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	Siano \(a,b\in \Z\) e sia \(m\in\Z\) dispari.
+	Allora
+	\[
+		\jac{a\,b}{m} = \jac{a}{m} \jac{b}{m}.
+	\]
+\end{pr}
+
+\begin{proof}
+	Applicando la definizione e le proprietà del simbolo di Legendre
+	\[
+		\jac{a\,b}{m} = \prod_p \jac{a\,b}{p}^{v_p(m)} = \prod_p \jac{a}{p}^{v_p(m)}\prod_p \jac{b}{p}^{v_p(m)} = \jac{a}{m}\jac{b}{m}.\qedhere
+	\]
+\end{proof}
+
+\begin{lem}
+	La funzione
+	\[
+		\c_4(m) = 	\begin{cases}
+			(-1)^{\frac{m-1}{2}} & \text{se }2\nmid m \\
+			0                    & \text{se }2\mid m
+		\end{cases}
+	\]
+	è totalmente moltiplicativa.
+\end{lem}
+
+\begin{proof}
+	Siano \(n,m\in\N\) e supponiamo che \(2\mid n\,m\).
+	Per definizione \(\c_4(n\,m)=0\), ma \(2\mid n\,m\implies 2\mid n\) oppure \(2\mid m\).
+	Quindi \(\c_4(n)=0\) oppure \(\c_4(m)=0\).
+
+	Supponiamo ora \(2\nmid n,m\), avremo
+	\[
+		\c_4(m)\c_4(n)\c_4(m\,n)^{-1} = (-1)^{\frac{m-1}{2}+\frac{n-1}{2}-\frac{m\,n-1}{2}} = (-1)^{-\frac{(m-1)(n-1)}{2}},
+	\]
+	ma \(m,n\) sono dispari, quindi \(m-1,n-1\) sono pari.
+	Ovvero
+	\[
+		\frac{(m-1)(n-1)}{2}\text{ pari }\implies (-1)^{-\frac{(m-1)(n-1)}{2}} = 1.
+	\]
+\end{proof}
+
+\begin{lem}
+	La funzione
+	\[
+		\c_8(m) = 	\begin{cases}
+			(-1)^{\frac{m^2-1}{8}} & \text{se }2\nmid m \\
+			0                      & \text{se }2\mid m
+		\end{cases}
+	\]
+	è totalmente moltiplicativa.
+\end{lem}
+
+\begin{proof}
+	Analoga alla dimostrazione precedente.
+\end{proof}
+
+\begin{pr}
+	Sia \(m\in\Z\) dispari.
+	Allora
+	\[
+		\jac{-1}{m} = (-1)^{\frac{m-1}{2}} = 	\begin{cases}
+			1  & \text{se }p\equiv 1 \pmod{4} \\
+			-1 & \text{se }p\equiv 3 \pmod{4}
+		\end{cases}.
+	\]
+\end{pr}
+
+\begin{proof}
+	Dalla definizione e per la totale moltiplicatività di \(\c_4\),
+	\[
+		\begin{split}
+			\jac{-1}{m} & = \prod_p \jac{-1}{p}^{v_p(m)} = \prod_p \big((-1)^{\frac{p-1}{2}}\big)^{v_p(m)}\\
+			& = \prod_p \c_4(p)^{v_p(m)} = \c_4 \left( \prod_p p^{v_p(m)} \right)\\
+			& = \c_4(m) = (-1)^{\frac{m-1}{2}}.\qedhere
+		\end{split}
+	\]
+\end{proof}
+
+\begin{pr}
+	Sia \(m\in\Z\) dispari.
+	Allora
+	\[
+		\jac{2}{m} = (-1)^{\frac{m^2-1}{8}} = 	\begin{cases}
+			1  & \text{se }p\equiv \pm 1 \pmod{8} \\
+			-1 & \text{se }p\equiv \pm 3 \pmod{8}
+		\end{cases}.
+	\]
+\end{pr}
+
+\begin{proof}
+	Dalla definizione e per la totale moltiplicatività di \(\c_8\),
+	\[
+		\begin{split}
+			\jac{2}{m} & = \prod_p \jac{2}{p}^{v_p(m)} = \prod_p \c_8(p)^{v_p(m)}\\
+			& = \c_8 \left( \prod_p p^{v_p(m)} \right) = \x_8(m)\\
+			& = (-1)^{\frac{m^2-1}{8}}.\qedhere
+		\end{split}
+	\]
+\end{proof}
+
+\begin{pr}
+	Siano \(m,n\in\Z\) dispari.
+	Allora
+	\[
+		\jac{m}{n} = \jac{n}{m}(-1)^{\frac{m-1}{2}\frac{n-1}{2}}.
+	\]
+\end{pr}
+
+\begin{proof}
+	Se \((m,n)\neq 1\) allora
+	\[
+		\jac{n}{m} = \jac{m}{n} = 0,
+	\]
+	quindi la tesi è soddisfatta.
+
+	Supponiamo quindi \((m,n)=1\), allora
+	\[
+		\begin{split}
+			\jac{m}{n}\jac{n}{m} & = \prod_p \jac{m}{p}^{v_p(m)}\jac{n}{p}^{v_p(n)} = \prod_p\prod_q \jac{q}{p}^{v_p(m)v_q(n)} \jac{q}{p}^{v_p(n)v_q(m)}\\
+			& = \prod_{p,q} \jac{q}{p}^{v_p(m)v_q(n)} \prod_{p,q} \jac{p}{q}^{v_p(m)v_q(n)} = \prod_{p,q} \left[ \jac{q}{p}\jac{p}{q} \right]^{v_p(m)v_q(n)}\\
+			& = \prod_{p,q} \left[ \big((-1)^{\frac{p-1}{1}}\big)^{\frac{q-1}{2}} \right]^{v_p(m)v_q(n)} = \prod_{p,q} \left( \c_4(p)^{\frac{q-1}{2}} \right)^{v_p(m)v_q(n)}\\
+			& = \prod_q \left[ \prod_p \c_4(p)^{v_p(m)} \right] ^{v_q(n)\frac{q-1}{2}} = \prod_q \c_4(m)^{v_q(n)\frac{q-1}{2}}\\
+			& = \prod_q \big((-1)^{\frac{m-1}{2}\frac{q-1}{2}}\big)^{v_q(n)} = \left( \prod_q \c_4(q)^{v_q(n)} \right)^{\frac{m-1}{2}}\\
+			& = \c_4(n)^{\frac{m-1}{2}} = (-1)^{\frac{m-1}{2}\frac{n-1}{2}}.\qedhere
+		\end{split}
+	\]
+\end{proof}
+
+\begin{prop}{Algoritmo per il calcolo del simbolo di Jacobi}{algoritmoJacobi}
+	Siano \(m,n \in \N\) con \(2\nmid n\), allora
+	\[
+		\jac{m}{n} = 	\begin{cases}
+			0                                            & m=0               \\
+			1                                            & m=1               \\
+			(-1)^{\frac{n^2-1}{8}} \jac{m/2}{n}          & 2\mid m           \\
+			\jac{m\pmod{n}}{n}                           & 2\nmid m, m \ge n \\
+			\jac{n}{m} (-1)^{\frac{n-1}{2}\frac{m-1}{2}} & 2\nmid m, m<n
+		\end{cases}
+	\]
+\end{prop}
+
+\begin{proof}
+	Segue immediatamente dalle proprietà precedenti.
+\end{proof}
+
+\begin{ese}
+	Si calcoli il simbolo di Jacobi associato a \(\jac{3073}{2919}\).
+	Sfruttiamo l'algoritmo
+	\[
+		\begin{split}
+			\jac{3073}{2919} & = \jac{3073 \pmod{2919}}{2919} = \jac{154}{2919}\\
+			& = \jac{2 \cdot 77}{2919} = \jac{77}{2919}\\
+			& = \jac{2919}{77}\\
+			& = \jac{2919 \pmod{77}}{77} = \jac{70}{77}\\
+			& = \jac{2 \cdot 35}{77} = -\jac{35}{77}\\
+			& = -\jac{77}{35}\\
+			& = -\jac{77 \pmod{35}}{35} = -\jac{7}{35}\\
+			& = -\jac{35}{7}\\
+			& = -\jac{35\pmod{7}}{7} = -\jac{0}{7}\\
+			& = 0.
+		\end{split}
+	\]
+\end{ese}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MINIMO RESIDUO NON QUADRATICO%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Minimo residuo non quadratico}
+
+\begin{defn}{Minimo residuo non quadratico}{minimoResiduoNonQuadratico}
+	Sia \(p\ge 3\) primo.
+	Definiamo \(n_p\) come il più piccolo residuo non quadratico modulo \(p\):
+	\[
+		n_p = \min \Set{a\in \N | \jac{a}{p}=-1}.
+	\]
+\end{defn}
+
+\begin{oss}
+	Sicuramente \(n_p \le \frac{p}{2}+1\).
+	Infatti i residui quadratici sono precisamente \(\frac{p-1}{2}\), quindi dopo \(\frac{p-1}{2}\) ne troveremo almeno uno.
+\end{oss}
+
+\begin{oss}
+	Se \(p\equiv 3 \pmod{8}\) allora \(n_p=2\).
+	Infatti
+	\[
+		\jac{2}{p} = (-1)^{\frac{p^2-1}{8}} = -1,
+	\]
+	quando \(p\equiv \pm 3 \pmod{8}\).
+\end{oss}
+
+\begin{prop}{Lemma di Linnick}{lemmaLinnick}\index{Lemma!di Linnick}
+	Sia \(p\ge 3\) primo.
+	Allora
+	\[
+		\fa \e>0, n_p \ll p^{\frac{1}{4}+\e}.
+	\]
+\end{prop}
+
+\begin{proof}
+	Non fornita.
+\end{proof}
+
+\begin{oss}
+	La congettura di Vinogradov (1919), afferma che
+	\[
+		\fa \e>0, n_p \ll p^\e.
+	\]
+\end{oss}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 22/04/2016 - OTTAVA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{teor}{Non limitatezza di \(n_p\)}{n_pIllimitati}
+	Sia \(p\ge 3\) primo.
+	Allora
+	\[
+		\limsup_{p\to +\infty} n_p = +\infty,
+	\]
+	ovvero
+	\[
+		\fa k\in\N\,\ex p \text{ primo }: n_p \ge k.
+	\]
+\end{teor}
+
+\begin{proof}
+	Il teorema di Dirichlet sui primi in progressione aritmetica, afferma che per ogni coppia \(a,b\in\Z\) coprimi con \(b>1\), esistono infiniti primi \(p\) tali che \(p\equiv a \pmod{b}\).
+	Quindi esisterà \(p\) primo tale che \(p\equiv 1 \pmod{8k!}\) per ogni \(k\in\N\).
+	In particolare
+	\[
+		p\equiv 1 \pmod{8} \implies \jac{2}{p} = 1.
+	\]
+	Ora, preso \(l\ge 3\) primo con \(l<k\), si ha \(l\mid k!\). Da cui \(p\equiv 1 \pmod{l}\) che implica
+	\[
+		\begin{split}
+			\jac{l}{p}  & = \jac{p}{l} (-1)^{\frac{p-1}{2}\frac{l-1}{2}} = \jac{p}{l}\graffito{ricordiamo che \(p\equiv 1 \pmod{8}\)}\\
+			& = \jac{p\pmod{l}}{l} = 1.
+		\end{split}
+	\]
+	Sia ora \(m<k\) con \(m\) non necessariamente primo.
+	Avremo
+	\[
+		\jac{m}{p} = \prod_l \jac{l}{p}^{v_l(m)} = \prod_l 1^{v_l(m)} = 1.\graffito{\(v_l(m) \neq 0\) se e soltanto se \(l\mid m<k\), quindi \(l<k\)}
+	\]
+	Quindi \(m\) è un residuo quadratico fintanto che è minore di \(k\).
+	In particolare il più piccolo residuo non quadratico è necessariamente maggiore di \(k\), ovvero
+	\[
+		n_p \ge k \implies \limsup_{p\to +\infty} = +\infty.
+	\]
+\end{proof}
+
+\begin{ese}
+	Troviamo \(p\) primo tale che \(n_p\ge 5\).
+	Se \(n_p\ge 5\) necessariamente
+	\[
+		\jac{1}{p} = \jac{2}{p} = \jac{3}{p} = \jac{4}{p} = 1.
+	\]
+	Dove
+	\[
+		\jac{1}{p}=\jac{4}{p} = 1,
+	\]
+	sono condizioni sempre verificate, mentre
+	\[
+		\jac{2}{p} = 1 \iff (-1)^{\frac{p^2-1}{8}} = 1 \iff p\equiv \pm 1 \pmod{8},
+	\]
+	e
+	\[
+		\begin{split}
+			\jac{3}{p} = 1 & \iff \jac{p}{3}(-1)^{\frac{p-1}{2}\frac{3-1}{2}} = \begin{cases}
+				(-1)^{\frac{p-1}{2}}  & \text{se }p\equiv 1 \pmod{3} \\
+				-(-1)^{\frac{p-1}{2}} & \text{se }p\equiv 2 \pmod{3}
+			\end{cases}\\
+			& \iff \begin{cases}p\equiv 1 \pmod{3}\\p\equiv 1 \pmod{4}\end{cases} \vee \begin{cases}p\equiv 2\pmod{3}\\p\equiv 3 \pmod{4}\end{cases}\\
+			& \iff p\equiv 1 \pmod{12} \vee p\equiv -1\pmod{12}.
+		\end{split}
+	\]
+	Il problema si riduce quindi a quattro sistemi distinti
+	\[
+		\begin{cases}
+			p\equiv \pm 1 \pmod{8} \\
+			p\equiv \pm 1 \pmod{12}
+		\end{cases}
+	\]
+	Ora se \(p\equiv \pm 1\pmod{8}\) in particolare \(p\equiv \pm 1\pmod{4}\), quindi \(p\not\equiv \mp 1 \pmod{12}\).
+	I sistemi accettabili sono quindi
+	\[
+		\begin{cases}
+			p\equiv 1 \pmod{8} \\
+			p\equiv 1 \pmod{12}
+		\end{cases}
+		\vee
+		\begin{cases}
+			p\equiv -1 \pmod{8} \\
+			p\equiv -1 \pmod{12}
+		\end{cases}
+		\iff p\equiv \pm 1\pmod{24}.
+	\]
+	Da cui \(p=23\).
+\end{ese}
+
+\begin{teor}{Limite superiore di \(n_p\)}{4.14}
+	Sia \(p\ge 3\) primo.
+	Allora
+	\[
+		n_p < \frac{1}{2} + \sqrt{p+\frac{1}{4}}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Sia \(h=\left[ \frac{p}{n_p} \right] +1\), per definizione avremo
+	\[
+		\frac{p}{n_p} < h < \frac{p}{n_p} + 1 \implies p < h\,n_p < p +n_p.
+	\]
+	Ora \(\jac{h}{p}=-1\), infatti
+	\[
+		\jac{n_ph-p}{p} = 1,
+	\]
+	in quanto \(0<n_p h-p<n_p\) dove \(n_p\) è il più piccolo residuo non quadratico modulo \(p\).
+	Ma
+	\[
+		\begin{split}
+			1 = \jac{n_p h-p}{p} & = \jac{n_p h}{p} = \jac{n_p}{p}\jac{h}{p}\\
+			& = -\jac{h}{p}.
+		\end{split}
+	\]
+	Per definizione di minimo, \(\jac{h}{p}=-1\) ci dice \(h\ge n_p\), ovvero
+	\[
+		\begin{split}
+			n_p^2 \le p+n_p & \implies n_p^2 - n_p -p \le 0\\
+			& \implies n_p \le \frac{1}{2}+\frac{1}{2}\sqrt{1+4p}\\
+			& \implies n_p < \frac{1}{2}+\sqrt{p+\frac{1}{4}}.\qedhere
+		\end{split}
+	\]
+\end{proof}

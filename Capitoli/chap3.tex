@@ -1,0 +1,1095 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 11/03/2016 - TERZA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Congruenze}
+
+\section{Introduzione}
+
+\begin{defn}{Congruenza modulo \(n\)}{congruenza}\index{Congruenza}
+	Presi \(a,b\in\Z\) e \(n\in\N\), diremo che \(a\) è congruo a \(b\) in modulo \(n\) se e soltanto se
+	\[
+		n \mid a-b.
+	\]
+\end{defn}
+
+\begin{notz}
+	Si scrive \(a\equiv b \pmod{n}\).
+\end{notz}
+
+\begin{oss}
+	Se facciamo la divisione euclidea fra \(a\) ed \(n\) otteniamo
+	\[
+		a = n\,q + r,\text{ con }0\le r < n,
+	\]
+	ovvero \(a\equiv r \pmod{n}\).
+\end{oss}
+
+\begin{teor}{Caratterizzazione della congruenza}{3.1}
+	Presi \(a,b\in\Z\) diremo che \(a\equiv b \pmod{n}\) se e soltanto se \(a\) e \(b\), divisi per \(n\), hanno lo stesso resto.
+\end{teor}
+
+\begin{proof}
+	\graffito{\(\Leftarrow)\)}Supponiamo che
+	\[
+		a = n\,q_1 + r \qquad\text{e}\qquad b = n\,q_2 + r,
+	\]
+	sottraendo membro a membro avremo
+	\[
+		a-b = n(q_1 - q_2),
+	\]
+	ovvero \(n\mid a-b\), quindi, per definizione, \(a\equiv b \pmod{n}\).
+
+	\graffito{\(\Rightarrow)\)}Supponiamo che \(n\mid a-b\), ovvero
+	\[
+		n\,q = a-b \iff a = n\,q + b,
+	\]
+	se effettuiamo la divisione euclidea fra \(a\) ed \(n\), avremo
+	\[
+		a = n\,q' + r,\text{ con }0\le r < n
+	\]
+	quindi, uguagliando le espressioni, otteniamo
+	\[
+		n\,q+b = n\,q'+r \iff b = n(q'-q) + r,
+	\]
+	dove \(0\le r < n\), da cui, per l'unicità dei resti, si ha la tesi.
+\end{proof}
+
+\begin{pr}\label{th:3.2}
+	Siano \(a_1,a_2,b_1,b_2\in\Z\) e sia \(n\in\N\) tali che
+	\[
+		a_1\equiv b_1 \pmod{n}\qquad\text{e}\qquad a_2\equiv b_2 \pmod{n},
+	\]
+	allora
+	\begin{itemize}
+		\item \(a_1+a_2\equiv b_1+b_2 \pmod{n}\);
+		\item \(a_1 a_2\equiv b_1 b_2 \pmod{n}\).
+	\end{itemize}
+\end{pr}
+
+\begin{pr}\label{th:3.3}
+	Siano \(a,b,c\in\Z\) e sia \(n\in\N\) con \(c\neq 0\), allora
+	\begin{itemize}
+		\item \(a\,c\equiv b\,c \pmod{n} \implies a\equiv b \pmod{n/(n,c)}\);
+		\item \((n,c)=1 \implies a\equiv b \pmod{n}\).
+	\end{itemize}
+\end{pr}
+%%%%%%%%%%%%%%%%%%%%
+%SISTEMI DI RESIDUI%
+%%%%%%%%%%%%%%%%%%%%
+\section{Sistemi di residui}
+
+\begin{defn}{Residuo modulo \(n\)}{residuo}\index{Residuo}
+	Preso \(a\in\Z\), diremo che il resto di \(a\) diviso \(n\) è il \emph{residuo} di \(a\) modulo \(n\).
+\end{defn}
+
+\begin{defn}{Insieme completo di residui modulo \(n\)}{ICR}\index{Insieme completo di residui}
+	Un insieme \(S\subseteq\Z\) si definisce \emph{insieme completo di residui modulo \(m\)} se, per ogni intero \(z\in\Z\), esiste un unico \(s\in S\) tale che
+	\[
+		z\equiv s \pmod{m}.
+	\]
+\end{defn}
+
+\begin{notz}
+	Spesso indicheremo un sistema completo di residui modulo \(m\) con la sigla ICR(\(m\)).
+\end{notz}
+
+\begin{pr*}
+	Dato \(m\in\N\), allora \(S\subseteq \Z\) è un ICR(\(m\)) se e soltanto se
+	\begin{itemize}
+		\item \(\abs{S} = m\);
+		\item \(\fa x,y \in S, x\neq y \implies x \not\equiv y \pmod{m}\).
+	\end{itemize}
+\end{pr*}
+
+\begin{ese}
+	Preso \(m\in\N\) l'insieme completo di residui canonico di \(m\) è
+	\[
+		S=\Set{0,1,\ldots,m-1}.
+	\]
+\end{ese}
+
+\begin{ese}
+	Analogamente sono sistemi completi di residui
+	\begin{itemize}
+		\item \(S=\Set{1,2,\ldots,m}\);
+		\item se \(m\) è pari \(S=\Set{-m/2,\ldots,-1,0,1,\ldots,m/2-1}\).
+	\end{itemize}
+\end{ese}
+
+\begin{teor}{Dilatazione di un ICR}{3.4}
+	Sia \(S\) un insieme completo di residui modulo \(m\) e sia \(k\in\Z\) tale che \((k,m)=1\).
+	Allora l'insieme
+	\[
+		k\,S = \Set{k\,x | x \in S},
+	\]
+	è ancora un insieme completo di residui modulo \(m\).
+\end{teor}
+
+\begin{proof}
+	Basta dimostrare che vale la caratterizzazione:
+	\begin{itemize}
+		\item \(\abs{k\,S} = m\) segue banalmente da dalla definizione di \(k\,S\) e da \(\abs{S} = m\).
+		\item Siano \(k\,x_1,k\,x_2\in k\,S\) distinti modulo \(m\).
+		      Se per assurdo \(k\,x_1 \equiv k\,x_2 \pmod{m}\), si avrebbe
+		      \[
+			      x_1 \equiv x_2 \pmod{\frac{m}{(k,m)}} \iff x_1 \equiv x_2 \pmod{m},
+		      \]
+		      in quanto \((k,m) = 1\) per ipotesi.
+		      Ma ciò è ovviamente assurdo in quanto \(x_1,x_2\) sono elementi distinti di un ICR(\(m\)).
+	\end{itemize}
+\end{proof}
+
+\begin{defn}{Insieme completo di residui invertibili}{IRR}
+	Sia \(S\) un insieme completo di residui modulo \(m\), si definisce \emph{insieme completo di residui invertibili modulo \(m\)}, l'insieme
+	\[
+		S^* = \Set{s\in S | (s,m) = 1}.
+	\]
+\end{defn}
+
+\begin{notz}
+	Spesso indicheremo un sistema completo di residui invertibili modulo \(m\) con la sigla IRR(\(m\)).
+\end{notz}
+
+\begin{pr*}
+	Dato \(m\in\N\), allora \(S^*\subseteq \Z\) è un IRR(\(m\)) se e soltanto se
+	\begin{itemize}
+		\item \(\abs{S^*} = \j(m)\);
+		\item \((a,m) = 1,\,\fa a \in S^*\);
+		\item \(\fa x,y \in S^*, x\neq y \implies x\not\equiv y \pmod{m}\).
+	\end{itemize}
+\end{pr*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 15/03/2016 - QUARTA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{teor}{Dilatazione di un ICR}{3.4'}
+	Sia \(S^*\) un insieme completo di residui invertibili modulo \(m\) e sia \(k\in\Z\) tale che \((k,m)=1\).
+	Allora l'insieme
+	\[
+		k\,S^* = \Set{k\,x | x \in S^*},
+	\]
+	è ancora un insieme completo di residui completo modulo \(m\).
+\end{teor}
+
+\begin{proof}
+	La dimostrazione è analoga a quella sugli insiemi completi (teorema \ref{th:3.4}), resta solo da mostrare che
+	\[
+		k\,x \in k\,S^* \implies (k\,x,m) = 1.
+	\]
+	Ma \(x\in S^*\) implica \((x,m) = 1\), mentre \((k,m) = 1\) per ipotesi, per cui
+	\[
+		(x\,k,m) = 1.\qedhere
+	\]
+\end{proof}
+
+\begin{oss}
+	Se \(S\) è ICR(\(m\)) allora \(S+a\) è ancora ICR(\(m\)).
+	Ma questo, in generale, non vale per gli IRR.
+\end{oss}
+
+\begin{teor}{Combinazione lineare di ICR}{3.5}
+	Siano \(a,b\in\N\) tali che \((a,b)=1\) e supponiamo che \(S_a\) sia un ICR(\(a\)) e che \(S_b\) sia un ICR(\(b\)), allora
+	\[
+		b\,S_a + a\,S_b,
+	\]
+	è un ICR(\(a\,b\)).
+\end{teor}
+
+\begin{proof}
+	Mostriamo che vale la caratterizzazione:
+	\begin{itemize}
+		\item Vogliamo mostrare che \(\#(b\,S_a + a\,S_b) = a\,b\).
+		      Ora
+		      \[
+			      b\,S_a + a\,S_b = \Set{b\,x + a\,y | x\in S_a, y\in S_b},
+		      \]
+		      dove \(\abs{S_a} = a\) e \(\abs{S_b} = b\).
+		      Quindi ci basta verificare che se \((x_1,y_1) \neq (x_2,y_2)\) allora \(x_1 b + y_1 a \not\equiv x_2 b + y_2 a\).
+		      Supponiamo per assurdo che \(x_1 b + y_1 a \equiv x_2 b + y_2 a\), allora
+		      \[
+			      \begin{split}
+				      b \mid a(y_1-y_2) & \implies b \mid y_1-y_2 \graffito{dal momento che \((a,b) = 1\)}\\
+				      & \implies y_1\equiv y_2 \pmod{b} \implies y_1 = y_2,
+			      \end{split}
+		      \]
+		      per la caratterizzazione degli ICR.
+		      Analogamente segue che \(x_1 = x_2\).
+		      Ma ciò è assurdo per la scelta di \(x_1,x_2,y_1,y_2\).
+		\item Il ragionamento precedente è valido anche per mostrare che
+		      \[
+			      x_1 b + y_1 a \not\equiv x_2 b + y_2 a \pmod{a\,b}.\qedhere
+		      \]
+	\end{itemize}
+\end{proof}
+
+\begin{cor}
+	Se \(S_a^*\) è un IRR(\(a\)) e \(S_b^*\) è un IRR(\(b\)), allora
+	\[
+		b\,S_a^* + a\,S_b^*,
+	\]
+	è un IRR(a\,b).
+\end{cor}
+
+\begin{proof}
+	La dimostrazione segue da quella precedente, eccetto per la verifica che
+	\[
+		(b\,x+a\,y,a\,b) = 1.
+	\]
+	Osserviamo che \((b\,x+a\,y,a)=(b\,x,a) = (x,a)\) in quanto \((a,b) = 1\), e che \((x,a) = 1\) poichè \(x\in S\).
+	Analogamente si mostra che \((b\,x+a\,y,b) = (a\,y,b) = (y,b) =1\).
+	Per cui
+	\[
+		(a\,x+b\,y,a\,b) = 1.\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TEOREMI DI EULERO E DI FERMAT%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Teoremi di Eulero e di Fermat}
+
+\begin{teor}{di Eulero-Fermat}{3.6}\index{Teorema!di Eulero-Fermat}
+	Preso \(m\in\N\), sia \(a\in\Z\) tale che \((a,m) = 1\), allora
+	\[
+		a^{\j(m)} \equiv 1 \pmod{m}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Sia \(S^*\) un qualsiasi IRR(\(m\)), allora sappiamo che anche \(a\,S^*\) è un IRR(\(m\)).
+	Ora
+	\[
+		\prod_{j\in S^*} j \equiv \prod_{a\,j \in S^*} a\,j \pmod{m}.
+	\]
+	Inoltre, siccome \(\abs{S^*} = \j(m)\), avremo
+	\[
+		\prod_{j\in S^*}j \equiv a^{\j(m)} \prod_{j\in S^*} j \pmod{m},
+	\]
+	dove \((m,j) = 1\) comunque prendo \(j\in S^*\), per cui
+	\[
+		\left( m, \prod_{j\in S^*} j \right)=1,
+	\]
+	quindi
+	\[
+		1 \equiv a^{\j(m)} \pmod{m}\qedhere
+	\]
+\end{proof}
+
+\begin{teor}{Piccolo teorema di Fermat}{3.7}\index{Teorema!di Fermat (piccolo)}
+	Sia \(p\) primo e sia \(a\in\Z\) tale che \(p\nmid a\), allora
+	\[
+		a^{p-1} \equiv 1 \pmod{p}
+	\]
+\end{teor}
+
+\begin{proof}
+	Dal momento che \(p\) è primo e che non divide \(a\), avremo necessariamente
+	\[
+		(a,p) = 1.
+	\]
+	Quindi, applicando il teorema precedente, avremo
+	\[
+		a^{\j(p)} \equiv 1 \pmod{p},
+	\]
+	ovvero, ricordando che \(p\) primo implica \(\j(p) = p-1\),
+	\[
+		a^{p-1} \equiv 1 \pmod{p}.\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%
+%CONGRUENZE LINEARI%
+%%%%%%%%%%%%%%%%%%%%
+\section{Congruenze lineari}
+
+\begin{defn}{Congruenza lineare}{congruenzaLineare}\index{Congruenza lineare}
+	Presi \(a,b\in\Z\) e \(m\in\N\) si definisce \emph{congruenza lineare} un'equazione del tipo
+	\[
+		a\,X \equiv b \pmod{m}.
+	\]
+\end{defn}
+
+\begin{oss}
+	Quando si parla del numero soluzioni di una congruenza lineare si fa riferimento al numero di elementi in un insieme completo di residui modulo \(m\) per cui la congruenza è valida.
+	In altre parole si intende il numero di soluzioni mutualmente incongrue fra di loro.
+\end{oss}
+
+\begin{notz}
+	In generale, data \(f\colon \Z \to \Z, m\in\N\), diremo che il numero di soluzioni di
+	\[
+		f(x) \equiv 0 \pmod{m},
+	\]
+	è la cardinalità di
+	\[
+		N_f(m) = \Set{j\in\N | 0 \le j < m, f(j) \equiv 0 \pmod{m}}.
+	\]
+	Inoltre diremo che la congruenza ammette soluzione se \(N_f(m) \neq \emptyset\).
+\end{notz}
+
+\begin{teor}{delle congruenze lineari}{3.8}
+	Siano \(a,b\in\Z\) e sia \(m\in\N\), allora
+	\[
+		a\, X \equiv b \pmod{m},
+	\]
+	ammette soluzione se e soltanto se
+	\[
+		(a,m) \mid b.
+	\]
+	In tal caso il numero di soluzioni è pari a \((a,m)\).
+\end{teor}
+
+\begin{proof}
+	Sfruttando la notazione precedentemente definita, la tesi risulta essere
+	\[
+		N_{a\,X-b} \neq \emptyset \iff (a,m) \mid b.
+	\]
+	\graffito{\(\Rightarrow)\)}Supponiamo che \(x_0\in N_{a\,X-b}\), ovvero
+	\[
+		a\,x_0 \equiv b \pmod{m},
+	\]
+	quindi esisterà \(y_0\in\Z\) tale che \(x_0 a-b = y_0 m\), ovvero
+	\[
+		b = x_0 a- y_0 m \implies (a,m) \mid b.
+	\]
+	\graffito{\(\Leftarrow)\)}Supponiamo che \((a,m) \mid b\), necessariamente avremo che
+	\[
+		\left( \frac{a}{(a,m)}, \frac{m}{(a,m)} \right) = 1.
+	\]
+	Ora, preso \(M=\Set{0,1,\ldots,\frac{m}{(a,m)}-1}\) un ICR\(\left(\frac{m}{(a,m)}\right)\), avremo che
+	\[
+		\frac{a}{(a,m)} M = \Set{0, \frac{a}{(a,m)}, \frac{2a}{(a,m)}, \ldots, \frac{a}{(a,m)} \left( \frac{m}{(a,m)} -1 \right)},
+	\]
+	è ancora un ICR\(\left( \frac{m}{(a,m)} \right)\).
+	Inoltre, dal momento che \((a,m) \mid b\), esisterà un \(x_0\in\Z\) tale che
+	\[
+		\frac{b}{(a,m)} \equiv \frac{a}{(a,m)}x_0 \pmod{\frac{m}{(a,m)}},
+	\]
+	ma da ciò segue subito che \(b\equiv a\,x_0 \pmod{m}\).
+
+	Resta da mostrare l'affermazione sul numero di soluzioni.
+	Se \(x_0\) è una soluzione, avremo che
+	\[
+		x_k = x_0+k \frac{m}{(a,m)},\text{ con }k=0,\ldots,(a,m)-1,
+	\]
+	sono tutte soluzioni non congrue fra di loro, infatti
+	\[
+		\begin{split}
+			a\,x_k & = a\,x_0 + k \frac{a}{(a,m)}m\\
+			& \equiv a\,x_0 \equiv b \pmod{m}.
+		\end{split}
+	\]
+	D'altronde ogni altra soluzione \(x\) ha la medesima forma, infatti
+	\[
+		a\,x \equiv b \equiv a\,x_0 \pmod{m},
+	\]
+	implica che
+	\[
+		\begin{split}
+			m \mid a(x-x_0) & \iff \frac{m}{(a,m)} \mid \frac{a}{(a,m)}(x-x_0)\\
+			& \implies \frac{m}{(a,m)} \mid x-x_0 \implies x = x_0 + k \frac{m}{(a,m)},
+		\end{split}
+	\]
+	in quanto \(\left( \frac{m}{(a,m)}, \frac{a}{(a,m)} \right) = 1\).
+\end{proof}
+
+\begin{teor}{cinese dei resti}{3.9}
+	Siano \(m_1,\ldots,m_s\in\N\) e siano \(a_1,\ldots,a_j\in\Z\) tali che \((m_i, m_j) = 1,\,\fa i\neq j\), allora
+	\[
+		\begin{cases}
+			x \equiv a_1 \pmod{m_1} \\
+			\dots                   \\
+			x \equiv a_s \pmod{m_s}
+		\end{cases}
+	\]
+	ammette un'unica soluzione modulo \(m_1 \cdot\ldots\cdot m_s\).
+\end{teor}
+
+\begin{proof}
+	Per ogni \(j\in\{1,\ldots,s\}\) poniamo
+	\[
+		M_j = \frac{m_1 \cdot\ldots\cdot m_s}{m_j},
+	\]
+	per definizione avremo quindi \((M_j,m_j) = 1\).
+	Prendiamo quindi \(M_j X \equiv a_j \pmod{m_j}\) che è una congruenza lineare che, per il teorema precedente, ammette un'unica soluzione \(q_j \pmod{m_j}\).
+	Posto
+	\[
+		x_0 = M_1 q_1 + \ldots + M_s q_s,
+	\]
+	avremo che
+	\[
+		x_0 \equiv M_j q_j \equiv a_j ,\,\fa j\in\{1, \ldots, s\}.
+	\]
+	Resta da mostrare l'unicità.
+	Supponiamo che \(x_1,x_2\) siano soluzioni del sistema di congruenze, allora
+	\[
+		\begin{cases}
+			x_1 \equiv a_j \pmod{m_j} \\
+			x_2 \equiv a_j \pmod{m_s}
+		\end{cases}
+	\]
+	ovvero \(m_j \mid x_1-x_2\) e, siccome \((m_i,m_j) = 1\), avremo
+	\[
+		m_1 \cdot\ldots\cdot m_s \mid x_1-x_2,
+	\]
+	che implica \(x_1 \equiv x_2 \pmod{m_1 \cdot\ldots\cdot m_s}\).
+\end{proof}
+
+\begin{ese}
+	Si trovino tutte le soluzioni di
+	\[
+		\begin{cases}
+			x \equiv 2 \pmod{3} \\
+			x \equiv 3 \pmod{4} \\
+			x \equiv 4 \pmod{5}
+		\end{cases}
+	\]
+	nell'intervallo \([-500,500]\).
+\end{ese}
+
+\begin{sol}
+	Per il teorema cinese dei resti esiste un'unica soluzione modulo \(60\).
+
+	La prima equazione ci dice \(x=2+3t\), mentre la seconda \(x=3+4s\), da cui
+	\[
+		3t+2=3+4s \iff 3t \equiv 1 \pmod{4},
+	\]
+	quindi \(t \equiv 3 \pmod{4} \iff t=3+4u\) che ci permette di ridurre le prime due equazioni alla singola
+	\[
+		x = 2+3(3+4u) = 11+12u.
+	\]
+	Dalla terza otteniamo
+	\[
+		11+12u \equiv 4 \iff 12 u \equiv 3 \iff u \equiv 4 \pmod{5},
+	\]
+	ovvero \(u = 4+5y\), da cui
+	\[
+		x = 11+12(4+5y) = 59+60y \iff x \equiv 59 \pmod{60}.
+	\]
+	Resta da trovare \(y\) tale che
+	\[
+		-500 \le 59 + 60y \le 500,
+	\]
+	ovvero
+	\[
+		\begin{split}
+			-559 \le 60 y \le 441 & \iff -\frac{559}{60} \le y \le \frac{441}{60}\\
+			& \iff \left[ -\frac{559}{60} \right]+1 \le u \le \big( \frac{441}{60} \big)\\
+			& \iff -9 \le u \le 7.
+		\end{split}
+	\]
+\end{sol}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 17/03/2016 - QUARTA SETTIMANA (2)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+%CONGRUENZE POLINOMIALI%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Congruenze polinomiali}
+
+\begin{notz}
+	Preso un polinomio \(f\in K[X]\) indicheremo il suo grado con il simbolo \(\pd f\).
+\end{notz}
+
+\begin{teor}{Interpolazione modulo \(p\)}{3.10}
+	Sia \(f\in\Z[X]\), allora esisterà \(g\in\Z[X]\) tale che
+	\[
+		\pd g < p \qquad\text{e}\qquad f(a) \equiv g(a) \pmod{p},\,\fa a\in\Z.
+	\]
+\end{teor}
+
+\begin{proof}
+	Dimostriamo il teorema prima nel caso semplice del polinomio avente un solo coefficiente non nullo per poi mostrare il caso generale.
+
+	Supponiamo che \(f(x) = \a_n x^n\).
+	Se \(n = 0\) avremmo che banalmente \(f(x) = \a_n\) e la tesi sarebbe banalmente soddisfatta.
+	Supponiamo quindi che \(n>1\), avremo
+	\[
+		n = q(p-1)+r,\text{ con }1 \le r \le p-1,
+	\]
+	infatti, per la divisione euclidea,
+	\[
+		n = q_1 (p-1) + r_1, \text{ con } 0 \le r_1 < p-1,
+	\]
+	in particolare, se fosse \(r_1 = 0\), avremmo \(n = (q_1-1)(p-1)+p_1\), quindi, in tal caso, mi basterebbe imporre
+	\[
+		\begin{cases}
+			q = q_1-1 \\
+			r = p-1
+		\end{cases}
+	\]
+	Per cui abbiamo \(x^n = \big( x^{p-1} \big)^q x^r\), posto \(g(x) = \a_n x^r\) otteniamo
+	\[
+		f(a) \equiv g(a) \pmod{p},\,\fa a\in\Z,
+	\]
+	infatti, se \(p\mid a\) si ha banalmente \(0 \equiv 0 \pmod{p}\).
+	Se, invece, \(p\nmid a\) otteniamo
+	\[
+		\begin{split}
+			f(a) & = \a_n a^n = \a_n \big( a^{p-1} \big)^q a^r\\
+			& \equiv \a_n a^r = g(a) \pmod{p},
+		\end{split}
+	\]
+	per il teorema di Fermat (\ref{th:3.7}).
+
+	In generale, se \(f(x) = a_0+a_1 x + \ldots + a_n x^n\), possiamo scrivere, comunque preso \(i\) fra \(2\) e \(n\) che
+	\[
+		i = q_i (p-1) + r_i,\text{ con }1 \le r_i \le p-1,
+	\]
+	che vale per ragionamenti analoghi al caso iniziale.
+	Definiamo quindi
+	\[
+		g(x) = \sum_{j=0}^n a_j x^{r_j},
+	\]
+	per definizione si avrà
+	\[
+		\pd g \le p-1 \qquad\text{e}\qquad f(a) \equiv g(a) \pmod{p},
+	\]
+	semplicemente iterando il caso iniziale ad ogni potenza di \(x\).
+\end{proof}
+
+\begin{prop}{Interpolazione modulo \(p\) (caso generale)}{3.10'}
+	Sia \(\s\colon \Z \to \Z\) e sia \(p\) primo e supponiamo che
+	\[
+		\s(a) \equiv \s(b) \pmod{p},\,\fa a \equiv b \pmod{p}.
+	\]
+	Allora esiste un'unica \(g_\s\in\Z[X]\) con \(\pd g_\s < p\) tale che
+	\[
+		g_\s(a) \equiv \s(a) \pmod{p},\,\fa a \in \Z.
+	\]
+\end{prop}
+
+\begin{proof}
+	DA FARE!%TODO
+\end{proof}
+
+\begin{teor}{di Lagrange}{3.11}\index{Teorema!di Lagrange}
+	Sia \(f\in\Z[X]\) con \(\pd f = n\), dove
+	\[
+		f(x) = a_n x^n + \ldots + a_1 x + a_0.
+	\]
+	Supponiamo che \(p\nmid a_n\), allora \(f\) ha al più \(n\) radici \(\pmod{p}\)
+\end{teor}
+
+\begin{proof}
+	Preso
+	\[
+		\begin{split}
+			N_f & = \Set{j\in\Z | 0 \le j \le p-1, f(j) \equiv 0 \pmod{p}}\\
+			& = \Set{j\in S | f(j) \equiv 0 \pmod{p}},
+		\end{split}
+	\]
+	con \(S\) un qualsiasi ICR(\(p\)), allora si tratta di mostrare che
+	\[
+		\# N_f \le \min\Set{\pd f,p}.\graffito{\(\# N_f \le p\) necessariamente in quanto \(N_f \subset S\) che è un ICR(\(p\))}
+	\]
+	Mostriamolo quindi per induzione su \(n\):
+	\begin{itemize}
+		\item Se \(n=0\) allora \(f\) è un polinomio costante non nullo, quindi
+		      \[
+			      \# N_f = 0\le 0.
+		      \]
+		\item Se \(n=1\) avremo \(f(x) = a\,x + b\), quindi, per il teorema \ref{th:3.8}, avremo
+		      \[
+			      \# N_f = 1\le 1.
+		      \]
+		\item Posto quindi \(n>1\) supponiamo che la tesi sia valida per \(k<n\).
+		      Se per assurdo \(x_0,\ldots,x_n\) sono \(n+1\) radici tali che \(x_i \not\equiv x_j \pmod{p}\), avremo che
+		      \[
+			      \begin{split}
+				      f(x) - f(x_0) & = \sum_{j=0}^n a_j x^j - a_j x_0^j\\
+				      & = \sum_{j=0}^n a_j \big( x^j - x_0^j \big)\\
+				      & = \sum_{j=0}^n a_j (x-x_0) \big( x^{j-1}+x^{j-2}x_0+\ldots+x\,x_0^{j-2}+x_0^{j-1} \big)\\
+				      & = (x-x_0)g(x),
+			      \end{split}
+		      \]
+		      con \(g(x)\in\Z[X]\) e \(\pd g = n-1\).
+		      Ora, comunque preso \(j\in\{1,\ldots,n\}\), avremo
+		      \[
+			      f(x_j)-f(x_0) \equiv 0 \pmod{p},
+		      \]
+		      ma
+		      \[
+			      f(x_j)-f(x_0) \equiv \cancel{(x_j-x_0)}g(x_j) \equiv 0 \pmod{p}.\graffito{posso cancellare \((x_j-x_0)\) in quanto non sono congrui e ogni elemento non nullo è invertibile \(\pmod{p}\)}
+		      \]
+		      Quindi \(x_1,\ldots,x_n\) sono \(n\) radici di \(g(x) \equiv 0 \pmod{p}\) tutte mutualmente incongrue.
+		      Ciò è assurdo per ipotesi induttiva, da cui la tesi.\qedhere
+	\end{itemize}
+\end{proof}
+
+\begin{teor}{Corollario di Lagrange}{3.12}
+	Sia \(f\in\Z[X]\) e supponiamo che \(f\) abbia un numero di radici \(\pmod{p}\) superiore a \(\pd f\), allora
+	\[
+		p\mid a_j,\,\fa j=0,\ldots,n.
+	\]
+\end{teor}
+
+\begin{proof}
+	Sia \(f(x) = a_0+\ldots+a_n x^n\) e supponiamo per assurdo che esista
+	\[
+		k = \max\Set{h | p\nmid a_h},
+	\]
+	ciò significa che possiamo riscrivere \(f\) come
+	\[
+		f(x) = g(x) + a_{k+1} x^{k+1} + \ldots + a_n x^n,
+	\]
+	dove \(g(x) = a_0+\ldots+a_k x^k\) e con i termini restanti di \(f\) che sono tutti divisibili per \(p\).
+	Quindi, per ognuna delle radici \(x_i\) di \(f\), che ricordiamo essere maggiori di \(n\), avremo
+	\[
+		f(x_i) \equiv g(x_i) \pmod{p},
+	\]
+	per cui anche \(g\) ha più di \(n\) radici \(\pmod{p}\).
+	Ma \(\pd g=k\le n\) e \(g\) soddisfa le ipotesi del teorema di Lagrange, per cui
+	\[
+		\# N_g \le k.
+	\]
+	Ma ciò è assurdo in quanto abbiamo stabilito che \(\# N_g > n\), da cui la tesi.
+\end{proof}
+
+\begin{teor}{di Wilson}{3.13}\index{Teorema!di Wilson}
+	Sia \(p\) primo, allora
+	\[
+		(p-1)! \equiv -1 \pmod{p}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Se \(p=2\) avremo
+	\[
+		1 \equiv -1 \pmod{2},
+	\]
+	analogamente se \(p=3\)
+	\[
+		2 \equiv -1 \pmod{3}.
+	\]
+	Possiamo quindi supporre \(p\ge 5\).
+	Il polinomio
+	\[
+		f(x) = x^{p-1}-1-\prod_{j=1}^{p-1} (x-j),
+	\]
+	ha \(\pd f = p-2\), dove il coefficiente di \(x^{p-2}\) è \(\frac{p(p-1)}{2} \neq 0\).
+	Ora, comunque preso \(x_0\in\Z\) tale che \(p\nmid x_0\), avremo \(f(x_0) \equiv 0 \pmod{p}\) in quanto
+	\[
+		p\nmid x_0 \implies x_0^{p-1}-1 \equiv 0 \pmod{p},
+	\]
+	per il teorema di Fermat, mentre
+	\[
+		\prod_{j=1}^{p-1}(x_0-j) \equiv 0 \pmod{p},
+	\]
+	in quanto se \(p\nmid x_0\) esisterà \(j\in\{1,\ldots,p-1\}\) tale che \(j\equiv x_0 \pmod{p}\).
+	In particolare \(f\) ha \(p-1\) radici \(\pmod{p}\), che sono in numero maggiore del suo grado.
+	Applicando il teorema precedente avremo che \(p\) divide tutti i coefficienti di \(f\), incluso il suo termine noto che è
+	\[
+		\begin{split}
+			f(0) & = -1-\prod_{j=1}^{p-1}-j=-1-(-1)^{p-1}(p-1)!\\
+			& = -1-(p-1)!,
+		\end{split}
+	\]
+	in quanto \(p-1\) è necessariamente pari.
+	Abbiamo quindi dimostrato che \(p\mid -1-(p-1)!\), ovvero
+	\[
+		(p-1)! \equiv -1 \pmod{p}.\qedhere
+	\]
+\end{proof}
+%%%%%%%%
+%ORDINE%
+%%%%%%%%
+\section{Ordine}
+
+\begin{defn}{Ordine di un elemento modulo \(m\)}{ordineModM}\index{Ordine modulo \(m\)}
+	Siano \(a\in\Z\) e \(m\in\N\) tali che \((a,m)=1\).
+	Si definisce \emph{l'ordine di \(a\) modulo \(m\)} come il più piccolo naturale \(n\) per cui \(a^n\equiv 1 \pmod{m}\), ovvero
+	\[
+		\ord_m(a) = \min \Set{n\in\N | a^n \equiv 1 \pmod{m}}.
+	\]
+\end{defn}
+
+\begin{oss}
+	Tale intero esiste in quanto, per Eulero, si ha
+	\[
+		a^{\j(m)} \equiv 1 \pmod{m},
+	\]
+	quindi, se chiamiamo \(S\) l'insieme di cui l'ordine di \(a\) è il minimo, avremo
+	\[
+		\j(m) \in S \implies S \neq \emptyset,
+	\]
+	ovvero \(S\) ammette minimo per il buon ordinamento.
+\end{oss}
+
+\begin{notz}
+	In alcuni libri si trova l'ordine di \(a\) modulo \(m\) con la dicitura "esponente a cui \(a\) appartiene modulo \(m\)".
+\end{notz}
+
+\begin{teor}{Proprietà dell'ordine}{3.14}
+	Siano \(a\in\Z\) e \(m\in\N\) tali che \((a,m) = 1\).
+	Se \(n = \ord_m(a)\), allora
+	\[
+		1,a,a^2,\ldots,a^{n-1},
+	\]
+	sono mutualmente non congruenti modulo \(m\).
+\end{teor}
+
+\begin{proof}
+	Presi \(j\neq k\), supponiamo per assurdo che \(a^j \equiv a^k \pmod{m}\).
+	Supponiamo inoltre, per semplicità, che \(1\le j < k \le n-1\), avremo quindi
+	\[
+		a^j (a^{k-j}-1) \equiv 0 \pmod{m},
+	\]
+	quindi, dal momento che \((a,m) = 1\) implica \((a^j,m) = 1\), avremo
+	\[
+		a^{k-j} \equiv 1 \pmod{m},
+	\]
+	che è assurdo in quanto \(k-j<n\).
+\end{proof}
+
+\begin{teor}{Congruenza modulo l'ordine}{3.15}
+	Siano \(a\in\Z\) e \(m\in\N\) tali che \((a,m)=1\) e sia \(n=\ord_m(a)\).
+	Supponiamo che \(l,k\in\N\) tali che \(a^l \equiv a^k \pmod{m}\), allora
+	\[
+		l \equiv k \pmod{n}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Se \(l=k\) la tesi è banalmente verificata.
+	Supponiamo quindi \(l>k\), applicando la divisione euclidea con \(n\) avremo
+	\begin{gather*}
+		l = n\,q_1 + r_1,\text{ con }0 \le r_1 < n,\\
+		k = n\,q_2 + r_2,\text{ con }0 \le r_2 < n,
+	\end{gather*}
+	da cui
+	\begin{gather*}
+		a^l \equiv \big( a^n \big)^{q_1}a^{r_1} \equiv a^{r_1} \pmod{m},\\
+		a^k \equiv \big( a^n \big)^{q_2}a^{r_2} \equiv a^{r_2} \pmod{m},
+	\end{gather*}
+	da cui, per ipotesi, \(a^{r_1} \equiv a^{r_2} \pmod{m}\).
+	Ma \(0\le r_1,r_2 <n\), quindi per il teorema precedente, avremo necessariamente \(r_1 = r_2\).
+	Quindi
+	\[
+		k \equiv l \pmod{n},
+	\]
+	in quanto \(k,l\) danno luogo allo stesso modulo se divisi per \(n\).
+\end{proof}
+
+\begin{oss}
+	In particolare, se \(k=0\), avremo \(a^l \equiv 1 \pmod{m}\) e quindi, per il teorema, \(l \equiv 0 \pmod{n}\), ovvero
+	\[
+		\ord_m(a) \mid l.
+	\]
+\end{oss}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 18/03/2016 - QUARTA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+%TEOREMA DI GAUSS%
+%%%%%%%%%%%%%%%%%%
+\section{Teorema di Gauss}
+
+\begin{defn}{Radice primitiva}{radicePrimitiva}\index{Radice primitiva}
+	Siano \(a\in\Z\) e \(m\in\N\) tali che \((a,m) = 1\).
+	Diremo che \(a\) è una \emph{radice primitiva modulo \(m\)} se
+	\[
+		\ord_m(a) = \j(m).
+	\]
+\end{defn}
+
+\begin{prop}{Numero di elementi di ordine \(n\) modulo \(p\)}{3.16}
+	Sia \(p\) primo e sia \(n\in\N\) tale che \(n\mid p-1\).
+	Allora in \(\big(\Z/p\,\Z\big)^*\) esistono \(\j(n)\) elementi di ordine \(n\).
+\end{prop}
+
+\begin{proof}
+	Supponiamo che \(n\mid p-1\), sia \(\y(n)\) il numero di elementi in \(\big(\Z/p\,\Z\big)^*\) che hanno ordine \(n\).
+	Vogliamo mostrare che \(\y(n)=\j(n)\).
+
+	Definiamo
+	\[
+		N_{x^n-1}(p) = \#\Set{x\in\big(\Z/p\,\Z\big)^* | x^n \equiv 1 \pmod{p}},
+	\]
+	che corrisponde al numeri di radici \(\pmod{p}\) di \(x^n-1\).
+	Per costruzione avremo che
+	\[
+		N_{x^n-1}(p) = \sum_{d\mid n}\y(d),
+	\]
+	infatti, se \(\a\) è una radice di \(x^n-1 \pmod{p}\), avremo che \(\ord_p(\a)\mid n\) per il teorema \ref{th:3.15}.
+	Quindi
+	\[
+		\Set{x\in\big(\Z/p\,\Z\big) | x^n\equiv 1 \pmod{p}} = \bigsqcup_{d\mid n}\Set{\a \in \big(\Z/p\,\Z\big) | \ord_p(\a)=d}.
+	\]
+	Supponendo che \(N_{x^n-1}(p) = n\), avremmo
+	\[
+		n = \sum_{d\mid n}\y(d),
+	\]
+	ovvero \(n\) sarebbe la trasformata di Dirichlet di \(\y(d)\), quindi, tramite la formula di inversione di M\"oebius, otterremmo
+	\[
+		\y(n) =\sum_{d\mid n}\m(d) \frac{n}{d} = \j(n).
+	\]
+	Resta quindi da mostrare \(N_{x^n-1}(p)=n\).
+	Per Lagrange sappiamo che \(N_{x^n-1}(p) \le n\), inoltre per ipotesi \(n\mid p-1\), da cui
+	\[
+		x^{p-1}-1 = (x^n-1)(x^{p-1-n}+x^{p-1-2n}+\ldots+x^n+1),\graffito{\(k\,n=p-1\)}
+	\]
+	dove, per Fermat, \(x^{p-1}-1\) ha \(p-1\) radici \(\pmod{p}\), mentre Lagrange ci dice che \(x^n-1\) ne ha al più \(n\) e che il secondo fattore ne ha al più \(p-1-n\), da cui
+	\[
+		\begin{split}
+			N_{x^n-1}(p) & = N_{x^{p-1}-1}(p)-N_{x^{p-1-n}+\ldots+x^n-1}(p)\\
+			& = p-1 - N_{x^{p-1-n}+\ldots+x^n-1}(p) \ge p-1-(p-1-n)\\
+			& = n.
+		\end{split}
+	\]
+	Ovvero
+	\[
+		N_{x^n-1}(p)= n.\qedhere
+	\]
+\end{proof}
+
+\begin{cor}
+	In \(\big(\Z/p\,\Z\big)^*\) ci sono precisamente \(\j(p-1)\) radici primitive.
+\end{cor}
+
+\begin{proof}
+	Per definizione una radice primitiva modulo \(p\) ha ordine \(\j(p)=p-1\).
+	Ovviamente \(p-1\mid p-1\), quindi per la proposizione esistono precisamente \(\j(p-1)\) radici primitive modulo \(p\).
+\end{proof}
+
+\begin{teor}{Sollevamento di una radice primitiva modulo \(p\)}{3.17}
+	Sia \(p\) primo e sia \(g\) una radice primitiva modulo \(p\).
+	Allora esiste \(t\in\Z\) tale che
+	\[
+		(g+t\,p)^{p-1} = 1+u\,p,
+	\]
+	dove \(p\nmid u\) e \(g+t\,p\) è una radice primitiva modulo \(p^\a\), comunque preso \(\a\in\N\).
+\end{teor}
+
+\begin{proof}
+	Troncando il binomio di Newton otteniamo
+	\[
+		(g+t\,p)^{p-1} = g^{p-1}+(p-1)g^{p-2}t\,p+r\,p^2,\text{ con }r\in\Z.
+	\]
+	Per Fermat \(g^{p-1}\equiv 1 \pmod{p}\), ovvero \(g^{p-1} = 1+q\,p\).
+	Quindi
+	\[
+		(g+t\,p)^{p-1} = 1+p\big(q+(p-1)t\,g^{p-2}+r\,p\big) = 1+p\,u,
+	\]
+	dove \(u=q+(p-1)g^{p-2}t+r\,p\).
+	Resta quindi da mostrare che esiste \(t\) tale che \(p\nmid u\).
+
+	Consideriamo
+	\[
+		\Set{q+(p-1)g^{p-2}t \pmod{p} | t\in\Z/p\,\Z}.
+	\]
+	Da \(g\) radice primitiva \(\pmod{p}\) e \(p-1\) coprimo con \(p\) abbiamo
+	\[
+		\big((p-1)g^{p-2},p\big) = 1-
+	\]
+	Ricordando che \(a(\Z/p\,\Z)+b=\Z/p\,\Z\) se \((a,p)=1\), avremo
+	\[
+		\Set{q+(p-1)g^{p-2}t \pmod{p} | t\in\Z/p\,\Z}=\Z/p\,\Z,
+	\]
+	ovvero esiste \(t\in\Z\) cercato.
+
+	Dobbiamo mostrare che \(g+t\,p\) è una radice primitiva \(\pmod{p^\a}\).
+	Per il binomio di Newton
+	\[
+		\begin{split}
+			(g+t\,p)^{p(p-1)} & = (1+u\,p)^p = 1+\binom{p}{1}u\,p+\binom{p}{2}(u\,p)^2+\ldots\\
+			& = 1+u\,p^2+r\,p^3 = 1+p^2(u+r\,p)\\
+			& = 1+u_2 p^2,\text{ con }p\nmid u_2.
+		\end{split}
+	\]
+	Analogamente
+	\[
+		\begin{split}
+			(g+t\,p)^{p^2(p-1)} & = (1+u_2\,p^2)^p = 1+p\,u_2 p^2+r\,p^4\\
+			& = 1+p^3(u_2+r,\p) = 1+u_3 p^3,\text{ con }p\nmid u_3.
+		\end{split}
+	\]
+	In generale\graffito{lo si può verificare per induzione}, avremo
+	\[
+		(g+t\,p)^{p^{r-1}(p-1)} = 1+u_r p^r,\text{ con }p\nmid u_r,
+	\]
+	ovvero \((g+t\,p)^{\j(p^r)}\equiv 1 \pmod{p^r}\), che implica, per Fermat,
+	\[
+		\ord_{p^r} (g+t\,p)\mid \j(p^r).
+	\]
+	%TODO
+\end{proof}
+
+\begin{ese}
+	Consideriamo \(m=125=5^3\), se prendiamo il suo IRR avremo
+	\[
+		\big(\Z/p\,\Z\big)^* = \Set{1,2,4,3} = \Set{1,2,2^2,2^3},
+	\]
+	quindi \(2\) è una radice primitiva modulo \(5\).
+	Proviamo a sollevarla ad una radice modulo \(125\) tramite il teorema.
+
+	Dobbiamo quindi trovare \(t\) tale che
+	\[
+		(2+5t)^4 = 1+5u,
+	\]
+	con \(5\nmid u\).
+	Se \(t=0\) otteniamo
+	\[
+		2^4 = 16 = 1+3\cdot 5,
+	\]
+	con \(5\nmid 3\), per cui \(2\) è una radice primitiva modulo \(5^\a\) per ogni \(\a\in\N\).
+\end{ese}
+
+\begin{oss}
+	Supponiamo che \(a\in\big(\Z/m\,\Z\big)^*\), allora è ben noto che
+	\[
+		\ord_m a^k = \frac{\ord_m a}{(k,\ord_m a)}.
+	\]
+	Per cui, se \((k,\ord_m a)=1\), si ha \(\ord_m a^k=\ord_m a\).
+	Quindi, se \(a\) è una radice primitiva \(\pmod{m}\), allora
+	\[
+		\Set{a^k | 1\le k \le \j(m),\big(k,\j(m)\big)=1},
+	\]
+	è l'insieme di tutte e sole le radici primitive.
+\end{oss}
+
+\begin{ese}
+	Si esibiscano tutte le radici primitive modulo \(25\).
+\end{ese}
+
+\begin{sol}
+	\(25=5^2\), quindi per il teorema di Gauss esisteranno radici primitive.
+	Dall'esempio precedente sappiamo che \(2\) è una radice primitiva di \(5^\a\).
+	In particolare, per l'osservazione precedente, avremo precisamente \(\j\big(\j(25)\big)=\j(20)=8\) radici primitive \(\pmod{25}\) del tipo \(2^k\) con \(k\) minore di \(\j(25)\) e coprime con \(\j(25)\), ovvero
+	\[
+		2,2^3,2^7,2^9,2^{11},2^{13},2^{17},2^{19}.
+	\]
+\end{sol}
+
+\begin{ese}
+	Si esibiscano tutte le radici modulo \(49\).
+\end{ese}
+
+\begin{sol}
+	\(49=7^2\), consideriamo quindi \(3\) che è una radice primitiva modulo \(7\) e proviamo a sollevarla.
+	Vogliamo \(t\) tale che
+	\[
+		(3+7t)^6 = 1+7u,
+	\]
+	con \(7\nmid u\).
+	Se \(t=0\) abbiamo
+	\[
+		3^6 = 729 = 1+728 = 1+7\cdot 104,
+	\]
+	dove \(7\nmid 104\).
+	Quindi \(3\) è una radice primitiva modulo \(49\).
+	In particolare avremo \(\j\big(\j(49)\big)=\j(42)=12\) radici primitive \(\pmod{49}\) del tipo \(3^k\), ovvero
+	\[
+		3,3^5,3^{11},3^{13},3^{17},3^{19},3^{23},3^{25},3^{29},3^{31},3^{37},3^{41}.
+	\]
+\end{sol}
+
+\begin{teor}{Sollevamento di una radice primitiva modulo \(p^r\)}{3.18}
+	Sia \(p\) primo e sia \(g\) una radice primitiva dispari modulo \(p^r\).
+	Allora \(g\) è una radice primitiva modulo \(2p^r\).
+\end{teor}
+
+\begin{proof}
+	Supponiamo che \(g^{\j(p^r)}\equiv 1 \pmod{p^r}\).
+	Per ipotesi \(g^{\j(p^r)}\) e \(1\) sono dispari, quindi \(p^r \mid g^{\j(p^r)}-1\) che è pari.
+	Ma \(p^r\) è necessariamente dispari, per cui
+	\[
+		2k\,p^r = g^{\j(p^r)}-1,
+	\]
+	ovvero
+	\[
+		2p^r \mid g^{\j(p^r)}-1 \iff g^{\j(p^r)} \equiv 1 \pmod{2p^r},
+	\]
+	per cui \(k=\ord_{2p^r} \mid \j(p^r)\).
+
+	Osserviamo che \(p\neq 2\), per cui \(\j(p^r)=\j(2p^r)\).
+	Ora, per ragionamenti analoghi ai precedenti si ha
+	\[
+		g^k \equiv 1 \pmod{2p^r} \implies g^k \equiv 1 \pmod{p^r},
+	\]
+	ovvero \(\j(p^r) = \ord_{p^r} g \mid k\).
+	Quindi
+	\[
+		\ord_{2p^r} g = \j(p^r) = \j(2p^r).\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 22/03/2016 - QUINTA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{teor}{di Gauss}{3.16}\index{Teorema!di Gauss}
+	Preso \(m\in\N\) esiste una radice primitiva modulo \(m\) se e soltanto se
+	\[
+		m=2,4,p^\a,2p^\a,\text{ con }p\ge 3.
+	\]
+\end{teor}
+
+\begin{proof}
+	\graffito{\(\Leftarrow)\)}Per \(m=2,4\) la tesi è banalmente verificata rispettivamente da \(1 \pmod{2}\) e \(3 \pmod{4}\).
+	Per i casi \(m=p^\a,2p^\a\) la dimostrazione segue dai risultati precedentemente visti in questo paragrafo.
+
+	\graffito{\(\Rightarrow)\)}Sia \(m\in\N\) e consideriamo la sua fattorizzazione unica \(m=p_1^{\a_1} \cdot\ldots\cdot p_s^{\a_s}\).
+	Sia
+	\[
+		l = \big[\j(p_1^{\a_1}), \ldots, \j(p_s^{\a_s})\big],
+	\]
+	il minimo comune multiplo delle funzioni di Eulero calcolate nei fattori primi.
+	Per la moltiplicatività di \(\j\) avremo che \(l \mid \j(m) = \j(p_1^{\a_1}), \ldots, \j(p_s^{\a_s})\).
+	Vogliamo determinare quando vale \(l = \j(m)\), ovvero
+	\[
+		\big[(p_1-1)p_1^{\a_1-1},\ldots,(p_s-1)p_s^{\a_s-1}\big] = (p_1-1)p_1^{\a_1-1} \cdot\ldots\cdot (p_s-1)p_s^{\a_s-1}\big.
+	\]
+	Sicuramente tale uguaglianza vale quando \(m=p^\a\) con \(p \ge 2\).
+	D'altronde sarà certamente falsa se \(m=p_1^{\a_1} \cdot\ldots\cdot p_s^{\a_s}\) con \(s \ge 2\) e \(p_i \ge 3\), infatti in questo caso \(p_i-1\) è pari e quindi \(l \mid \frac{\j(m)}{2}\).
+
+	Analogamente se \(s\ge 2, p_1 = 2\) ma \(\a_1 \ge 2\) si avrebbe \(2 \mid (p_1-1)p_1^{\a_1-1}\) e nuovamente \(l \mid \frac{\j(m)}{2}\).
+
+	In conclusione gli unici casi in cui vale l'uguaglianza sono per \(m=p_1^{\a_1}\) con \(p_1 \ge 2\) oppure \(m=2p_2^{\a_2}\) con \(p_2 \ge 3\).
+
+	In tutti gli altri casi, preso \(a\in\Z\) con \((a,m)=1\) si avrebbe
+	\[
+		a^l \equiv \left( a^{\j(p_j^{\a_j})} \right)^{\frac{l}{\j(p_j^{\a_j})}} \equiv 1 \pmod{p_j^{\a_j}},\,\fa j,
+	\]
+	ovvero \(a^l \equiv 1 \pmod{m}\).
+	Quindi non potrà mai accadere che \(\ord_m a = \j(m)\), poichè abbiamo dimostrato che
+	\[
+		\ord_m a \mid l < \j(m).
+	\]
+	Resta da dimostrare che non esistono radici primitive nel caso \(m=2^\a\) con \(\a \ge 3\).
+
+	Mostriamo per induzione su \(k\ge 3\) che, preso \(a\in\Z\) dispari con \((a,2^k)=1\) si ha
+	\[
+		a^{\frac{1}{2}\j(2^k)} \equiv 1 \pmod{2^k},
+	\]
+	ovvero che
+	\[
+		\ord_{2^k} a \mid \frac{1}{2} \j(2^k) < \j(2^k).
+	\]
+	Per \(k=3\) sappiamo già che \(a^2 \equiv 1 \pmod{8}\), supponiamo quindi che sia vero per ogni \(u<k\), avremo quindi
+	\[
+		a^{\frac{1}{2}\j(2^u)} \equiv 1 \pmod{2^u} \iff a^{2^{u-2}} = 1+h\,2^u.
+	\]
+	Mostriamolo quindi per \(k\):
+	\[
+		\begin{split}
+			a^{\frac{1}{2} \j(2^k)} & = a^{2^{k-2}} = \big(a^{2^{k-3}}\big)^2 = \big(a^{\frac{1}{2}\j(2^{k-1})}\big)^2 \graffito{applicando l'ipotesi induttiva}\\
+			& = \big( 1+h\,2^{k-1} \big)^2 = 1+h\,2^k+h^2 2^{2k-2}\\
+			& = 1+h\,2^k \big(1+h\,2^{k-2}\big)\graffito{\(k \ge 3 \implies 2k-2>k\)}\\
+			& = 1+h'2^k,
+		\end{split}
+	\]
+	ovvero
+	\[
+		a^{\frac{1}{2}\j(2^k)} \equiv 1 \pmod{2^k}.\qedhere
+	\]
+\end{proof}
+
+\begin{cor}
+	\(\big(\Z/m\,\Z\big)^*\) è ciclico se e soltanto se \(m=2,4,p^\a,2p^\a\), con \(p\ge3\).
+\end{cor}

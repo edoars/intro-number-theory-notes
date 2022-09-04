@@ -1,0 +1,1052 @@
+%!TEX root = ../main.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 23/02/2016 - PRIMA SETTIMANA (1)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Divisione e fattorizzazione}
+%%%%%%%%%%%%%%
+%INTRODUZIONE%
+%%%%%%%%%%%%%%
+\section{Introduzione}
+
+\begin{notz}
+	In questo corso l'insieme dei numeri naturali \(\N\) è privo dello zero.
+\end{notz}
+
+\begin{defn}{Assioma del buon ordinamento}{bo}\index{Assioma!del buon ordinamento}
+	Sia \(S\subset\N\) non vuoto, allora:
+	\[
+		\ex\min S.
+	\]
+\end{defn}
+
+\begin{oss}
+	Il buon ordinamento è equivalente al seguente assioma: Se \(S\subset\Z\) è non vuoto e limitato inferiormente, allora
+	\[
+		\ex\min S.
+	\]
+\end{oss}
+
+\begin{teor}{Divisione euclidea}{1.1}\index{Divisione euclidea}
+	Siano \(a\in\N,b\in\Z\), allora:
+	\[
+		\exists!\,q,r\in\Z:b=a\,q+r\text{ e }0\le r<a.
+	\]
+\end{teor}
+
+\begin{proof}
+	Definiamo il seguente insieme
+	\[
+		S=\Set{b-s\,a | s\in\Z}\subseteq\Z.
+	\]
+	Sia ora
+	\[
+		S^+=S\cap\big(\N\cup\{0\}\big),
+	\]
+	ovvero
+	\[
+		S^+=\Set{b-s\,a\ge0 | s\in\Z},
+	\]
+	per cui \(S^+\subseteq\N\cup\{0\}\).
+	Sicuramente \(S^+\neq\emptyset\), infatti se \(b\ge0\) avremo
+	\[
+		b\in S^+;
+	\]
+	mentre se \(b<0\) segue
+	\[
+		b-b\,a=b(1-a)\ge 0\graffito{\(b\le 0\) e \((1-a)\le 0\)},
+	\]
+	per cui
+	\[
+		b-b\,a\in S^+.
+	\]
+	Quindi, per il buon ordinamento, \(\ex r=\min S^+\) e supponiamo che
+	\[
+		r=b-q\,a
+	\]
+	con \(q\in\Z\). Quindi \(b=a\,q+r\) con \(r\ge 0\), in quanto \(r\in S^+\).
+	Se per assurdo \(r\ge a\) si avrebbe
+	\[
+		r-a\ge 0\iff b-(q+1)a\ge 0,
+	\]
+	ovvero
+	\[
+		\begin{split}
+			b-(q+1)a\in S^+ & \implies b-(q+1)a\ge r\\
+			& \iff r-a\ge r\\
+			& \iff a\le 0,
+		\end{split}
+	\]
+	ma ciò è assurdo in quanto \(a\in\N\), per cui
+	\[
+		0\le r<a.
+	\]
+	Resta da mostrare l'uncità, supponiamo quindi che esistano \(q',r'\in\Z\) tali che
+	\[
+		q'a+r'=b=q\,a+r,
+	\]
+	ne segue
+	\[
+		\abs{r'-r}=a\,\abs{q'-q}.
+	\]
+	Se per assurdo \(q'\neq q\) seguirebbe
+	\[
+		\abs{r'-r}\ge a,
+	\]
+	ma per ipotesi \(r,r'<a\), da cui
+	\[
+		\abs{r'-r}<a.
+	\]
+	Ciò è assurdo, per cui \(q'=q\) e \(r'=r\).
+\end{proof}
+
+\begin{defn}{Massimo comun divisore}{MCD}\index{Massimo comun divisore}
+	Siano \(a,b\in\N\) e sia \(d\in\N\) tale che:
+	\begin{itemize}
+		\item \(d\mid a,d\mid b\);
+		\item \(\ex k\in\N:k\mid a,k\mid b\implies k\mid d\).
+	\end{itemize}
+	\(d\) si definisce \emph{massimo comun divisore} di \(a\) e di \(b\).
+\end{defn}
+
+\begin{notz}
+	Il massimo comun divisore fra \(a\) e \(b\) si indica con \((a,b)\).
+\end{notz}
+
+\begin{oss}
+	Per definizione si pongono
+	\begin{itemize}
+		\item \((a,0)=a\);
+		\item se \(a,b\in\Z,(a,b)=(\abs{a},\abs{b})\).
+	\end{itemize}
+\end{oss}
+
+\begin{teor}{Unicità del massimo comun divisore}{1.2}
+	Siano \(a,b\in\N\), allora:
+	\[
+		\exists!\,d=(a,b),
+	\]
+	e vale l'identità di Bezout, ovvero
+	\[
+		\ex x,y\in\Z:d=a\,x+b\,y.
+	\]
+\end{teor}
+
+\begin{proof}
+	Definiamo il seguente insieme
+	\[
+		S=\Set{a\,x+b\,y | x,y\in\Z}\cap\N.
+	\]
+	Sicuramente \(S\neq\emptyset\) in quanto \(a,b\in S\).
+	Sia quindi \(d=\min S\), il quale esiste per il buon ordinamento, per cui
+	\[
+		\ex x,y\in\Z:d=a\,x+b\,y.
+	\]
+	Mostriamo che \(d=(a,b)\) tramite la divisione euclidea:
+	\[
+		\ex q,r\in\Z:a=d\,q+r,
+	\]
+	con \(0\le r<d\). Per come abbiamo definito \(d\) avremo
+	\[
+		r=a-d\,q=a(1-q\,x)+b(-q\,y).
+	\]
+	Se per assurdo \(r>0\) seguirebbe \(r\in S\) che è assurdo per la minimalità di \(d\) in \(S\), da cui
+	\[
+		r=0\implies a=d\,q\iff d\mid b.
+	\]
+	Analogamente si mostra che \(d\mid b\).
+	Mostriamo che se \(\ex k\in\N:k\mid a\) e \(k\mid b\) allora \(k\mid d\):
+	\begin{gather*}
+		k\mid a\iff\ex\a\in\Z:k\,\a=a,\\
+		k\mid b\iff\ex\b\in\Z:k\,\b=b,
+	\end{gather*}
+	da cui
+	\[
+		d=a\,x+b\,y=k(\a\,x+\b\,y),
+	\]
+	ovvero
+	\[
+		k\mid d.
+	\]
+	Infine l'unicità segue banalmente dall'ultima proprietà, infatti se esistesse \(d'\in\N\) che soddisfa le ipotesi del teorema si avrebbe
+	\[
+		d\mid d'\text{ e }d'\mid d,
+	\]
+	ovvero
+	\[
+		d'=d.\qedhere
+	\]
+\end{proof}
+
+\begin{prop}{Algoritmo di Euclide}{1.3}\index{Algoritmo!di Euclide}
+	Dati \(a,b\in\N\), siano \(q_1,\dots,q_{n+1}\) e \(r_1,\dots,r_n\in\Z\) tali che:
+	\begin{itemize}
+		\item \(r_1>r_2>\dots>r_n\ge 0\);
+		\item \(b=a\,q_1+r_1,\\
+		      a=r_1 q_2+r_2,\\
+		      r_1=r_2 q_3+r_3,\\
+		      \dots\\
+		      r_{n-2}=r_{n-1}q_n+r_n,\\
+		      r_{n-1}=r_n q_{n+1}+0\).
+	\end{itemize}
+	Allora
+	\[
+		r_n=(a,b).
+	\]
+\end{prop}
+
+\begin{proof}
+	Mostriamo che se \(a=b\,q+r\) con \(0\le r<b\), allora
+	\[
+		(a,b)=(b,r).
+	\]
+	Per definizione
+	\[
+		(a,b)\mid a,b,
+	\]
+	per cui \((a,b)\) dividerà ogni combinazione lineare di \(a,b\), in particolare
+	\[
+		(a,b)\mid a-b\,q=r,
+	\]
+	per cui \((a,b)\mid b,r\), ovvero
+	\[
+		(a,b)\mid (b,r).
+	\]
+	Viceversa
+	\[
+		(b,r)\mid b,r\implies (b,r)\mid b\,q+r=a,
+	\]
+	ovvero
+	\[
+		(b,r)\mid (a,b).
+	\]
+	Applicando tale osservazione al nostro caso otteniamo
+	\[
+		\begin{split}
+			(a,b) & =(b,r_1)\\
+			& =(r_1,r_2)\\
+			& =\dots\\
+			& =(r_{n-1},r_n),
+		\end{split}
+	\]
+	ma \(r_{n-1}=r_n\,q_{n+1}\) per cui
+	\[
+		(r_{n-1},r_n)=r_n.\qedhere
+	\]
+\end{proof}
+
+\begin{oss}
+	L'algoritmo di Euclide ci fornisce anche un metodo pratico per trovare l'identità di Bezout, infatti \(\fa j=0,\dots,n\) avremo
+	\[
+		r_j=x_j a+y_j b,\text{ con }x_j,y_j\in\Z.
+	\]
+	Infatti, sfruttando le equazioni dell'algoritmo di Euclide, avremo
+	\begin{gather*}
+		r_0 = a\implies (x_0,y_0)=(1,0);\\
+		r_1 = -q_1 a+b\implies (x_1,y_1)=(-q_1,1),
+	\end{gather*}
+	più in generale
+	\[
+		\begin{split}
+			r_j & =r_{j-2}-q_j r_{j-1}\\
+			& =(x_{j-2}a+y_{j-2}b)-q_j(x_{j-1}a+y_{j-1}b)\\
+			& =(x_{j-2}-q_j x_{j-1})a+(y_{j-2}-q_j y_{j-1})b.
+		\end{split}
+	\]
+	Quindi
+	\[
+		\left\{
+		\begin{aligned}
+			x_0 & =1 \\
+			y_0 & =0
+		\end{aligned}
+		\right. ,\left\{
+		\begin{aligned}
+			x_1 & =-q_1 \\
+			y_1 & =1
+		\end{aligned}
+		\right. \text{ e }\left\{
+		\begin{aligned}
+			x_j & =x_{j-2}-q_j x_{j-1} \\
+			y_j & =y_{j-2}-q_j y_{j-1}
+		\end{aligned}
+		\right. .
+	\]
+\end{oss}
+
+\begin{ese}
+	Calcoliamo \((5111,589)\) tramite l'algoritmo di Euclide:
+	\begin{gather*}
+		5111=8\cdot 589+399,\\
+		589=1\cdot 399+190,\\
+		399=2\cdot 190+19,\\
+		190=10\cdot 19+0.
+	\end{gather*}
+	Per cui
+	\[
+		(5111,589)=19.
+	\]
+\end{ese}
+
+\begin{prop}{Divisore del prodotto di coprimi}{1.4}
+	Siano \(a,b\in\N\) tali che \((a,b)=1\).
+	Sia \(w\in\N\) tale che \(w\mid a\,b\), allora:
+	esistono unici \(u,v\in\N\) tali che
+	\begin{itemize}
+		\item \(w=u\,v\);
+		\item \(u\mid a,v\mid b\).
+	\end{itemize}
+\end{prop}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 25/02/2016 - PRIMA SETTIMANA (2)
+%
+%chg:oss. algoritmo di euclide
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+	Poniamo \(u=(a,w)\) e \(v=(b,w)\), dobbiamo verificare che \(u\mid a,v\mid b,u\,v=w\) e che \(u,v\) siano unici:
+	\begin{itemize}
+		\item Per definizione \(u\) è il massimo comun divisore di \(a\) e \(w\), in particolare risulterà essere divisore di \(a\).
+		\item Analogamente \(v\) è un divisore di \(b\).
+		\item Per il teorema \ref{th:1.2} sappiamo che
+		      \begin{gather*}
+			      u=(a,w)\implies u=x_1 a+y_1 w;\\
+			      v=(b,w)\implies v=x_2 b+y_2 w,
+		      \end{gather*}
+		      quindi
+		      \[
+			      \begin{split}
+				      u\,v & =a\,b\,x_1 x_2+w(y_1 x_2 b+x_1 y_1 a+y_1 y_2 w)\graffito{\(w\mid a\,b\)}\\
+				      & =w\,K,\text{ con }K\in\Z,
+			      \end{split}
+		      \]
+		      ovvero \(w\mid u\,v\).
+		      D'altronde \(1=x\,a+y\,b\), ovvero
+		      \[
+			      \begin{split}
+				      w & =x\,w\,a+y\,w\,b\\
+				      & =(w,a)(w,b)S,\text{ con }S\in\Z,
+			      \end{split}
+		      \]
+		      in quanto \(x\,w\,a\) è multiplo di \((w,b)\) e \(y\,w\,b\) è multiplo di \((w,a)\), per cui \(u\,v\mid w\), ovvero
+		      \[
+			      u\,v=w.
+		      \]
+		\item Supponiamo che \(u',v'\) siano altri due interi che soddisfano la tesi, in particolare avremo \(u'v'=w\), inoltre \(u'\mid a\) e \(u'\mid w\), da cui
+		      \[
+			      u'\mid (a,w)=u.
+		      \]
+		      Se per assurdo \(u'\neq(a,w)\) si avrebbe \(u'<(a,w)\) e, per ragionamenti analoghi ai precedenti, \(v'\leq (b,w)\), da cui
+		      \[
+			      \begin{split}
+				      w & =u'v'\\
+				      & <(a,w)(b,w)\\
+				      & =w,
+			      \end{split}
+		      \]
+		      ma ciò è assurdo, quindi \(u'=(a,w)=u\). Analogamente si mostra che \(v'=v\).\qedhere
+	\end{itemize}
+\end{proof}
+
+\begin{oss}
+	Se poniamo \(\mathcal{D}(n)=\Set{d\in\N : d\mid n}\), allora, se prendiamo \(a,b\in\N\) tali che \((a,b)=1\), avremo
+	\[
+		\mathcal{D}(a)\times \mathcal{D}(b)\longleftrightarrow\mathcal{D}(a\,b),
+	\]
+	dove la corrispondenza biunivoca è determinata da
+	\[
+		(u,v)\mapsto u\,v,
+	\]
+	che è biiettiva per la proposizione.
+\end{oss}
+%%%%%%%
+%PRIMI%
+%%%%%%%
+\section{Primi}
+
+\begin{defn}{Insieme dei divisori}{insiemeDivisori}\index{Insieme!dei divisori}
+	Si definisce \emph{l'insieme dei divisori} di \(n\in\N\) come l'insieme dei naturali che dividono \(n\), ovvero
+	\[
+		\mathcal{D}(n)=\Set{d\in\N : d\mid n}.
+	\]
+\end{defn}
+
+\begin{defn}{Primo}{primo}\index{Primo}
+	Un naturale \(n\in\N\) si definisce \emph{primo} se
+	\[
+		\big\lvert\mathcal{D}(n)\big\rvert=2.
+	\]
+\end{defn}
+
+\begin{oss}
+	\(1\) non è primo in quanto \(\big\lvert\mathcal{D}(1)\big\rvert=1\).
+\end{oss}
+
+\begin{teor}{Divisore primo}{1.5}
+	Siano \(a,b\in\N\) e sia \(p\) primo, allora:
+	\[
+		p\mid a\,b\implies p\mid a\text{ oppure }p\mid b.
+	\]
+\end{teor}
+
+\begin{proof}
+	Supponiamo che \(p\nmid a\), per la primalità di \(p\) avremo che \(p\neq a\), quindi
+	\[
+		(a,p)=1,
+	\]
+	per cui esistono \(x,y\in\Z\) tali che \(1=x\,a+y\,p\), da cui
+	\[
+		\begin{split}
+			b & =a\,b\,x+y\,b\,p\\
+			& =p\,N,\text{ con }N\in\Z,
+		\end{split}
+	\]
+	ovvero \(p\mid b\).
+\end{proof}
+
+\begin{prop}{Divisore primo per una succcessione}{1.6}
+	Siano \(a_1,\dots,a_n\in\N\) e sia \(p\) primo, allora:
+	\[
+		p\mid a_1\cdot\ldots\cdot a_k\implies \ex j=1,\dots,n:p\mid a_j.
+	\]
+\end{prop}
+
+\begin{proof}
+	Basta applicare iterativamente il teorema \ref{th:1.5}, infatti
+	\[
+		p\mid a_1\cdot\ldots\cdot a_k\implies p\mid a_1\text{ oppure }p\mid a_2\cdot\ldots\cdot a_k,
+	\]
+	se \(p\nmid a_1\) avremo di conseguenza
+	\[
+		p\mid a_2\text{ oppure }p\mid a_3\cdot\ldots\cdot a_k.
+	\]
+	Iterando il procedimento di arriva alla tesi.
+\end{proof}
+
+\begin{teor}{Teorema fondamentale dell'aritmetica}{1.7}\index{Teorema!fondamentale dell'aritmetica}
+	Sia \(n\in\N\) tale che \(n>1\), allora esistono unici, a meno dell'ordine, \(p_1,\dots,p_r\) primi tali che
+	\[
+		n=p_1\cdot\ldots\cdot p_r.
+	\]
+\end{teor}
+
+\begin{proof}
+	Dimostriamolo per ampia induzione su \(n\):
+	\begin{itemize}
+		\item Se \(n=2\) soddisfa banalmente la tesi in quanto \(2\) è primo e si scrive unicamente come se stesso, in quanto non ha altri divisori primi.
+		\item Supponiamo che, comunque preso \(2<m<n\), esso sia prodotto di numeri primi.
+		      Se \(n\) è primo non ho nulla da dimostrare, supponiamo quindi che non lo sia.
+
+		      \(n\) non primo ammette un divisore non banale, ovvero esiste \(1<n_1<n\) tale che \(n_1\mid n\).
+		      Poniamo quindi \(n_2=\frac{n}{n_1}\), di conseguenza \(1<n_2<n\) e
+		      \[
+			      n=n_1 n_2.
+		      \]
+		      Per induzione avremo
+		      \begin{gather*}
+			      n_1=p_1\cdot\ldots\cdot p_r;\\
+			      n_2=p_1'\cdot\ldots\cdot p_r',
+		      \end{gather*}
+		      da cui
+		      \[
+			      n=p_1\cdot\ldots\cdot p_r p_1'\cdot\ldots\cdot p_r'.
+		      \]
+	\end{itemize}
+	Per dimostrare l'unicità, supponiamo che
+	\[
+		q_1\cdot\ldots\cdot q_s=n=p_1\cdot\ldots\cdot p_r,
+	\]
+	dove
+	\begin{gather*}
+		q_1\le q_2\le\dots\le q_s;\\
+		p_1\le p_2\le\dots\le p_r.
+	\end{gather*}
+	Voglio mostrare che \(r=s\) e che \(q_j=p_j\).
+	Ora, per la proposizione \ref{pr:1.6}, \(q_1\mid p_1\cdot\ldots\cdot p_r\) implica
+	\[
+		\ex j:q_1\mid p_j\implies q_1=p_j,
+	\]
+	in quanto entrambi primi.
+	Analogamente si mostra che
+	\[
+		\ex i:p_1\mid q_i\implies p_1=q_i.
+	\]
+	Per cui
+	\[
+		p_1\le p_j=q_1\le q_i=p_1,
+	\]
+	ovvero \(p_1=q_1\), da cui
+	\[
+		q_2\cdot\ldots\cdot q_s=p_2\cdot\ldots\cdot p_r.
+	\]
+	Iterando ottengo \(s=r\) e \(p_i=q_j\).
+\end{proof}
+
+\begin{teor}{Equivalente del teorema fondamentale dell'aritmetica}{1.8}
+	Sia \(n\in\N\) tale che \(n>1\), allora esistono unici \(p_1,\dots,p_r\) primi distinti e \(m_1,\dots,m_r\in\N\) tali che
+	\[
+		n=p_1^{m_1}\cdot\ldots\cdot p_r^{m_r},
+	\]
+	con \(p_1<\dots<p_r\).
+\end{teor}
+
+\begin{proof}
+	Segue immediatamente dal teorema fondamentale dell'aritmetica.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%PROPRIETA' ELEMENTARI DEI PRIMI%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proprietà elementari dei primi}
+
+\begin{teor}{Cardinalità dell'insieme dei numeri primi}{1.9}
+	Esistono infiniti numeri primi.
+\end{teor}
+
+\begin{proof}
+	Sia \(p_1=2\) e supponiamo per assurdo che \(p_1,\dots,p_s\) siano tutti i numeri primi.
+	Sia ora
+	\[
+		N=p_1\cdot\ldots\cdot p_s+1\in\N.
+	\]
+	Osserviamo che
+	\[
+		(N,p_j)=1,\,\fa j=1,\dots,s,
+	\]
+	in quanto
+	\[
+		1=p_j\frac{1-N}{p_j}+N.
+	\]
+	Ora, per il teorema fondamentale dell'aritmetica, avremo
+	\[
+		N=q_1^{m_1}\cdot\ldots\cdot q_r^{m_r},
+	\]
+	dove \(q_1,\dots,q_r\) sono primi, ma, per quanto osservato a proposito di \((N,p_j)\), avremo che
+	\[
+		\{q_1,\dots,q_r\}\cap\{p_1,\dots,p_s\}=\emptyset,
+	\]
+	ma ciò è assurdo, in quanto avevamo supposto che non vi fossero altri numeri primi.
+\end{proof}
+
+\begin{oss}
+	Esistono numerose dimostrazioni alternative di questo teorema, un'altra strategia è la seguente: consideriamo la seguente sequnza di interi
+	\[
+		(a_n)_{n\in\N}\subseteq \N^{>1},
+	\]
+	tale che
+	\[
+		(a_n,a_m)=1,\,\fa n>m.
+	\]
+	Allora, se \((l_n)_{n\in\N}\) è una sequenza di numeri primi tali che
+	\[
+		l_k\mid a_k,
+	\]
+	si ha che \(\{l_k\}\) sono tutti distinti e sono infiniti.
+\end{oss}
+
+\begin{ese}
+	Costruiamo la sequenza \(a_n\) come segue:
+	\begin{align*}
+		a_1 & =2,                           \\
+		a_2 & =2+1=3,                       \\
+		a_3 & =2\cdot 3+1=7,                \\
+		a_4 & =2\cdot3\cdot7+1=43,          \\
+		a_5 & =2\cdot3\cdot7\cdot43+1=1807, \\
+		\dots                               \\
+		a_n & =(a_{n-1}-1)a_{n-1}+1,
+	\end{align*}
+	allora \(a_n\) soddisfa il criterio.
+\end{ese}
+
+\begin{ese}
+	Mostriamo che la sequenza \((2^{2^k}+1)_{k\in\N}\) soddisfa il criterio.
+	Per farlo, verifichiamo che
+	\[
+		2^{2^n}-1=3\prod_{j=1}^{n-1}2^{2^j}+1,
+	\]
+	è sufficiente sviluppare \(2^{2^n}-1\) come differenza di quadrati:
+	\[
+		\begin{split}
+			2^{2^n}-1 & =\big(2^{2^{n-1}}+1\big)\big(2^{2^{n-1}}-1\big)\\
+			& =\big(2^{2^{n-1}}+1\big)\big(2^{2^{n-2}}+1\big)\big(2^{2^{n-2}}-1\big)\\
+			& =\left(\prod_{j=1}^{n-1}2^{2^j}+1\right)\big(2^2-1\big)\\
+			& =3\prod_{j=1}^{n-1}2^{2^j}+1.
+		\end{split}
+	\]
+	Affinchè il criterio sia valido, dobbiamo mostrare che tutti gli elementi della sequnza sono coprimi.
+	Se per assurdo
+	\[
+		p\mid (2^{2^k}+1,2^{2^j}+1),\text{ con }k<t,
+	\]
+	allora, in particolare, \(p\mid(2^{2^k}+1)\) e, per linearità, dividerebbe anche ogni suo multiplo, da cui
+	\[
+		p\mid 3\prod_{j=1}^{t-1}2^{2^j}+1.
+	\]
+	Ma, per quanto mostrato
+	\[
+		3\prod_{j=1}^{t-1}2^{2^j}+1=2^{2^t}-1,
+	\]
+	ovvero
+	\[
+		p\mid (2^{2^t}-1).
+	\]
+	Quindi, ancora per linearità
+	\[
+		p\mid (2^{2^t}+1)-(2^{2^t}-1)=2,
+	\]
+	da cui, per la primalità di \(p\), segue \(p=2\).
+	Ma ciò è assurdo in quanto \(p\mid 2^{2^k}+1\) che è dispari.
+	Quindi la successione soddisfa il criterio.
+\end{ese}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ALCUNI RISULTATI E PROBLEMI SUI PRIMI%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Alcuni risultati e problemi sui primi}
+
+\begin{defn}{Funzione enumerativa dei primi}{funzionePi}\index{Funzione!enumerativa dei primi}
+	Si definisce \emph{funzione enumerativa dei primi} l'applicazione che associa ad ogni numero naturale \(n\) il numero dei primi non superiori ad \(n\), ovvero
+	\[
+		\p(n)=\big\lvert\{p\le n\}\big\rvert.
+	\]
+\end{defn}
+
+\begin{ese}
+	Alcuni valori della funzione \(\p\):
+	\begin{itemize}
+		\item \(\p(1)=0\);
+		\item \(\p(2)=1\);
+		\item \(\p(100)=25\).
+	\end{itemize}
+\end{ese}
+
+\begin{teor}{Teorema dei numeri primi}{teorPrimi}\index{Teorema!dei numeri primi}
+	Sia \(\p\) la funzione enumerativa dei numeri primi, allora:
+	\[
+		\p(x)\sim\frac{x}{\ln x}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Si rimanda ad un corso superiore di teoria dei numeri.
+\end{proof}
+
+\begin{oss}
+	La dimostrazione sfrutta l'anialisi complessa attraverso lo studio della funzione zeta di Riemann
+	\[
+		\z(s)=\sum_{n=1}^{\infty}\frac{1}{n^s},
+	\]
+	la quale è una funzione differenziabile (olomorfa) nella regione
+	\[
+		\Set{s\in\C | \Re(s)>1}\subseteq\C.
+	\]
+\end{oss}
+
+\begin{prop}{Stima della funzione enumerativa dei numeri primi}{stimaPrimi}
+	Sia \(\p\) la funzione enumerativa dei numeri primi, allora:
+	\[
+		\p(x)\ge\log_2(\log_2 x)-1,
+	\]
+	per \(x\ge 2\).
+\end{prop}
+
+\begin{proof}
+	Sia \(k=\max\{j:2^{2^j}+1\le x\}\), mostriamo che
+	\[
+		\p(x)\ge k.
+	\]
+	Infatti
+	\[
+		[1,x]\cap\{2^{2^j}+1:j\in\N\}=\{5,17,\dots,2^{2^k}+1\},
+	\]
+	ovvero
+	\[
+		\#\big([1,x]\cap\{2^{2^j}+1:j\in\N\}\big)=k,
+	\]
+	da cui
+	\[
+		\p(x)=\#\{p\text{ primo }:p\le x\}\ge\#\big([1,x]\cap\{2^{2^j}+1:j\in\N\}\big)=k.
+	\]
+	Infine, per ipotesi, \(2^{2^{k+1}}+1>x\) da cui \(2^{2^{k+1}}\ge x\), ovvero
+	\[
+		k+1\ge \log_2(\log_2 x),
+	\]
+	quindi
+	\[
+		\p(x)\ge k\ge \log_2(\log_2 x)-1.\qedhere
+	\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%LEZIONE 26/02/2016 - PRIMA SETTIMANA (3)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{teor}{di Gauss}{teorGauss}\index{Teorema!di Gauss}
+	Sia \(\p\) la funzione enumerativa dei numeri primi, allora:
+	\[
+		\p(x)\sim\li(x):=\int_1^x\frac{\dd t}{\ln t}.
+	\]
+\end{teor}
+
+\begin{proof}
+	Applichiamo il teorema dei numeri primi (\ref{th:1.9}), mostrando che
+	\[
+		\li(x)\sim\frac{x}{\ln x}.
+	\]
+	Sviluppiamo \(\li(x)\) per parti, escludendo l'intervallo \((1,2)\) per evitare che l'integrale sia improprio,
+	\[
+		\begin{split}
+			\int_2^x \frac{\dd t}{\ln t} & =\left.\frac{t}{\ln t}\right\rvert_2^x+\int_2^x \frac{\dd t}{\ln^2 t}\\
+			& =\frac{x}{\ln x}-\frac{2}{\ln 2}+\int_2^x\frac{\dd t}{\ln^2 t}.
+		\end{split}
+	\]
+	Osserviamo che
+	\[
+		\begin{split}
+			\int_2^x\frac{\dd t}{\ln^2 t} & =\int_2^{\sqrt{x}}\frac{\dd t}{\ln^2 t}+\int_{\sqrt{x}}^x\frac{\dd t}{\ln^2 t}\\
+			& \le \sqrt{x}+\frac{x}{\ln^2\sqrt{x}}\\
+			& \le 6\frac{x}{\ln^2 x}.\graffito{per \(x\) grande}
+		\end{split}
+	\]
+	per cui
+	\[
+		\li(x)=\frac{x}{\ln x}+E(x),\text{ con }\big\lvert E(x)\big\rvert\le 6\frac{x}{\ln^2 x}.
+	\]
+	Ora
+	\[
+		\lim_{x\to 0}\frac{\big\lvert E(x)\big\rvert}{\frac{x}{\ln x}}=0,
+	\]
+	da cui
+	\[
+		\li(x)\sim\frac{x}{\ln x}.\qedhere
+	\]
+\end{proof}
+
+\begin{teor}{di Chebi\v{c}ev}{teorChebicevEnunciato}
+	Sia \(p\) la funzione enumerativa dei numeri primi, allora:
+	\[
+		\ex c_1,c_2\in\R^+:c_1\frac{x}{\ln x}\le\p(x)\le c_2\frac{x}{\ln x},
+	\]
+	con \(0<c_1<1< c_2\) e \(x\ge 2\).
+\end{teor}
+
+\begin{proof}
+	A pagina \pageref{th:teorChebicev}.
+\end{proof}
+
+\begin{oss}
+	Chebi\v{c}ev dimostrò questo teorema in modo elementare, senza l'utilizzo dell'analisi complessa.
+\end{oss}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%LA FUNZIONE PARTE INTERA%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{La funzione parte intera}
+
+\begin{defn}{Parte intera}{parteIntera}\index{Parte intera}
+	Si definisce \emph{parte intera} di \(\a\in\R\) come il più grande intero minore di \(\a\), ovvero
+	\[
+		[\a]=\max\{m\in\Z:m\le\a\}.
+	\]
+\end{defn}
+
+\begin{oss}
+	Analogamente si puà definire \([\a]\) come l'unico intero \(m\in\Z\) tale che
+	\[
+		m\le\a<m+1.
+	\]
+\end{oss}
+
+\begin{ese}
+	Consideriamo \(\p\), avremo
+	\begin{gather*}
+		[\p]=3,\\
+		[-\p]=-4.
+	\end{gather*}
+\end{ese}
+
+\begin{pr}
+	\[
+		\a-1<[\a]\le\a.
+	\]
+\end{pr}
+
+\begin{proof}
+	Dalla definizione sappiamo che
+	\[
+		[\a]\le\a<[\a]+1,
+	\]
+	da cui
+	\[
+		0\le\a-[\a]<1\iff -\a\le-[\a]<1-\a,
+	\]
+	ovvero
+	\[
+		\a-1<[\a]\le\a.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	Se \(\a\ge 0\), allora
+	\[
+		[\a]=\sum_{\substack{n\in\N\\n\le\a}}1.
+	\]
+\end{pr}
+
+\begin{proof}
+	Osserviamo che
+	\[
+		\sum_{\substack{n\in\N\\n\le\a}}1=\#\big(\N\cap[0,\a]\big),
+	\]
+	ma per definizione \([\a]=\max\{m\in\Z:m\le\a\}\), da cui
+	\[
+		[\a]=\#\big(\N\cap[0,\a]\big).\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	Se \(n\in\Z\), allora
+	\[
+		[\a+n]=[\a]+n.
+	\]
+\end{pr}
+
+\begin{proof}
+	Per definizione \([\a]\) è l'unico intero tale che
+	\[
+		[\a]\le\a<[\a]+1,
+	\]
+	da cui
+	\[
+		[\a]+n\le\a+n<[\a]+n+1,
+	\]
+	ovvero
+	\[
+		[\a+n]=[\a]+n.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	\[
+		[\a]+[\b]\le[\a+\b]\le[\a]+[\b]+1.
+	\]
+\end{pr}
+
+\begin{proof}
+	Sappiamo che \([\a]\le\a\) e \([\b]\le\b\), da cui
+	\[
+		[\a]+[\b]\le\a+\b,
+	\]
+	d'altronde, \([\a+\b]\) è il più grande intero minore di \(\a+\b\), e chiaramente \([\a]+[\b]\) è un intero, per cui
+	\[
+		[\a]+[\b]\le[\a+\b].
+	\]
+	Infine
+	\[
+		\begin{split}
+			[\a+\b] & =\big[[\a]+[\b]+\a-[\a]+\b-[\b]\big]\\
+			& \overset{(P.3)}{=}[\a]+[\b]+\big[\a-[\a]+\b-[\b]\big],
+		\end{split}
+	\]
+	dove, per la proprietà \(1\), avremo
+	\[
+		0\le\a-[\a],\b-[\b]<1,
+	\]
+	per cui
+	\[
+		0\le\a-[\a]+\b-[\b]<2\implies\big[\a-[\a]+\b-[\b]\big]\le 1,
+	\]
+	ovvero
+	\[
+		[\a+\b]\le[\a]+[\b]+1.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	\[
+		[\a]+[-\a]=
+		\begin{cases}
+			0  & \a\in\Z    \\
+			-1 & \a\notin\Z
+		\end{cases}
+	\]
+\end{pr}
+
+\begin{proof}
+	Se \(\a\in\Z\), ovviamente \([\a]=\a\) e \([-\a]=-\a\), per cui
+	\[
+		[\a]+[-\a]=0.
+	\]
+	Se \(\a\notin\Z\), per definizione \([\a]\le\a<[\a]+1\), ma, dal momento che \([\a]\neq\a\), avremo
+	\[
+		[\a]<\a<[\a]+1,
+	\]
+	ed analogamente \([-\a]<-\a<[-\a]+1\). Sommando membro a membro otteniamo
+	\[
+		[\a]+[-\a]<0<[\a]+[-\a]+2,
+	\]
+	ovvero
+	\[
+		[\a]+[-\a]<0\land[\a]+[-\a]>-2,
+	\]
+	quindi, dal momento che \([\a]+[-\a]\in\Z\),
+	\[
+		[\a]+[-\a]=-1.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	\[
+		-[-\a]=\min\{k\in\Z:k\ge\a\}.
+	\]
+\end{pr}
+
+\begin{proof}
+	Basta applicare la definizione di parte intera al contrario, sappiamo infatti che \([\a]=\max\{m\in\Z:m\le\a\}\) è l'unico intero \(x\) tale che \(x\le\a<x+1\), analogamente avremo che \(y=\min\{k\in\Z:k\ge\a\}\) è l'unico intero tale che
+	\[
+		y-1<\a\le y.
+	\]
+	Ci basta quindi verificare che \(-[-\a]\) soddisfa tale disuguaglianza, ma ciò discende proprio dalla definzione di parte intera di \(-\a\), infatti
+	\[
+		-[-\a]-1<\a\le-[-\a]\iff [-\a]\le-\a<[-\a]+1,
+	\]
+	ovvero
+	\[
+		-[-\a]=\min\{k\in\Z:k\ge\a\}.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}
+	\[
+		\left[\frac{[\a]}{n}\right]=\left[\frac{\a}{n}\right].
+	\]
+\end{pr}
+
+\begin{proof}
+	Sia \(m\in\Z\), per definizione \([\a]=\max\{k\in\Z:k\le\a\}\), per cui \(m=[\a]\) se e soltanto se \(m\le \a\) e, preso \(k\in\Z\), si ha \(k\le a\iff k\le m\).
+
+	Ora
+	\[
+		\left[\frac{[\a]}{n}\right]\le\frac{[\a]}{n}\le\frac{\a}{n},
+	\]
+	quindi, dal momento che la parte intera di \(\frac{\a}{n}\) è \(\left[\frac{\a}{n}\right]\), si avrà
+	\[
+		\left[\frac{[\a]}{n}\right]\le\left[\frac{\a}{n}\right].
+	\]
+	Sia ora \(k\in\Z\), avremo
+	\[
+		\begin{split}
+			k\le\left[\frac{[\a]}{n}\right] & \iff k\le\frac{\a}{n}\\
+			& \iff n\,k\le [\a]\\
+			& \iff n\,k\le \a\\
+			& \iff k\le\frac{a}{n}\\
+			& \iff k\le\left[\frac{\a}{n}\right],
+		\end{split}
+	\]
+	da cui, per l'osservazione iniziale, si ottiene la tesi.
+\end{proof}
+
+\begin{pr}
+	\[
+		\left[\a+\frac{1}{2}\right]=
+		\begin{cases}
+			[\a]   & \text{se }\{\a\}<\frac{1}{2}   \\
+			[\a]+1 & \text{se }\{\a\}\ge\frac{1}{2}
+		\end{cases}
+	\]
+\end{pr}
+
+\begin{proof}
+	Ricordiamo che \(\{x\}=x-[x]\).
+	Se \(\{\a\}<\frac{1}{2}\), allora, per la proprietà \(1\),
+	\[
+		\begin{split}
+			0\le\a-[\a]<\frac{1}{2} & \iff 0\le\a-[\a]+\frac{1}{2}< 1\\
+			& \iff [\a]\le\a+\frac{1}{2}<[\a]+1,
+		\end{split}
+	\]
+	ovvero
+	\[
+		\left[\a+\frac{1}{2}\right]=[\a].
+	\]
+	Analogamente, se \(\{\a\}\ge\frac{1}{2}\), avremo
+	\[
+		\begin{split}
+			\frac{1}{2}\le\a-[\a]<1 & \iff 1\le\a-[\a]+\frac{1}{2}<\frac{3}{2}\\
+			& \iff 1\le\a-[\a]+\frac{1}{2}<2\\
+			& \iff [\a]+1\le\a+\frac{1}{2}<[\a]+1+1,
+		\end{split}
+	\]
+	ovvero
+	\[
+		\left[\a+\frac{1}{2}\right]=[\a]+1.\qedhere
+	\]
+\end{proof}
+
+\begin{pr}\label{pr:parteIntera9}
+	\[
+		\left[\frac{\a}{n}\right]=\sum_{\substack{m\in\N\\m\le\a\\n\mid m}}1.
+	\]
+\end{pr}
+
+\begin{proof}
+	Osserviamo che
+	\[
+		\sum_{\substack{m\in\N\\m\le\a\\n\mid m}}1 =\#\Set{m\in\N:m\le\a,n\mid m},
+	\]
+	ovvero
+	\[
+		\#\Set{t\in\N:t\le\frac{\a}{m}},
+	\]
+	quindi, applicando la proprietà \(2\), si giunge alla tesi.
+\end{proof}
+
+\begin{defn}{Valutazione p-adica}{valPadica}\index{Valutazione p-adica}
+	Siano \(p\) un primo ed \(n\in\N\), si definisce \emph{valutazione p-adica} \(v_p(n)\) di \(n\) come il massimo intero non negativo tale che
+	\[
+		p^{v_p(n)}\mid n,\text{ ma }p^{v_p(n)+1}\nmid n.
+	\]
+\end{defn}
+
+\begin{oss}
+	Se \(n=p_1^{\a_1}\cdot\ldots\cdot p_s^{\a_s}\), allora
+	\[
+		v_{p_j}(n)=\a_j,
+	\]
+	mentre, se \(p\nmid n\), allora
+	\[
+		v_p(n)=0.
+	\]
+\end{oss}
+
+\begin{teor}{Valutazione p-adica del fattoriale}{1.10}
+	Siano \(p\) primo ed \(n\in\N\), allora
+	\[
+		v_p(n!)=\sum_{j=1}^{\infty}\left[\frac{n}{p^j}\right].
+	\]
+\end{teor}
+
+\begin{proof}
+	Osserviamo che
+	\[
+		v_p(n!)=\sum_{k=1}^n v_p(k),
+	\]
+	infatti
+	\[
+		v_p(a\,b)=v_p(a)v_p(b).
+	\]
+	Quindi
+	\[
+		v_p(n!)=\sum_{k=1}^n v_p(k)=\sum_{k=1}^n\sum_{\substack{j=1\\p^j\mid n}}^{\infty}1,
+	\]
+	ciò in quanto, se \(k=p_1^{\a_1}\cdot\ldots\cdot p^\a\cdot\ldots\cdot p_s^{\a_s}\), si ha
+	\[
+		v_p(k)=\a=\#\Set{j\in\N:p^j\mid k}.
+	\]
+	Per cui
+	\[
+		\begin{split}
+			v_p(n!) & =\sum_{k=1}^n\sum_{\substack{j=1\\p^j\mid n}}^{\infty}1\\
+			& =\sum_{j=1}^{\infty}\sum_{\substack{k=1\\p^j\mid k}}^n 1\\
+			& \overset{(P.9)}{=}\sum_{j=1}^{\infty}\left[\frac{n}{p^j}\right].\qedhere
+		\end{split}
+	\]
+\end{proof}
